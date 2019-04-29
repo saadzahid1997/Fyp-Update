@@ -1,0 +1,77 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Hotels</ion-title>
+    <ion-buttons start>
+        <button ion-button color="blue" clear (tap)="dismiss()">
+          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+        </button>
+      </ion-buttons>
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+      <ion-label floating>Hotel Name</ion-label>  
+      <ion-input type = "text" [(ngModel)]="hotel.hotelName"></ion-input>
+  </ion-item>
+  <ion-row>
+  <ion-col col-6>   
+  <ion-item>
+      <ion-label floating>Hotel Category</ion-label>  
+      <ion-input type = "text" (tap) = "showRadioCategory()" [(ngModel)]="hotel.hotelCategory"></ion-input>
+  </ion-item>
+  </ion-col>
+  <ion-col col-6>
+  <ion-item>
+      <ion-label floating>Rooms</ion-label>  
+      <ion-input type = "text" (tap) = "roomsModal()" ></ion-input>
+  </ion-item>
+  </ion-col>
+  </ion-row>
+  <ion-item>
+        <ion-label floating>Amenities</ion-label>  
+        <ion-input type = "text" (tap) = "showHotelAmenities()" [(ngModel)] = "hotel.hotelAmenities"></ion-input>
+  </ion-item>    
+  <ion-item>
+      <ion-label floating>Hotel Mail</ion-label>  
+      <ion-input type = "text" [(ngModel)]="hotel.hotelMail"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label floating>Hotel Contact</ion-label>  
+      <ion-input type = "number"[(ngModel)]="hotel.hotelContactNo" ></ion-input>
+   </ion-item>
+   <ion-item>
+        <ion-label floating >Hotel Location</ion-label>
+        <ion-input id = "txtLocation" (tap) = "hotelLocation()" type = "text"    [(ngModel)] ="hotel.hotelLocation" ></ion-input>
+           
+   </ion-item>
+   <ion-item>
+        <ion-label floating>Hotel Description</ion-label>  
+        <ion-input type = "text" [(ngModel)]="hotel.hotelDescription"></ion-input>
+    </ion-item>
+    
+   <ion-row>
+       <ion-col col-4>
+            <ion-item>
+                <button ion-button (tap) = "addHotel(hotel)">Add Hotel </button>
+            </ion-item>
+        </ion-col>
+        <ion-col col-4>    
+            <ion-item>
+                <button ion-button (click) = "takePhoto()">Take Photo</button>
+            </ion-item>
+        </ion-col>
+        <ion-col col-4>    
+            <ion-item>
+                <input type="file" (change)="handler($event)">Choose Photo/>     
+            </ion-item>
+        </ion-col>    
+   </ion-row>
+   <ion-item *ngFor="let item of filesURL">
+       <img class="img-responsive" src="{{item}}">
+   </ion-item>
+</ion-content>

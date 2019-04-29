@@ -1,0 +1,72 @@
+<!--
+  Generated template for the RetrieveHotelPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Recommended Hotels</ion-title>
+    <button ion-button (tap) = mapView()>Map view</button>
+    <ion-buttons start>
+        <button ion-button color="blue" clear (tap)="dismiss()">
+          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+        </button>
+      </ion-buttons>
+    
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <!--  <agm-map [latitude] = "38" [longitude ]  = "-119">
+      <agm-marker *ngFor = "let hotel of hotels | async"   [latitude] = "hotel.pos.geopoint.latitude" [longitude ]  = "hotel.pos.geopoint.longitude">
+        <agm-info-window>
+          {{hotel.queryMetadata}}
+        </agm-info-window>
+      </agm-marker>
+    </agm-map>-->
+  <!--<button ion-button (tap) = retrieveData()>Retrieve Data</button>-->
+
+
+  <ion-list>
+
+    <ion-item *ngFor="let hotel of hotelsList">
+      <ion-item>
+        <button ion-button (tap)="openTrips($event, hotel.id)">Add to trip</button>
+      </ion-item>
+      <ion-item class="animated fadeInLeft" (tap)="hotelDetail(hotel.id)">
+
+
+        <ion-thumbnail item-start>
+          <img src = "assets/imgs/logo.png">
+        </ion-thumbnail>
+
+        <ion-row>
+
+          <!-- Name of Hotel -->
+          <h1 text-wrap class="name">{{ hotel.data.hotelName}}</h1>
+
+
+        </ion-row>
+        <!-- Hotel Review and Type  -->
+        <p class="reviews">{{hotel.data.hotelOverview}} | {{hotel.data.hotelCategory}} </p>
+
+        <ion-item style="background: transparent" no-padding>
+
+          <!-- Hotel Ratings  
+              <rating [(ngModel)]="hotel.data.star" readOnly="false" max="{{hotel.data.star}}" emptyStarIconName="ios-star-outline" halfStarIconName="star-half"
+                starIconName="ios-star" nullable="true">
+              </rating>-->
+
+          <!-- Price  -->
+          <ion-badge item-end>Rs.{{hotel.data.hotelPrice}}/Night</ion-badge>
+        </ion-item>
+      </ion-item>
+      
+    </ion-item>
+    <!--- <h2>{{hotel.hotelName}}</h2>-->
+  </ion-list>
+</ion-content>

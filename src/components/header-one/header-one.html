@@ -1,0 +1,31 @@
+<!-- Generated template for the HeaderOneComponent component -->
+
+<!--
+  - This component is for header toolber.
+  - that contains menu button, page title, notification and language change options 
+-->
+<ion-navbar no-border>
+
+  <!-- Menu-->
+  <button color="blue" ion-button menuToggle>
+    <ion-icon name="menu" color="white"></ion-icon>
+  </button>
+
+  <!-- Page Title  -->
+  <ion-title color="white">{{title}}</ion-title>
+
+  <!-- Buttons  -->
+  
+  <ion-buttons right>
+    
+    
+    <!-- Notification Button  -->
+    
+    <!-- Language Settings Option  -->
+    <button ion-button icon-only color="white" (tap)="goToLanguageSettingPage()">
+      <ion-icon name="md-options"></ion-icon>
+    </button>
+    
+  </ion-buttons>
+
+</ion-navbar>

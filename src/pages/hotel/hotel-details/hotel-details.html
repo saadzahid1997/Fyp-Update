@@ -1,0 +1,137 @@
+
+
+<!-- Header  -->
+<ion-header no-border title="Hotel Details">
+   
+  <ion-fab top right edge>
+    <button ion-fab color="danger" (tap)="openLocationMap()">
+      <ion-icon name="ios-pin-outline"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-header>
+<!-- Content  -->
+<ion-content fullscreen elestic-header *ngFor = "let hotel of hotelsList" >
+  
+  <!-- Hotel Location Map Icon  -->
+  
+  <!-- Image Slider of Hotel  -->
+  <ion-slides *ngIf="slideData && slideData.length" slidesPerView="0" pager loop="true" effect="slide" autoplay="5000" class="image-slider"
+    style="direction:ltr">
+    
+    <ion-slide *ngFor = "let img of hotel.fileURL">
+        <img [src] = "img">
+      <div class="slider-contents">
+        
+        <!-- Name of Hotel  -->
+        
+        <p class="name">{{hotel.hotelName}}</p>
+        
+        <!--Reviews and Type of Hotel -->
+        
+        <p class="reviews">{{hotel.hotelOverview}}  | {{hotel.hotelCategory}} </p>
+        
+        <!-- Hotel Ratings  
+        <rating [(ngModel)]="hotelDetails.star" readOnly="false" max="{{hotelDetails.star}}" emptyStarIconName="ios-star-outline"
+          halfStarIconName="star-half" starIconName="ios-star" nullable="true">
+        </rating>-->
+
+
+      </div>
+
+    </ion-slide>
+  </ion-slides>
+
+  <!-- Details of Hotel  -->
+  <section class="details-section">
+
+    
+    <!-- Hotel Overview  -->
+    <ion-list no-lines>
+      <ion-list-header>
+        <h3>Description </h3>
+      </ion-list-header>
+      <ion-item text-wrap>
+        <p text-justify [innerHTML]="hotel.hotelOverview"></p>
+      </ion-item>
+    </ion-list>
+    
+    <!-- Amenities  
+    <ion-list no-lines>
+      <ion-list-header>
+        <p>Amenities</p>
+      </ion-list-header>
+      <ion-row wrap justify-content-center align-items-center class="features">
+        <ion-col col-3 *ngFor="let feature of hotelDetails.amenities; let i = index" class='cell-{{i}}'>
+          <i class="{{feature.icon}}"></i>
+          <span class="item-block">{{feature.name}}</span>
+        </ion-col>
+      </ion-row>
+    </ion-list>-->
+
+    <!-- Contact Information  -->
+    <ion-list no-lines>
+      <ion-list-header>
+        <h3>Contact Information </h3>
+      </ion-list-header>
+      <ion-item text-wrap>
+        <ion-icon name="ios-pin-outline" item-start color="color2"></ion-icon>
+        <p>{{hotel.hotelLocation}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-globe-outline" item-start color="color2"></ion-icon>
+        <p>{{hotel.hotelMail}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="ios-call-outline" item-start color="color2"></ion-icon>
+        <p>{{hotel.hotelContactNo}}</p>
+      </ion-item>
+    </ion-list>
+
+    <!-- Description  -->
+    
+    <ion-list no-lines>
+      <ion-list-header>
+        <h3>Amenities </h3>
+      </ion-list-header>
+      <ion-item text-wrap>
+        <p text-justify [innerHTML]="hotel.hotelAmenities"></p>
+      </ion-item>
+    </ion-list>
+    
+      
+
+
+
+    <ion-list no-lines>
+        <ion-list-header>
+          <h3>Reviews </h3>
+        </ion-list-header>
+        <ion-item *ngFor = "let reviews of reviewList">
+        <ion-item>
+          <p>{{reviews.data.userName}}</p>
+          <p>{{reviews.data.hotelReview}}</p>
+          <p right class="dateFont">{{reviewDate | date}}</p>
+        </ion-item>
+        </ion-item>
+        <ion-item>
+            <ion-label floating >Add your Review</ion-label>  
+            <ion-input type = "text"   [(ngModel)] = "reviews.hotelReview" ></ion-input>
+           
+        </ion-item>
+        <ion-item>
+          <button ion-button (tap) = "addReview()">Done</button>   
+        </ion-item>
+      </ion-list>
+      
+  </section>
+  <!--<ion-item>               
+      <ion-input type = "text" placeholder = "Add your review"></ion-input>
+  </ion-item>--> 
+
+</ion-content>
+
+<!-- Footer  -->
+<ion-footer>
+  <button (tap) = "bookRooms()">Book Now</button>
+</ion-footer>

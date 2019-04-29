@@ -1,0 +1,24 @@
+<!--
+  Generated template for the HotelReviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>hotelReview</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <ion-label floating >Hotel Review</ion-label>  
+    <ion-input type = "text" [(ngModel)] = 'review.hotelReview'></ion-input>
+  </ion-item>
+  <ion-item>
+    <button ion-button (tap) = "addReviewToHotel()">Add Review</button>   
+  </ion-item>
+</ion-content>
