@@ -10,6 +10,7 @@ export class ResturantService {
     resturantCollection: AngularFirestoreCollection<any>;
     resturant: Observable<any>;
     resturantDetailId : any;
+    resturantDetail:any;
     constructor(public afs: AngularFirestore) {
         console.log("Resturant service instantiated...");
 
@@ -26,5 +27,14 @@ export class ResturantService {
                 id: data.payload.id, data: data.payload.data()
             }
         }))
+    }
+    setResDetails(resDetail)
+    {
+        this.resturantDetail = resDetail;
+    }
+
+    getResDetails()
+    {
+        return this.resturantDetail;
     }
 }

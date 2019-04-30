@@ -1,9 +1,10 @@
 import { Component,OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController,Platform } from 'ionic-angular';
 import { ResturantService } from '../../app/services/resturant.service';
-
+import {Trip} from '../../models/trips/trips.interface';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 
 /**
  * Generated class for the FindResturantsPage page.
@@ -27,13 +28,17 @@ export class FindResturantsPage implements OnInit {
   resLng: any;
   retResList: any = [];
   x: number;
+  btnStatus: any;
+  trip = {} as Trip;
+  y : number;
 
   constructor(public navCtrl: NavController, 
                public navParams: NavParams,
                public resturantSer : ResturantService,
                public db : AngularFirestore,
                public popoverCtrl: PopoverController,
-               public platform: Platform)
+               public platform: Platform,
+               public viewCtrl: ViewController)
    {
 
     }
@@ -42,7 +47,8 @@ export class FindResturantsPage implements OnInit {
     console.log('ionViewDidLoad FindResturantsPage');
   }
   ngOnInit()
-  {   
+  {   console.log(this.btnStatus);
+      this.btnStatus = this.navParams.data.btnStatus;
       this.resLat = this.navParams.data.searchResLat;
       this.resLng = this.navParams.data.searchResLng;
       this.resturantSer.getResturant().subscribe(resturant=>{
@@ -70,6 +76,19 @@ export class FindResturantsPage implements OnInit {
       this.resturantList = this.retResList
 
     });
+  }
+  getHotels(val,getResturant)
+  {
+    console.log(val);
+    this.resturantSer.showResDetails(val).subscribe(item =>{
+      this.trip.tripResturants = item
+      getResturant = this.trip.tripResturants
+      console.log(getResturant);
+      this.resturantSer.setResDetails(getResturant);
+      //this.navCtrl.setRoot('TripsPage',{getResturant})
+      this.viewCtrl.dismiss();  
+    })
+    
   }
   openTrips(myEvent, resturantId) {
     console.log(resturantId);

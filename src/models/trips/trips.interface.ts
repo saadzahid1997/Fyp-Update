@@ -6,9 +6,12 @@ export interface Trip
   returnDate: any;
   departureDate: any;
   tripName: string;
-  tripLocation:any;
-  tripLocationLat:any;
-  tripLocationLng:any;
+  tripDepLocation:any;
+  tripDepLocationLat:any;
+  tripDepLocationLng:any;
+  tripRetLocation:any;
+  tripRetLocationLat:any;
+  tripRetLocationLng:any;
   tripHost:string;
   tripCateogory:string;
   userId:string;
@@ -17,6 +20,12 @@ export interface Trip
   tripReturn:string;
   numberOfDays:string;
   numberOfNights:string;
-  tripServices:string;
-
+  tripServices:any;
+  tripHotels:any;
+  tripResturants:any;
+  tripPlaces:any;
+  tripDayDescription:any;
+  tripDays:any;
+  tripNights:any;
+  
 }

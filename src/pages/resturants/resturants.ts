@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
+
 declare var google: any;
 /**
  * Generated class for the ResturantsPage page.
@@ -15,17 +16,33 @@ declare var google: any;
   selector: 'page-resturants',
   templateUrl: 'resturants.html',
 })
-export class ResturantsPage {
+export class ResturantsPage implements OnInit {
   searchResturantForm:FormGroup;
   searchResLat: any;
   searchResLng: any;
+  tripName: any;
+  btnStatus:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _formBuilder:FormBuilder, 
     public mapsApiLoader:MapsAPILoader) {
     this.searchResturantForm = this._formBuilder.group({
       txtSearch: ['', Validators.required]
+      
   })
+  this.btnStatus = false;
 }
+
+  ngOnInit() {
+    this.tripName = this.navParams.data.tripName;
+    console.log(this.tripName);
+    if(this.tripName !== null && this.tripName !== undefined && this.tripName !== "" )
+    {
+      this.btnStatus = true;
+      console.log(this.btnStatus);
+      
+    }
+
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResturantsPage');
@@ -49,10 +66,12 @@ export class ResturantsPage {
   {
     this.navCtrl.setRoot('AadResturantsPage');
   }
-  searchResturants(searchResLat,searchResLng)
+  searchResturants(searchResLat,searchResLng, btnStatus)
   {
+    console.log(this.btnStatus);
+    btnStatus = this.btnStatus;
     searchResLat = this.searchResLat;
     searchResLng = this.searchResLng;
-    this.navCtrl.setRoot('FindResturantsPage',{searchResLat,searchResLng})
+    this.navCtrl.setRoot('FindResturantsPage',{searchResLat,searchResLng,btnStatus})
   }
 }

@@ -40,6 +40,7 @@ export class RetrieveHotelPage implements OnInit {
   locationRef = SearchHotelsPage.searchPlace;
   searchLocationRef:string;
   hotelRef$: AngularFirestoreCollection<any>
+  btnStatus: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFirestore,
     private hotelSer: HotelService, public popoverCtrl: PopoverController, public tripSer: TripService, public modalCtrl: ModalController) {
     this.hotelRef$ = this.db.collection('hotel');
@@ -50,6 +51,7 @@ export class RetrieveHotelPage implements OnInit {
     // this.tripSer.getTripDetails().subscribe(trips => {
     //   console.log(trips);
     // })
+    this.btnStatus = this.navParams.data.btnStatus;
     console.log("in thre retrieve page")
     console.log(" Latitude")
     console.log(this.navParams.data.searchLocationLat);

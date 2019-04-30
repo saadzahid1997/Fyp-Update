@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Trip } from '../../models/trips/trips.interface';
@@ -7,6 +7,7 @@ import { MapsAPILoader } from '@agm/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { CalendarModalOptions, CalendarModal } from 'ion2-calendar';
+import { ResturantService } from '../../app/services/resturant.service';
 declare var google :any;
 /**
  * Generated class for the TripsPage page.
@@ -20,25 +21,32 @@ declare var google :any;
   selector: 'page-trips',
   templateUrl: 'trips.html',
 })
-export class TripsPage {
+export class TripsPage implements OnInit {
   trip = {} as Trip;
-  
+  resturantList:any=[];  
   tripRef$:AngularFirestoreCollection<any>;
   userId: string;
   departureDate: any;
   returnDate: any;
   inputs : any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore, public alert:AlertController , public userSer:UserService  , public MapsApiLoader:MapsAPILoader  , public storage : AngularFireStorage, public modalCtrl:ModalController) {
+  y = 0;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore, public alert:AlertController , public userSer:UserService  , public MapsApiLoader:MapsAPILoader  , public storage : AngularFireStorage, public modalCtrl:ModalController, public resSer:ResturantService) {
 
     this.tripRef$ = this.db.collection('trips')
 
+  }
+  ngOnInit()
+  {
+    // console.log(this.navParams.data.getResturant);
+    // this.resturantList = this.navParams.data.getResturant;
+    // console.log(this.resturantList);
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TripsPage');
     this.userSer.user$.subscribe(user =>{
       this.userId = user.uid;
-   
     })
 
   }
@@ -72,10 +80,10 @@ export class TripsPage {
     alertTripCateogory.present();
 
   }
-  tripLocation()
+  tripDepLocation()
   {
     this.MapsApiLoader.load().then(() => {
-      let nativeHomeInputBox = document.getElementById('txtLocation').getElementsByTagName('input')[0];
+      let nativeHomeInputBox = document.getElementById('txtDepLocation').getElementsByTagName('input')[0];
       let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox,{
         types : ["geocode"]
       });
@@ -83,13 +91,33 @@ export class TripsPage {
       autocomplete.addListener("place_changed", () => {
           let place = google.maps.places.PlaceResult = autocomplete.getPlace();
           console.log(place);
-          this.trip.tripLocationLat = place.geometry.location.lat();
-          this.trip.tripLocationLng = place.geometry.location.lng();
-          this.trip.tripLocation = place.formatted_address;
+          this.trip.tripDepLocationLat = place.geometry.location.lat();
+          this.trip.tripDepLocationLng = place.geometry.location.lng();
+          this.trip.tripDepLocation = place.formatted_address;
           //console.log(this.resturant.resturantLocation);               
       });
     });
   }
+
+  tripRetLocation()
+  {
+    this.MapsApiLoader.load().then(() => {
+      let nativeHomeInputBox = document.getElementById('txtRetLocation').getElementsByTagName('input')[0];
+      let autocomplete = new google.maps.places.Autocomplete(nativeHomeInputBox,{
+        types : ["geocode"]
+      });
+      autocomplete.setComponentRestrictions({ 'country': ['pk'] })
+      autocomplete.addListener("place_changed", () => {
+          let place = google.maps.places.PlaceResult = autocomplete.getPlace();
+          console.log(place);
+          this.trip.tripRetLocationLat = place.geometry.location.lat();
+          this.trip.tripRetLocationLng = place.geometry.location.lng();
+          this.trip.tripRetLocation = place.formatted_address;
+          //console.log(this.resturant.resturantLocation);               
+      });
+    });
+  }
+
 
   openCalendar() {
 
@@ -330,6 +358,15 @@ tripServices(){
     label: 'Others',
     value: '',
    })
+   alertServices.addButton('Cancel');
+   alertServices.addButton({
+    text: 'OK',
+    handler: data => {
+
+      this.trip.tripServices = data;
+    }
+  
+   })
    alertServices.present();
 }
 
@@ -340,24 +377,57 @@ addDay()
   this.inputs.push({
     placeholder: 'Day '+this.inputs.length,
     value:'Day '+this.inputs.length,
-  });
   
+  });
+  this.trip.tripDayDescription = this.inputs;
 }
 
+addPlaces()
+{
+    this.navCtrl.setRoot('PalcesPage')
+}
 
+addHotels(tripName)
+{
+  console.log(this.trip.tripName)
+  tripName = this.trip.tripName
+  this.navCtrl.setRoot('SearchHotelsPage', {tripName})
+}
+
+addResturants(tripName)
+{
+  console.log(this.trip.tripName)
+  tripName = this.trip.tripName
+ // this.navCtrl.setRoot('ResturantsPage', {tripName})
+  let resModal = this.modalCtrl.create('ResturantsPage',{tripName})
+    
+  resModal.present();
+
+}
+
+resturantAdded()
+{
+  this.resturantList[this.y] = this.resSer.getResDetails();
+  this.y = this.y+1;
+  console.log(this.resturantList);
+}
   addTrips()
   {
       this.tripRef$.add({
       tripName : this.trip.tripName,
-      tripLocation: this.trip.tripLocation,
-      tripLocationLat : this.trip.tripLocationLat,
-      tripLocationLng: this.trip.tripLocationLng,
+      tripDepartureLocation: this.trip.tripDepLocation,
+      tripDepartureLocationLat : this.trip.tripDepLocationLat,
+      tripDepartureLocationLng: this.trip.tripDepLocationLng,
+      tripReturnLocation: this.trip.tripRetLocation,
+      tripReturnLocationLat : this.trip.tripRetLocationLat,
+      tripReturnLocationLng: this.trip.tripRetLocationLng,
       tripHost : this.trip.tripHost,
       tripCateogory: this.trip.tripCateogory,
       userId: this.trip.userId = this.userId,
       tripFileURL : this.trip.fileURL,
       tripDeparture: this.trip.tripDeparture = this.departureDate,
-      tripReturn:this.trip.tripReturn = this.returnDate
+      tripReturn:this.trip.tripReturn = this.returnDate,
+      tripDayDescription:this.trip.tripDayDescription
     });
   }
 

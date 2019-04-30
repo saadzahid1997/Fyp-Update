@@ -32,24 +32,24 @@ export class HotelDetailsPage implements OnInit {
   hotel = {} as Hotel;
   hotelId: string;
   reviews = {} as Review;
-  reviewList:any = [];
-  hotelReviewList:any= [];
+  reviewList: any = [];
+  hotelReviewList: any = [];
   //locationRef = SearchHotelsPage.searchPlace;
   hotelRef$: any
-  reviewRef$:AngularFirestoreCollection<any>
+  reviewRef$: AngularFirestoreCollection<any>
   // Check In Date
   checkInDate: any;
-  hotelList:any = [];
+  hotelList: any = [];
   // Check Out Date
   checkOutDate: any;
   x: number;
   reviewDate = Date.now();
   userRef: any;
-  roomList:any=[];
-  roomRef:any;
-  hotelRoomRef:any;
-  finalHotelList:any=[];
-  finalRoomList:any=[];
+  roomList: any = [];
+  roomRef: any;
+  hotelRoomRef: any;
+  finalHotelList: any = [];
+  finalRoomList: any = [];
   //review: any;
 
   // Array List of Hotels
@@ -63,14 +63,14 @@ export class HotelDetailsPage implements OnInit {
     private db: AngularFirestore,
     public hotelSer: HotelService,
     public alert: AlertController,
-    public reviewSer:hotelReviewService,
+    public reviewSer: hotelReviewService,
     public userSer: UserService,
-    public roomSer:roomService
-  
+    public roomSer: roomService
+
   ) {
     // Get Hotel Details Information
-    
-   
+
+
     this.reviewRef$ = this.db.collection('hotel-Reviews')
     // Current Time For CheckIn (Demo)
     this.checkInDate = new Date();
@@ -79,93 +79,92 @@ export class HotelDetailsPage implements OnInit {
     this.hotelId = this.navParams.data.hotelId;
     //this.getHotelList();
   }
-
-  ngOnInit()
-   {     
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad');
+  }
+  ngOnInit() {
     //this.userRef = this.navParams.get('userRef');
-     this.roomSer.getRoomDetails().subscribe(items=>{
-        this.roomList = items;
-        console.log(this.roomList);
-        for(let i = 0 ; this.roomList.length; i++){
+    this.roomSer.getRoomDetails().subscribe(items => {
+      this.roomList = items;
+      console.log(this.roomList);
+      for (let i = 0; this.roomList.length; i++) {
         //this.roomRef = this.roomList[i].data.roomsRef
         //console.log(this.roomRef);
-        }
-      })
-      //   this.hotelSer.getHotels().subscribe(items=>{
-      //     this.hotelList = items;
-      //     console.log(this.hotelList);
-      //     for(let i = 0 ; this.hotelList.length; i++){
-      //       //this.hotelRoomRef = this.hotelList[i].data.roomId
-      //       console.log(this.hotelList[i].data.roomId)
-      //       this.finalRoomList = this.roomSer.getRoom(this.hotelList[i].data.roomId);
+      }
+    })
+    //   this.hotelSer.getHotels().subscribe(items=>{
+    //     this.hotelList = items;
+    //     console.log(this.hotelList);
+    //     for(let i = 0 ; this.hotelList.length; i++){
+    //       //this.hotelRoomRef = this.hotelList[i].data.roomId
+    //       console.log(this.hotelList[i].data.roomId)
+    //       this.finalRoomList = this.roomSer.getRoom(this.hotelList[i].data.roomId);
 
-      //       console.log(this.finalRoomList);
-      //       }
-      //  })
-      //  this.finalHotelList = this.hotelRoomRef;  
-      //  console.log(this.finalHotelList);   
-      //   // this.x = 0;
-        
+    //       console.log(this.finalRoomList);
+    //       }
+    //  })
+    //  this.finalHotelList = this.hotelRoomRef;  
+    //  console.log(this.finalHotelList);   
+    //   // this.x = 0;
 
-        // for(let i = 0; i < this.roomList.length; i++)
-        // {
-        //   console.log(this.roomList[i].roomRef);
-        //   console.log(this.hotelList[i].roomId);
-        //   if(this.roomList[i].data.roomRef == this.hotelList[i].data.roomId)
-        //   {
-        //       this.finalList[this.x]= this.roomList[i]
-        //       this.x = this.x + 1;
-        //       //console.log(this.finalList)
-        //   }
-        //   else
-        //   {
-        //     console.log('not executing room details')
-        //   }
-        // }
-        
-      
-    
-     
+
+    // for(let i = 0; i < this.roomList.length; i++)
+    // {
+    //   console.log(this.roomList[i].roomRef);
+    //   console.log(this.hotelList[i].roomId);
+    //   if(this.roomList[i].data.roomRef == this.hotelList[i].data.roomId)
+    //   {
+    //       this.finalList[this.x]= this.roomList[i]
+    //       this.x = this.x + 1;
+    //       //console.log(this.finalList)
+    //   }
+    //   else
+    //   {
+    //     console.log('not executing room details')
+    //   }
+    // }
+
+
+
+
 
     this.hotelRef$ = this.db.collection('hotel').doc(this.hotelId);
     this.hotelSer.showHotelDetails(this.hotelId).subscribe(hotel => {
       this.hotelsList[0] = hotel.data;
-       console.log(this.hotelsList );
+      console.log(this.hotelsList);
     })
 
-    this.reviewSer.getReviewDetails().subscribe(items =>{
-        this.reviewList = items;
-        this.x = 0;
-        for(let i=0 ; i<items.length ; i++)
-        {
-          if(this.reviewList[i].data.hotelId == this.hotelId)
-          {
-              this.hotelReviewList[this.x] = this.reviewList[i];
-              this.x = this.x + 1;
-          }
-          else
-          {
-            console.log("no reviews")
-          }
+    this.reviewSer.getReviewDetails().subscribe(items => {
+      this.reviewList = items;
+      this.x = 0;
+      for (let i = 0; i < items.length; i++) {
+        if (this.reviewList[i].data.hotelId == this.hotelId) {
+          this.hotelReviewList[this.x] = this.reviewList[i];
+          this.x = this.x + 1;
+        }
+        else {
+          console.log("no reviews")
+        }
       }
       console.log(this.hotelReviewList);
       this.reviewList = this.hotelReviewList;
-        
+
     });
   }
+
+  
   /**
    * Open Location Map
    */
-  openLocationMap()
-    {
-      
-      this.modalCtrl.create('LocationMapPage', { Latitude: this.hotelsList[0].hotelLocationLat, Longitude: this.hotelsList[0].hotelLocationLng, Address:this.hotelsList[0].hotelLocation}).present();
-    }
+  openLocationMap() {
 
-  goToOrderPage() {
-    this.viewCtrl.dismiss();
-    //this.navCtrl.setRoot('OrderHotelPage', { hotelDetails: this.hotelDetails });
+    this.modalCtrl.create('LocationMapPage', { Latitude: this.hotelsList[0].hotelLocationLat, Longitude: this.hotelsList[0].hotelLocationLng, Address: this.hotelsList[0].hotelLocation }).present();
   }
+
+  // goToOrderPage() {
+  //   this.viewCtrl.dismiss();
+  //   //this.navCtrl.setRoot('OrderHotelPage', { hotelDetails: this.hotelDetails });
+  // }
 
   /**
    * -----------------------------------------------------------
@@ -175,28 +174,26 @@ export class HotelDetailsPage implements OnInit {
    * 
    * You get `DataProvider` Service at - 'src/providers/data/data';
    */
-  getHotelList() {
-    //this.hotels = this.dataProvider.getHotels();
-  }
-  bookRooms()
-  {
-    this.navCtrl.setRoot(`BookRoomsPage/${this.hotelId}`)
-  }
-  addReview()
-  {
-       
-      this.userRef = this.userSer.user$.subscribe(user=>
-        {
-          this.userRef = user.displayName
-          console.log(this.userRef)
-        this.reviewRef$.add({
-        userName:this.reviews.userName = this.userRef,
-        hotelId: this.reviews.hotelId = this.hotelId ,
-        hotelReview : this.reviews.hotelReview
+  // getHotelList() {
+  //   //this.hotels = this.dataProvider.getHotels();
+  // }
+  // bookRooms()
+  // {
+  //   this.navCtrl.setRoot(`BookRoomsPage/${this.hotelId}`)
+  // }
+  addReview() {
+    console.log("Clicked Done")
+    this.userRef = this.userSer.user$.subscribe(user => {
+      this.userRef = user.displayName
+      console.log(this.userRef)
+      this.reviewRef$.add({
+        userName: this.reviews.userName = this.userRef,
+        hotelId: this.reviews.hotelId = this.hotelId,
+        hotelReview: this.reviews.hotelReview
       })
-        });
-      
-         
+    })
+
+
   }
 
 } 

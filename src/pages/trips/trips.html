@@ -14,6 +14,7 @@
     
 
 <ion-content padding >
+  <h3>Trip Details</h3> 
   <ion-item>
   <ion-input type = "text" placeholder="Trip Title" name = "trip-title" [(ngModel)]="trip.tripName"></ion-input>
   </ion-item>  
@@ -28,22 +29,22 @@
   <ion-input type = "text" placeholder="Trip Cateogory" (tap) = "tripCateogory()"  name = "trip-cateogory" [(ngModel)]="trip.tripCateogory"></ion-input>
   </ion-item>
       
-  <ion-label>Trip Location</ion-label>
+  <h3>Trip Location</h3>
   <ion-item>
   <ion-row>
   <ion-col col-6>
   <ion-item>
-    <ion-input type = "text" placeholder="From" id = "txtLocation" name = "trip-location" (tap) = "tripLocation()"></ion-input>
+    <ion-input type = "text" placeholder="From" id = "txtDepLocation" name = "trip-location" (tap) = "tripDepLocation()"></ion-input>
   </ion-item>   
   </ion-col>
   <ion-col col-6>
   <ion-item>
-      <ion-input type = "text" placeholder="To" id = "txtLocation" name = "trip-location" (tap) = "tripLocation()"></ion-input>
+      <ion-input type = "text" placeholder="To" id = "txtRetLocation" name = "trip-location" (tap) = "tripRetLocation()"></ion-input>
   </ion-item>
   </ion-col>  
   </ion-row> 
  </ion-item>
-  <ion-label>Trip Duration</ion-label>
+  <h3>Trip Duration</h3>
   
   <ion-row class="animated zoomIn" justify-content-center align-items-center>
 
@@ -77,65 +78,64 @@
   <ion-row>
       <ion-col col-6>  
       <ion-item>
-          <ion-input type = "text" placeholder="Days"  (tap) = "tripDays()"  name = "trip-days" [(ngModel)]="trip.tripCateogory"></ion-input>
+          <ion-input type = "text" placeholder="Days"  (tap) = "tripDays()"  name = "trip-days" [(ngModel)]="trip.tripDays"></ion-input>
       </ion-item>  
       </ion-col>
       <ion-col col-6>
       <ion-item>
-          <ion-input type = "text" placeholder="Nights"  (tap) = "tripNights()"  name = "trip-nights" [(ngModel)]="trip.tripCateogory"></ion-input>
+          <ion-input type = "text" placeholder="Nights"  (tap) = "tripNights()"  name = "trip-nights" [(ngModel)]="trip.tripNights"></ion-input>
       </ion-item>
       </ion-col>
       </ion-row>
     
 
-<ion-label>Trip Plan</ion-label>
-<ion-item *ngFor="let input of inputs">
-<!--  
-   <ion-row class="animated zoomIn" justify-content-center align-items-center>
+<h3>Trip Plan</h3>
 
-        <!-- Check-in Date  -->
-        <!-- <ion-col col-5 text-center>
-          <p class="title">Departure Date</p>
-          <ion-card (tap)="openCalendar()">
-            <ion-card-content>
-              <p class="date">{{trip.departureDate | date: 'dd'}}</p>
-              <p>{{trip.departureDate | date: 'MMM'}} &nbsp;{{trip.departureDate | date: 'yy'}}</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-     -->
-        <!-- Date Icon  -->
-        <!-- <ion-col col-2 text-center>
-          <ion-icon color="color3" name="ios-calendar" style="zoom:2.5;"></ion-icon>
-        </ion-col>
-     -->
-        <!-- Check-out Date  -->
-        <!-- <ion-col col-5 text-center>
-          <p class="title">Return Date</p>
-          <ion-card (tap)="openCalendar()">
-            <ion-card-content>
-              <p class="date">{{trip.returnDate | date: 'dd'}}</p>
-              <p>{{trip.returnDate | date: 'MMM'}} &nbsp;{{trip.returnDate | date: 'yy'}}</p>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row> -->
-     <ion-item>
-      <ion-row>
-     <ion-col col-4>  
-    <ion-label color="light">{{input.label}}</ion-label>
-    <ion-input type="text" [(ngModel)]="input.value"></ion-input>
-      </ion-col>
-  </ion-row>
-  </ion-item>
+<ion-item *ngFor="let input of inputs">   
+   <textarea cols = "35" rows = "4" [(ngModel)]="input.value"></textarea>
  </ion-item>
  
- <button ion-button (click)="addDay();">Add day</button>
+ <button ion-button  (click)="addDay();">Add day</button>
  
-<ion-label>Trip Services</ion-label>
+<h3>Trip Services</h3>
 <ion-item>
-<ion-input type = "text" placeholder="Trip Services" (tap) = "tripServices()"  name = "trip-cateogory" [(ngModel)]="trip.tripCateogory"></ion-input>
+<ion-input type = "text" placeholder="Trip Services" (tap) = "tripServices()"  name = "trip-cateogory" [(ngModel)]="trip.tripServices"></ion-input>
 </ion-item>
+<ion-row>
+<ion-col col-10>  
+<h3 class = "place-margin">Places to visit</h3>
+</ion-col>
+<ion-col col-2>
+<button ion-button class="btn-round" (tap) = "addPlaces()">+</button>
+</ion-col>
+</ion-row>
+<ion-card>
+
+</ion-card>
+
+<ion-row>
+  <ion-col col-10>  
+     <h3 class = "place-margin">Hotels to stay</h3>
+  </ion-col>
+  <ion-col col-2>
+     <button ion-button class="btn-round" (tap) = "addHotels()">+</button>
+  </ion-col>
+  </ion-row>
+          
+<ion-row>
+  <ion-col col-10>  
+     <h3 class = "place-margin">Resturants to eat</h3>
+  </ion-col>
+  <ion-col col-2>
+     <button ion-button class="btn-round" (tap) = "addResturants()">+</button>
+  </ion-col>
+</ion-row>
+<button (tap)="resturantAdded()">Details</button>
+ <ion-card *ngFor="let resturant of resturantList">
+   <p>{{resturant.data.resturantName}}</p> 
+</ion-card>      
+          
+
 </ion-content>
 <ion-footer text-center>
   <ion-row>
