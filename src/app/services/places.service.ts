@@ -10,6 +10,7 @@ export class PlacesService {
     resturantCollection: AngularFirestoreCollection<any>;
     place: Observable<any>;
     placeDetailId : any;
+    placeDetail: any;
     constructor(public afs: AngularFirestore) {
         console.log("Places service instantiated...");
 
@@ -26,5 +27,15 @@ export class PlacesService {
                 id: data.payload.id, data: data.payload.data()
             }
         }))
+    }
+
+    setPlaceDetails(placeDetail)
+    {
+        this.placeDetail = placeDetail;
+    }
+
+    getPlaceDetails()
+    {
+        return this.placeDetail;
     }
 }

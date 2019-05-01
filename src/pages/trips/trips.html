@@ -109,9 +109,10 @@
 <button ion-button class="btn-round" (tap) = "addPlaces()">+</button>
 </ion-col>
 </ion-row>
-<ion-card>
-
-</ion-card>
+<button (tap)="placeAdded()">Add Places</button>
+<ion-card *ngFor="let place of placeList">
+  <p>{{place.data.placeName}}</p> 
+</ion-card>      
 
 <ion-row>
   <ion-col col-10>  
@@ -121,7 +122,15 @@
      <button ion-button class="btn-round" (tap) = "addHotels()">+</button>
   </ion-col>
   </ion-row>
-          
+  <button (tap)="hotelAdded()">Add Hotels</button>
+  
+  <ion-card class="animated fadeInLeft text-primary" *ngFor="let hotel of hotelList">
+      <div *ngIf = "hotel.data.fileURL">
+      <img [src] = "hotel.data.fileURL">
+      <p>{{hotel.data.hotelName}}</p> 
+      </div>  
+  </ion-card>      
+
 <ion-row>
   <ion-col col-10>  
      <h3 class = "place-margin">Resturants to eat</h3>
@@ -130,7 +139,7 @@
      <button ion-button class="btn-round" (tap) = "addResturants()">+</button>
   </ion-col>
 </ion-row>
-<button (tap)="resturantAdded()">Details</button>
+<button (tap)="resturantAdded()">Add Resturant</button>
  <ion-card *ngFor="let resturant of resturantList">
    <p>{{resturant.data.resturantName}}</p> 
 </ion-card>      

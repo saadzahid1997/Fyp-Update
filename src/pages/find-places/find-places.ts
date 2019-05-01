@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, Platform } from 'ionic-angular';
 import { PlacesService } from '../../app/services/places.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import {Trip} from '../../models/trips/trips.interface'
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 /**
  * Generated class for the FindPlacesPage page.
  *
@@ -26,13 +27,14 @@ export class FindPlacesPage implements OnInit{
   placesLng: any;
   retPlacesList: any = [];
   x: number;
-
+  trip = {} as Trip
   constructor(public navCtrl: NavController, 
                public navParams: NavParams,
                public placeSer : PlacesService,
                public db : AngularFirestore,
                public popoverCtrl: PopoverController,
-               public platform: Platform)
+               public platform: Platform,
+               public viewCtrl:ViewController)
    {
 
     }
@@ -70,6 +72,21 @@ export class FindPlacesPage implements OnInit{
 
     });
   }
+
+  getPlace(val,getPlace)
+  {
+    console.log(val);
+    this.placeSer.showPlacesDetails(val).subscribe(item =>{
+      this.trip.tripPlaces = item
+      getPlace = this.trip.tripPlaces
+      console.log(getPlace);
+      this.placeSer.setPlaceDetails(getPlace);
+      //this.navCtrl.setRoot('TripsPage',{getResturant})
+      this.viewCtrl.dismiss();  
+    })
+    
+  }
+
   openTrips(myEvent, placeId) {
     console.log(placeId);
     let popover = this.popoverCtrl.create('TripPopPlacesPage', { placeId });

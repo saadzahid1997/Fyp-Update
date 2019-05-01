@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>trip-details</ion-title>
+    <ion-title>Trip Details</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,30 +15,39 @@
 
 <ion-content padding *ngFor = "let trip of tripList">
   
-  <ion-row>
-    <ion-col col-6>
-      <ion-item><ion-label>Name</ion-label></ion-item>
-      <ion-item>  {{trip.tripName}}</ion-item>
-     </ion-col> 
-
-     <ion-col col-6>
-        <ion-item><ion-label>Host Name</ion-label></ion-item>
-        <ion-item>  {{trip.tripHost}} </ion-item>
-      </ion-col>  
-  </ion-row>
-      <ion-item>Locaiton : {{trip.tripLocation}}</ion-item>
-      <ion-row>
-          <ion-col col-6>
-              <ion-item><ion-label>Departure</ion-label></ion-item>
-            <ion-item>  {{trip.tripDeparture}}</ion-item>
-           </ion-col> 
-      
-           <ion-col col-6>
-              <ion-item><ion-label>Return</ion-label></ion-item>
-              <ion-item>  {{trip.tripReturn}} </ion-item>
-            </ion-col>  
-        </ion-row>
-        <ion-item>Description : {{trip.tripDescription}}</ion-item>        
+        <h3>Trip Information</h3>
+        <h5>{{trip.tripName}}</h5>
+      <div>
+        <h6 style="display:inline;">Description : </h6>
+        <p style="display:inline;">  {{trip.tripDescription}}</p>
+      </div>  
+      <div>   
+          <h6 style="display:inline;">Host Name :</h6> 
+          <p style="display:inline;">{{trip.tripHost}}</p>
+      </div> 
+      <div>   
+          <h6 style="display:inline;">From :</h6>
+          <p style="display:inline;">{{trip.tripDepartureLocation}}</p> 
+      </div>
+      <div>  
+          <h6 style="display:inline;">To : </h6>
+          <p style="display:inline;">{{trip.tripReturnLocation}}</p>     
+      </div> 
+      <div>
+          <h6 style="display:inline;">Departure :</h6>
+          <p style="display:inline;">{{trip.tripDeparture}}</p> 
+      </div>
+      <div>        
+          <h6 style="display:inline;">Return : </h6>
+          <p style="display:inline;">{{trip.tripReturn}}</p> 
+      </div>  
+          <h3>Trip Plan</h3>
+      <ion-item *ngFor = "let day of dayPlanList">
+          <h6 style="display:inline;">{{day.placeholder}} </h6>
+          <p style="display:inline;">{{day.value}}</p> 
+      </ion-item>
+          <h3>Trip Services</h3>
+         <p>{{trip.tripServices}}</p> 
   <ion-item >
     <h3>Places to visit</h3>
     <ion-row>
@@ -83,35 +92,55 @@
     </ion-row>
   </ion-item>
 
-  <ion-item >
+  
       <h3>Resturants to visit</h3>
+      <ion-item>
       <ion-row>
       <ion-col col-6 *ngFor = "let resturant of resList">  
       <ion-card (tap)=resturantDetail()>
-       <h3> {{resturant.resturantName}}</h3>
+       <h3>dsfffffffff {{resturant.resturantName}}</h3>
         
       </ion-card>
       </ion-col>  
       </ion-row>
   </ion-item>
+  <ion-item>
+      <button ion-button (tap) = "addMember()">Join Trip</button>
+   </ion-item>
 
   <ion-list no-lines>
     <ion-list-header>
       <h3>Members </h3>
     </ion-list-header>
     <ion-item *ngFor = "let member of memberList">
-    <ion-item>
+    
       <p>{{member.data.memberName}}</p>
       
+    
     </ion-item>
-    </ion-item>
+  </ion-list>
+
     <ion-item>
-       <button ion-button (tap) = "addMember()">Join Trip</button>
+        <ion-label floating >Add your Review</ion-label>  
+        <ion-input type = "text"   [(ngModel)] = "review.tripReview" ></ion-input>
+    
     </ion-item>
     <ion-item>
       <button ion-button (tap) = "addReview()">Done</button>   
     </ion-item>
-  </ion-list>
+    <ion-list no-lines>
+        <ion-list-header>
+          <h3>Reviews </h3>
+        </ion-list-header>
+        <ion-item *ngFor = "let reviews of reviewList">
+        <ion-item>
+          <p>{{reviews.data.userName}}</p>
+          <p>{{reviews.data.tripReview}}</p>
+          <p right class="dateFont">{{reviewDate | date}}</p>
+        </ion-item>
+        </ion-item>
+    </ion-list>
+
 
   
 </ion-content>

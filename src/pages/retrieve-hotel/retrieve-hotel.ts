@@ -4,10 +4,12 @@ import { HotelService } from '../../app/services/hotels.service';
 import { Hotel } from '../../models/hotels/hotels.interface';
 import { SearchHotelsPage } from '../../pages/hotel/search-hotels/search-hotels';
 //import * as geofirex from 'geofirex';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, from } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { TripService } from '../../app/services/trips.service';
 import { storage } from 'firebase';
+import {Trip} from '../../models/trips/trips.interface';
+import { ViewController } from 'ionic-angular/navigation/view-controller';
 //import { FirebaseApp } from '@firebase/app-types';
 /**
  * Generated class for the RetrieveHotelPage page.
@@ -41,8 +43,12 @@ export class RetrieveHotelPage implements OnInit {
   searchLocationRef:string;
   hotelRef$: AngularFirestoreCollection<any>
   btnStatus: any;
+  trip = {} as Trip
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private db: AngularFirestore,
-    private hotelSer: HotelService, public popoverCtrl: PopoverController, public tripSer: TripService, public modalCtrl: ModalController) {
+    private hotelSer: HotelService, public popoverCtrl: PopoverController, public tripSer: TripService, 
+    public modalCtrl: ModalController, public viewCtrl : ViewController) {
     this.hotelRef$ = this.db.collection('hotel');
 
   }
@@ -51,6 +57,7 @@ export class RetrieveHotelPage implements OnInit {
     // this.tripSer.getTripDetails().subscribe(trips => {
     //   console.log(trips);
     // })
+    console.log(this.navParams.data.btnStatus);
     this.btnStatus = this.navParams.data.btnStatus;
     console.log("in thre retrieve page")
     console.log(" Latitude")
@@ -115,32 +122,19 @@ export class RetrieveHotelPage implements OnInit {
    * @param myEvent
    */
 
-  openTrips(myEvent, hotelId) {
-    let popover = this.popoverCtrl.create('TripPopPage', { hotelId });
-    popover.present({
-      ev: myEvent
-    });
-  } 
-
-  // retrieveData() {
-  //   console.log("operating");
-  //   //console.log(items[9]);
-  //   //console.log(this.hotelsList);
-  //   this.hotelSer.getItems().subscribe(items => {
-
-  //     this.hotelsList = items;
-
-  //     let hotels = [];
-
-
-  //     this.hotelsList.forEach(hotel => {
-  //       hotels.push(hotel);
-  //       console.log(hotel);
-  //     });
-
-  //   });
-
-  // }
+  getHotel(val,getHotels)
+  {
+    console.log(val);
+    this.hotelSer.showHotelDetails(val).subscribe(item =>{
+      this.trip.tripHotels = item
+      getHotels = this.trip.tripHotels
+      console.log(getHotels);
+      this.hotelSer.setHotelDetails(getHotels);
+      //this.navCtrl.setRoot('TripsPage',{getResturant})
+      this.viewCtrl.dismiss();  
+    })
+    
+  }
   mapView()
   {
         this.modalCtrl.create('HotelMapPage', { Latitude: this.hotelLatList, Longitude: this.hotelLngList}).present();

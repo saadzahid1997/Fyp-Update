@@ -77,7 +77,7 @@ export class FindResturantsPage implements OnInit {
 
     });
   }
-  getHotels(val,getResturant)
+  getResturant(val,getResturant)
   {
     console.log(val);
     this.resturantSer.showResDetails(val).subscribe(item =>{

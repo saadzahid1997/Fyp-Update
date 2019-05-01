@@ -8,6 +8,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { CalendarModalOptions, CalendarModal } from 'ion2-calendar';
 import { ResturantService } from '../../app/services/resturant.service';
+import { HotelService } from '../../app/services/hotels.service';
+import { PlacesService } from '../../app/services/places.service';
 declare var google :any;
 /**
  * Generated class for the TripsPage page.
@@ -30,7 +32,16 @@ export class TripsPage implements OnInit {
   returnDate: any;
   inputs : any = [];
   y = 0;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore, public alert:AlertController , public userSer:UserService  , public MapsApiLoader:MapsAPILoader  , public storage : AngularFireStorage, public modalCtrl:ModalController, public resSer:ResturantService) {
+  r = 0;
+  p = 0;
+  h = 0;
+  tripResturantId: any = [];
+  hotelList:any=[];
+  tripHotelId:any=[];
+  placeList: any = [];
+  tripPlaceId: any = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private db:AngularFirestore, public alert:AlertController , public userSer:UserService  , public MapsApiLoader:MapsAPILoader  , public storage : AngularFireStorage, public modalCtrl:ModalController,
+     public resSer:ResturantService, public hotelSer:HotelService, public placeSer:PlacesService) {
 
     this.tripRef$ = this.db.collection('trips')
 
@@ -225,6 +236,15 @@ export class TripsPage implements OnInit {
     label: '10 Days',
     value: '10 Days',
    })
+   alertDays.addButton('Cancel');
+   alertDays.addButton({
+    text: 'OK',
+    handler: data => {
+
+      this.trip.tripDays = data;
+    }
+  
+   })
    alertDays.present();
  }
 
@@ -281,6 +301,15 @@ export class TripsPage implements OnInit {
    label: '10 Nights',
    value: '10 Nights',
   })
+  alertNights.addButton('Cancel');
+   alertNights.addButton({
+    text: 'OK',
+    handler: data => {
+
+      this.trip.tripNights = data;
+    }
+  
+   })
   alertNights.present();
 }
 
@@ -382,16 +411,30 @@ addDay()
   this.trip.tripDayDescription = this.inputs;
 }
 
-addPlaces()
+addPlaces(tripName)
 {
-    this.navCtrl.setRoot('PalcesPage')
+    
+  console.log(this.trip.tripName)
+  tripName = this.trip.tripName
+  let placeModel =  this.modalCtrl.create('PalcesPage', {tripName})
+  placeModel.present();
+
 }
 
 addHotels(tripName)
 {
   console.log(this.trip.tripName)
   tripName = this.trip.tripName
-  this.navCtrl.setRoot('SearchHotelsPage', {tripName})
+  let hotelModel =  this.modalCtrl.create('SearchHotelsPage', {tripName})
+  hotelModel.present();
+
+  //Store Hotels Id
+  // this.hotelList[this.h] = this.hotelSer.getHotelDetails();
+  // console.log(this.HotelList[this.h].id);
+  // this.tripHotelId[this.h] = this.hotelList[this.h].id
+  // this.h = this.h+1;
+  // console.log(this.tripHotelId);
+
 }
 
 addResturants(tripName)
@@ -402,19 +445,51 @@ addResturants(tripName)
   let resModal = this.modalCtrl.create('ResturantsPage',{tripName})
     
   resModal.present();
+  //Store Resturant Id
+  // this.resturantList[this.r] = this.resSer.getResDetails();
+  // console.log(this.resturantList[this.r].id);
+  // this.tripResturantId[this.r] = this.resturantList[this.r].id
+  // this.r = this.r+1;
+  // console.log(this.tripResturantId);
 
+  //Store Hotels Id
+
+}
+
+hotelAdded()
+{
+  this.hotelList[this.h] = this.hotelSer.getHotelDetails();
+  console.log(this.hotelList[this.h]);
+  this.tripHotelId[this.h] = this.hotelList[this.h].id
+  this.h = this.h+1;
+  console.log(this.tripHotelId);
+  
+}
+
+placeAdded()
+{
+  this.placeList[this.p] = this.placeSer.getPlaceDetails();
+  console.log(this.placeList[this.p]);
+  this.tripPlaceId[this.p] = this.placeList[this.p].id
+  this.p = this.p+1;
+  console.log(this.tripPlaceId);
+  
 }
 
 resturantAdded()
 {
-  this.resturantList[this.y] = this.resSer.getResDetails();
-  this.y = this.y+1;
-  console.log(this.resturantList);
+  this.resturantList[this.r] = this.resSer.getResDetails();
+  console.log(this.resturantList[this.r]);
+  this.tripResturantId[this.r] = this.resturantList[this.r].id
+  this.r = this.r+1;
+  console.log(this.tripResturantId);
+  
 }
   addTrips()
   {
       this.tripRef$.add({
       tripName : this.trip.tripName,
+      tripDescription:this.trip.tripDescription,
       tripDepartureLocation: this.trip.tripDepLocation,
       tripDepartureLocationLat : this.trip.tripDepLocationLat,
       tripDepartureLocationLng: this.trip.tripDepLocationLng,
@@ -427,7 +502,13 @@ resturantAdded()
       tripFileURL : this.trip.fileURL,
       tripDeparture: this.trip.tripDeparture = this.departureDate,
       tripReturn:this.trip.tripReturn = this.returnDate,
-      tripDayDescription:this.trip.tripDayDescription
+      tripDayDescription:this.trip.tripDayDescription,
+      tripResturants:this.trip.tripResturants = this.tripResturantId,
+      tripHotels:this.trip.tripHotels = this.tripHotelId,
+      tripPlaces:this.trip.tripPlaces = this.tripPlaceId,
+      tripServices:this.trip.tripServices,
+      tripDays:this.trip.tripDays,
+      tripNights:this.trip.tripNights
     });
   }
 

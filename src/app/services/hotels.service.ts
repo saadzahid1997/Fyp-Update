@@ -10,6 +10,7 @@ export class HotelService {
     hotelCollection: AngularFirestoreCollection<any>;
     hotels: Observable<any>;
     hotelDetailId: any;
+    HotelDetail: any;
     constructor(public afs: AngularFirestore) {
         console.log("Hotel service instantiated...");
 
@@ -32,6 +33,15 @@ export class HotelService {
 
     bookHotel(book) {
         return this.afs.collection('booking').add(book);
+    }
+    setHotelDetails(hotelDetail)
+    {
+        this.HotelDetail = hotelDetail;
+    }
+
+    getHotelDetails()
+    {
+        return this.HotelDetail;
     }
 
 

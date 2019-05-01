@@ -35,7 +35,7 @@
 
     <ion-item *ngFor="let hotel of hotelsList">
       <ion-item>
-        <button ion-button *ngIf = 'btnStatus'>Add to trip</button>
+        <button ion-button *ngIf = 'btnStatus' (tap) = getHotel(hotel.id)>Add to trip</button>
         <!-- <button ion-button (tap)="openTrips($event, hotel.id)">Add to trip</button> -->
       </ion-item>
       <ion-item class="animated fadeInLeft" (tap)="hotelDetail(hotel.id)">

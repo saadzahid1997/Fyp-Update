@@ -18,7 +18,7 @@
 
     <ion-item  *ngFor="let place of placesList" >
       <ion-item>
-        <button ion-button (tap)="openTrips($event, place.id)">Add to trip</button>
+        <button ion-button (tap)="getPlace(place.id)">Add to trip</button>
       </ion-item>
       <ion-item class="animated fadeInLeft" (tap)="placeDetail(place.id)">
 

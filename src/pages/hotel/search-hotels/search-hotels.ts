@@ -1,5 +1,5 @@
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { Search } from '../../../models/search';
 import { CalendarModal, CalendarModalOptions } from 'ion2-calendar';
@@ -21,7 +21,7 @@ declare var google: any;
   selector: 'page-search-hotels',
   templateUrl: 'search-hotels.html',
 })
-export class SearchHotelsPage {
+export class SearchHotelsPage implements OnInit {
   google:any;
   searcHotelForm: FormGroup;
   public static  searchPlace:string;
@@ -37,6 +37,8 @@ export class SearchHotelsPage {
   searchObjects: Search = new Search();
   searchLocationLat: number;
   searchLocationLng: number;
+  tripName: any;
+  btnStatus: boolean;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -53,6 +55,17 @@ export class SearchHotelsPage {
 
     })
     
+  }
+
+  ngOnInit(){
+    this.tripName = this.navParams.data.tripName;
+    console.log(this.tripName);
+    if(this.tripName !== null && this.tripName !== undefined && this.tripName !== "" )
+    {
+      this.btnStatus = true;
+      console.log(this.btnStatus);
+      
+    }
   }
 
   openCalendar() {
@@ -119,14 +132,15 @@ export class SearchHotelsPage {
   addHotels() {
     this.navCtrl.setRoot("AddHotelsPage");
   }
-  searchHotels(searchLocationLat,searchLocationLng)
+  searchHotels(searchLocationLat,searchLocationLng,btnStatus)
   {
+    btnStatus = this.btnStatus
     searchLocationLat = this.searchLocationLat;
     searchLocationLng = this.searchLocationLng
     console.log("in the search method")
     console.log(searchLocationLat);
     console.log(searchLocationLat);
-    this.navCtrl.setRoot("RetrieveHotelPage",{searchLocationLat,searchLocationLng});
+    this.navCtrl.setRoot("RetrieveHotelPage",{searchLocationLat,searchLocationLng,btnStatus});
   }
   
 }
