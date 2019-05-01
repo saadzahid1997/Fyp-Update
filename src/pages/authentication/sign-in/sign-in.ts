@@ -6,10 +6,22 @@ import {
   MenuController,
   AlertController
 } from 'ionic-angular';
+import {
+  AngularFirestore,
+} from '@angular/fire/firestore';
+import { AngularFirestoreDocument } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from '../../../app/services/user.service';
-//import { HotelDetailsPage}from '../../hotel/hotel-details/hotel-details';
+import { MyApp } from '../../../app/app.component';
+
+interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  myCustomData?: string;
+}
 
 @IonicPage()
 @Component({
@@ -35,7 +47,9 @@ export class SignInPage {
     public menuCtrl: MenuController,
     private fire: AngularFireAuth,
     public alertCtrl: AlertController,
-    public userSer: UserService
+    public userSer: UserService,
+    public afs: AngularFirestore,
+    public app: MyApp 
   ) {
     this.menuCtrl.enable(false); // Disable SideMenu
   }
@@ -69,25 +83,42 @@ export class SignInPage {
       })
       .present();
   }
-  doLogin(userName) {
-    this.fire.auth
-      .signInWithEmailAndPassword(this.user.value, this.pass.value)
-      .then(() => {
+  
+  doLogin() {
+
+    this.userSer.getUsers(this.signInForm.email, this.signInForm.password).subscribe(item => {
+      this.userList = item;
+
+      if(this.userList.length > 0){
+        let userData = this.userList[0].data;
+        this.app.user = userData;
+        this.navCtrl.setRoot('HomePage', {userData});          
+      }
+      else {
+        this.alert("Username or password incorrect!");
+      }
+    },
+    (error) => {
+      console.log(error.statusText);
+    })
+    // this.fire.auth
+    //   .signInWithEmailAndPassword(this.user.value, this.pass.value)
+    //   .then(() => {
           
-          this.navCtrl.setRoot('HomePage');
+    //       this.navCtrl.setRoot('HomePage');
           
-        })
+    //     })
       
-      .catch(error => {
-        this.alert(error.message);
-      });
-    console.log(this.user.value);
-    console.log(this.pass.value);
+    //   .catch(error => {
+    //     this.alert(error.message);
+    //   });
+    // console.log(this.user.value);
+    // console.log(this.pass.value);
     //userName = this.user.value
 
     //this.navCtrl.push('MyApp',{userName})
-    console.log('In the sign in page');
-    console.log(userName);
+    // console.log('In the sign in page');
+    // console.log(userName);
   }
 
   goToForgetPasswordPage() {
