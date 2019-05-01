@@ -54,6 +54,7 @@ export class MyApp implements OnInit {
     
     this.userSer.user$.subscribe(user => {
       this.user = user;
+      console.log("==> ", this.user);
     });
   }
 
@@ -84,6 +85,7 @@ export class MyApp implements OnInit {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if (component) {
+      let userData = this.user;
       this.nav.setRoot(component);
       this.menuCtrl.close();
     } else {

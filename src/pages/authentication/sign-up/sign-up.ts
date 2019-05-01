@@ -118,11 +118,11 @@ export class SignUpPage {
     addUser()
     {
       this.userRef$.add({
-        userFName:this.userModel.userFName,
-        userLName:this.userModel.userLName,
-        userMail:this.userModel.userMail,
+        // userFName:this.userModel.userFName,
+        // userLName:this.userModel.userLName,
+        email:this.userModel.userMail,
         userPass:this.userModel.userPass,
-        userPhoto: this.userModel.fileURL,
+        photoURL: this.userModel.fileURL,
         displayName: this.userModel.displayName = this.userModel.userFName.concat(' '+this.userModel.userLName)
       });
     }

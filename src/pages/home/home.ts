@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   }
 ngOnInit()
 {
-    console.log(this.navParams.data.userName)
+    console.log(this.navParams.data.userData)
 
 }
   goToSearchPage(userName) {

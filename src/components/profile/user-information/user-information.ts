@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
 })
 export class UserInformationComponent {
 
+  public updateProfile = false;
+
   constructor() { }
+
+  profileUpdate() {
+    this.updateProfile = true;
+  }
 }
 
   

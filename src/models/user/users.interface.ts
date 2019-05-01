@@ -9,4 +9,5 @@ export interface User
         userPass:string;
         fileURL:string;
         displayName:string;
+
     }

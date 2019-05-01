@@ -1,41 +1,44 @@
 <div class="container">
   <form class="animated zoomIn contents">
     <ion-list>
-
+ 
       <!-- First Name -->
       <ion-item>
         <ion-label stacked color="color2">First Name</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [disabled]="!updateProfile" type="text" ></ion-input>
       </ion-item>
 
       <!-- Last Name -->
       <ion-item>
           <ion-label stacked color="color2">Last Name</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
+          <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+      </ion-item>
   
-
       <!-- Email Address -->
       <ion-item>
         <ion-label stacked color="color2">Email Address</ion-label>
-        <ion-input type="text" ></ion-input>
+        <ion-input [disabled]="!updateProfile" type="text"></ion-input>
       </ion-item>
 
       <!-- Phone Number -->
       <ion-item>
         <ion-label stacked color="color2">Phone Number</ion-label>
-        <ion-input type="text" ></ion-input>
+        <ion-input [disabled]="!updateProfile" type="text"></ion-input>
       </ion-item>
 
       <!-- Address -->
       <ion-item>
         <ion-label stacked color="color2">Address</ion-label>
-        <ion-input type="text" ></ion-input>
+        <ion-input [disabled]="!updateProfile" type="text"></ion-input>
       </ion-item>
     </ion-list>
 
     <ion-row justify-content-center align-items-center>
-      <button ion-button block type="button" color="color2">
+      <button ion-button block type="button" color="color2" *ngIf="updateProfile">
+          Save
+      </button>
+
+      <button ion-button block type="button" color="color2" *ngIf="!updateProfile" (click)="profileUpdate()">
           Update Profile
       </button>
     </ion-row>
