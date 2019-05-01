@@ -53,14 +53,15 @@ export class UserService {
   }
 
   getUsers(userName, password) {
-
     return this.afs
-      .collection('users', ref => ref.where('email', '==', userName).where('userPass', '==', password))
+      .collection('users', ref =>
+        ref.where('email', '==', userName).where('userPass', '==', password)
+      )
       .snapshotChanges()
       .pipe(
         map(res => {
           return res.map(data => {
-              return { data: data.payload.doc.data() };
+            return { data: data.payload.doc.data() };
           });
         })
       );
@@ -86,9 +87,8 @@ export class UserService {
   }
 
   public updateUserData(user) {
-
     console.log(user);
-    
+
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
       `users/${user.uid}`
@@ -98,7 +98,7 @@ export class UserService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL 
+      photoURL: user.photoURL
     };
 
     return userRef.set(data, { merge: true });
