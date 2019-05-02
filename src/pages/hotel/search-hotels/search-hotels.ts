@@ -1,6 +1,6 @@
 
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
 import { Search } from '../../../models/search';
 import { CalendarModal, CalendarModalOptions } from 'ion2-calendar';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import { MapsAPILoader } from '@agm/core';
 import { HotelService } from '../../../app/services/hotels.service';
+import {Trip} from '../../../models/trips/trips.interface'
 //import { AngularFireDatabase,AngularFireList } from '@angular/fire/database';
 //import { Hotel } from '../../../models/hotels/hotels.interface';
 //import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -34,12 +35,12 @@ export class SearchHotelsPage implements OnInit {
   @ViewChild("addHotels")
   @ViewChild("search")
   public searchElementRef: any;
-
+  trip = {} as Trip;
   searchObjects: Search = new Search();
   searchLocationLat: number;
   searchLocationLng: number;
   tripName: any;
-  btnStatus: boolean;
+  btnStatus: any;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -47,7 +48,8 @@ export class SearchHotelsPage implements OnInit {
     public _formBuilder: FormBuilder,
     public geoLocation: Geolocation,
     public MapsApiLoader : MapsAPILoader,
-    public hotelSer:HotelService
+    public hotelSer:HotelService,
+    public viewCtrl:ViewController
     
     //private database: AngularFirestore
     ) {
@@ -60,6 +62,7 @@ export class SearchHotelsPage implements OnInit {
   }
 
   ngOnInit(){
+    this.btnStatus = this.navParams.data.btnStatus;
     this.tripName = this.navParams.data.tripName;
     console.log(this.tripName);
     if(this.tripName !== null && this.tripName !== undefined && this.tripName !== "" )
@@ -137,6 +140,18 @@ export class SearchHotelsPage implements OnInit {
   hotelDetail(hotelId)
   {
     this.navCtrl.setRoot('HotelDetailsPage', {hotelId});
+  }
+  
+  getHotel(val, getHotels) {
+    console.log(val);
+    this.hotelSer.showHotelDetails(val).subscribe(item => {
+      this.trip.tripHotels = item;
+      getHotels = this.trip.tripHotels;
+      console.log(getHotels);
+      this.hotelSer.setHotelDetails(getHotels);
+      //this.navCtrl.setRoot('TripsPage',{getResturant})
+      this.viewCtrl.dismiss();
+    });
   }
   addHotels() {
     this.navCtrl.setRoot("AddHotelsPage");
