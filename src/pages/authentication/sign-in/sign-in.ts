@@ -6,10 +6,7 @@ import {
   MenuController,
   AlertController
 } from 'ionic-angular';
-import {
-  AngularFirestore,
-} from '@angular/fire/firestore';
-import { AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserService } from '../../../app/services/user.service';
@@ -47,15 +44,20 @@ export class SignInPage {
     public menuCtrl: MenuController,
     private fire: AngularFireAuth,
     public alertCtrl: AlertController,
-    public userSer: UserService,
+    public _user: UserService,
     public afs: AngularFirestore,
-    public app: MyApp 
+    public app: MyApp
   ) {
     this.menuCtrl.enable(false); // Disable SideMenu
   }
 
   ngOnInit() {
     this.formValidation();
+    this._user.user$.subscribe(user => {
+      console.log(user);
+
+      if (user) this.navCtrl.setRoot('HomePage');
+    });
   }
 
   formValidation() {
@@ -83,32 +85,42 @@ export class SignInPage {
       })
       .present();
   }
-  
+
   doLogin() {
-
-    this.userSer.getUsers(this.signInForm.email, this.signInForm.password).subscribe(item => {
-      this.userList = item;
-
-      if(this.userList.length > 0){
-        let userData = this.userList[0].data;
-        this.app.user = userData;
-        this.navCtrl.setRoot('HomePage', {userData});          
-      }
-      else {
-        this.alert("Username or password incorrect!");
-      }
-    },
-    (error) => {
-      console.log(error.statusText);
-    })
+    this._user
+      .signInWithEmailAndPassword(
+        this.signInForm.email,
+        this.signInForm.password
+      )
+      .then(user => {
+        console.log(user);
+        this.navCtrl.setRoot('HomePage');
+      });
+    // this._user
+    //   .getUsers(this.signInForm.email, this.signInForm.password)
+    //   .subscribe(
+    //     item => {
+    //       this.userList = item;
+    //       if (this.userList.length > 0) {
+    //         let userData = this.userList[0].data;
+    //         this.app.user = userData;
+    //         this.navCtrl.setRoot('HomePage', { userData });
+    //       } else {
+    //         this.alert('Username or password incorrect!');
+    //       }
+    //     },
+    //     error => {
+    //       console.log(error.statusText);
+    //     }
+    //   );
     // this.fire.auth
     //   .signInWithEmailAndPassword(this.user.value, this.pass.value)
     //   .then(() => {
-          
+
     //       this.navCtrl.setRoot('HomePage');
-          
+
     //     })
-      
+
     //   .catch(error => {
     //     this.alert(error.message);
     //   });
@@ -130,14 +142,14 @@ export class SignInPage {
   }
 
   logInWithFacebook() {
-    this.userSer.facebookSignIn().then(() => {
+    this._user.facebookSignIn().then(() => {
       this.navCtrl.setRoot('HomePage');
     });
     //this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
   }
 
   logInWithGoogle() {
-    this.userSer.googleSignin().then(() => {
+    this._user.googleSignin().then(() => {
       this.navCtrl.setRoot('HomePage');
     });
     //this.fire.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())

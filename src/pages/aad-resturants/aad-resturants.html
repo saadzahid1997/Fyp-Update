@@ -5,63 +5,91 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Add Resturants</ion-title>
+    <ion-buttons start>
+      <button ion-button color="blue" clear (tap)="dismiss()">
+        <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-    <ion-item>
-        <ion-label floating>Resturant Name</ion-label>  
-        <ion-input type = "text" [(ngModel)] = "resturant.resturantName"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>Resturant Location</ion-label>  
-        <ion-input id = "txtLocation"  (tap) = "resturantLocation()"type = "text" ></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col col-6>
-          <ion-item>
-              <ion-label floating>Meals</ion-label>  
-              <ion-input type = "text" (tap) = "resturantMeals()" [(ngModel)] = "resturant.resturantMeals"></ion-input>      
-          </ion-item>
-      </ion-col>
-      <ion-col col-6>
-          <ion-item>
-              <ion-label floating>Cuisines</ion-label>  
-              <ion-input type = "text" (tap) = "resturantCuisines()" [(ngModel)] = "resturant.resturantCuisines"></ion-input>      
-          </ion-item>
-      </ion-col>
-    </ion-row>      
-    <ion-item>
-        <ion-label floating>Email</ion-label>  
-        <ion-input type = "text" [(ngModel)] = "resturant.resturantMail"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>Contact No.</ion-label>  
-        <ion-input type = "text" [(ngModel)] = "resturant.resturantContact"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label floating>Description</ion-label>  
-        <ion-input type = "text" [(ngModel)] = "resturant.resturantDescription"></ion-input>
-    </ion-item>
-   
+  <ion-item>
+    <ion-label floating>Resturant Name</ion-label>
+    <ion-input type="text" [(ngModel)]="resturant.resturantName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Resturant Location</ion-label>
+    <ion-input
+      id="txtLocation"
+      (tap)="resturantLocation()"
+      type="text"
+    ></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label floating>Meals</ion-label>
+        <ion-input
+          type="text"
+          (tap)="resturantMeals()"
+          [(ngModel)]="resturant.resturantMeals"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-label floating>Cuisines</ion-label>
+        <ion-input
+          type="text"
+          (tap)="resturantCuisines()"
+          [(ngModel)]="resturant.resturantCuisines"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-item>
+    <ion-label floating>Email</ion-label>
+    <ion-input type="text" [(ngModel)]="resturant.resturantMail"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Contact No.</ion-label>
+    <ion-input type="text" [(ngModel)]="resturant.resturantContact"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating>Description</ion-label>
+    <ion-input
+      type="text"
+      [(ngModel)]="resturant.resturantDescription"
+    ></ion-input>
+  </ion-item>
 </ion-content>
 <ion-footer text-center>
-    <ion-row>
-      <ion-col col-4 text-left>
-        <button ion-button block class="custom-btn" (tap) = "addResturant()">Add</button>
-      </ion-col>
-      <ion-col col-4>    
-        <ion-item>
-            <input type="file" (change)="handler($event)">Choose Photo/>     
-        </ion-item>
+  <ion-row>
+    <ion-col col-6>
+      <button
+        ion-button
+        block
+        class="custom-btn"
+        (tap)="addResturant()"
+        [disabled]="isUploading"
+      >
+        Add
+      </button>
     </ion-col>
-      <ion-col col-4 align-text-right>
-        <button ion-button block class="custom-btn" >Cancel</button>
-      </ion-col>
-    </ion-row>
+    <ion-col col-6>
+      <button
+        ion-button
+        block
+        class="custom-btn"
+        (tap)="fileUpload.click()"
+        [disabled]="isUploading"
+      >
+        Choose Photo
+      </button>
+      <input type="file" hidden (change)="handler($event)" #fileUpload />
+    </ion-col>
+  </ion-row>
 </ion-footer>

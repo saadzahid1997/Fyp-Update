@@ -1,34 +1,47 @@
 <ion-content>
   <div class="container">
-
-
     <div class="top-content" text-center>
       <div class="animated fadeInDown title">SIGN UP</div>
     </div>
 
-
     <div class="form-content">
-
       <form class="animated slideInUp" [formGroup]="registrationForm">
         <ion-list>
-
           <ion-row>
             <ion-col col-6 align-text-left>
               <ion-item>
                 <ion-label>
-                  <ion-icon ios="ios-person" md="md-person" color="color2"></ion-icon>
+                  <ion-icon
+                    ios="ios-person"
+                    md="md-person"
+                    color="color2"
+                  ></ion-icon>
                 </ion-label>
-                <ion-input type="text" placeholder="First Name" name="name" formControlName="name"
-                  [(ngModel)]="userModel.userFName"></ion-input>
+                <ion-input
+                  type="text"
+                  placeholder="First Name"
+                  name="fName"
+                  [(ngModel)]="userModel.userFName"
+                  [ngModelOptions]="{ standalone: true }"
+                ></ion-input>
               </ion-item>
             </ion-col>
             <ion-col col-6 align-text-right>
               <ion-item>
                 <ion-label>
-                  <ion-icon ios="ios-person" md="md-person" color="color2"></ion-icon>
+                  <ion-icon
+                    ios="ios-person"
+                    md="md-person"
+                    color="color2"
+                  ></ion-icon>
                 </ion-label>
-                <ion-input type="text" placeholder="Last Name" name="name" formControlName="name"
-                  [(ngModel)]="userModel.userLName"></ion-input>
+                <ion-input
+                  type="text"
+                  placeholder="Last Name"
+                  name="lName"
+                  [(ngModel)]="userModel.userLName"
+                  [ngModelOptions]="{ standalone: true }"
+                ></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -37,37 +50,73 @@
             <p>Atleast Six characters name.</p>
           </div>-->
 
+          <ion-item>
+            <ion-label>
+              <ion-icon name="md-call" color="color2"></ion-icon>
+            </ion-label>
+            <ion-input
+              type="phone"
+              #username
+              placeholder="Your Phone Number"
+              name="phone"
+              [(ngModel)]="userModel.phone"
+              [ngModelOptions]="{ standalone: true }"
+            ></ion-input>
+          </ion-item>
 
           <ion-item>
             <ion-label>
               <ion-icon name="md-mail" color="color2"></ion-icon>
             </ion-label>
-            <ion-input type="email" #username placeholder="Your Email Address" name="email" formControlName="email"
+            <ion-input
+              type="email"
+              #username
+              placeholder="Your Email Address"
+              name="email"
+              formControlName="email"
               [(ngModel)]="userModel.userMail"
-              [class.invalid]="!registrationForm.controls.email.valid && registrationForm.controls.email.dirty">
-            </ion-input>
+              [class.invalid]="
+                !registrationForm.controls.email.valid &&
+                registrationForm.controls.email.dirty
+              "
+            ></ion-input>
           </ion-item>
 
-
-          <div class="error-message"
-            *ngIf="!registrationForm.controls.email.valid  && registrationForm.controls.email.dirty">
+          <div
+            class="error-message"
+            *ngIf="
+              !registrationForm.controls.email.valid &&
+              registrationForm.controls.email.dirty
+            "
+          >
             <p>Please enter a valid email address.</p>
           </div>
-
 
           <ion-item>
             <ion-label>
               <ion-icon name="md-eye" color="color2"></ion-icon>
             </ion-label>
-            <ion-input type="password" #userpass placeholder="Your Password" name="password" formControlName="password"
-              [(ngModel)]="registrationForm.password " [(ngModel)]="userModel.userPass"
-              [class.invalid]="!registrationForm.controls.password.valid && registrationForm.controls.password.dirty">
-            </ion-input>
+            <ion-input
+              type="password"
+              #userpass
+              placeholder="Your Password"
+              name="password"
+              formControlName="password"
+              [(ngModel)]="userModel.userPass"
+              [class.invalid]="
+                !registrationForm.controls.password.valid &&
+                registrationForm.controls.password.dirty
+              "
+            ></ion-input>
           </ion-item>
 
-
-          <div class="error-message"
-            *ngIf="!registrationForm.controls.password.valid  && registrationForm.controls.password.dirty">
+          <div
+            class="error-message"
+            *ngIf="
+              !registrationForm.controls.password.valid &&
+              registrationForm.controls.password.dirty
+            "
+          >
             <p>Atleast 6 characters password.</p>
           </div>
 
@@ -77,25 +126,48 @@
               <div class="profile-photo" padding-top>
                 <!-- Photo Change Edit Button  -->
                 <ion-fab top>
-                  <button ion-fab mini icon-only color="color1">
+                  <button
+                    ion-fab
+                    mini
+                    icon-only
+                    color="color1"
+                    (click)="imgageUpload.click()"
+                  >
                     <ion-icon name="md-create"></ion-icon>
                   </button>
                 </ion-fab>
                 <!-- Image Preview  -->
-                <img [src]="">
+                <img [src]="" />
               </div>
-              <input hidden type="file" (change)="handler($event)" />
+              <input
+                hidden
+                type="file"
+                #imgageUpload
+                (change)="handler($event)"
+              />
             </ion-item>
           </ion-item>
         </ion-list>
-        <button ion-button round block type="button" class="custom-btn" (tap)="doRegistration()"
-          (click)="addUser(user)">
+        <button
+          ion-button
+          round
+          block
+          type="button"
+          class="custom-btn"
+          (tap)="doRegistration()"
+          (click)="addUser(user)"
+        >
           Sign Up
         </button>
 
-
         <ion-row justify-content-center align-items-center>
-          <button ion-button clear type="button" color="color3" (tap)="goToLoginPage()">
+          <button
+            ion-button
+            clear
+            type="button"
+            color="color3"
+            (tap)="goToLoginPage()"
+          >
             Already have an account? Sign In
           </button>
         </ion-row>

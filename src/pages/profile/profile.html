@@ -10,13 +10,10 @@
   <header-one title="Profile"></header-one>
 </ion-header>
 
-
 <!-- Contents  -->
 <ion-content padding>
-
   <!-- Profile Photo Section  -->
   <div class="profile-photo" padding-top>
-
     <!-- Photo Change Edit Button  -->
     <ion-fab top>
       <button ion-fab mini icon-only color="color1">
@@ -25,7 +22,7 @@
     </ion-fab>
 
     <!-- Image Preview  -->
-    <img src="assets/imgs/avatar.png">
+    <img [src]="user ? (user.photoURL ? user.photoURL : '') : ''" />
   </div>
 
   <!-- User Profile Settings Options  -->
@@ -34,22 +31,77 @@
       <ion-segment-button value="User Info">
         User Info
       </ion-segment-button>
-      <ion-segment-button value="Card Info">
+      <!-- <ion-segment-button value="Card Info">
         Card Info
       </ion-segment-button>
       <ion-segment-button value="Change Password">
         Change PWD
-      </ion-segment-button>
+      </ion-segment-button> -->
     </ion-segment>
   </div>
 
   <!-- Settings View   -->
   <div [ngSwitch]="options" padding-top>
-
     <!-- User Information Section -->
     <div *ngSwitchCase="'User Info'">
       <!-- User Information Component  -->
-      <user-information></user-information>
+      <!-- <user-information></user-information> -->
+      <form class="animated zoomIn contents">
+        <ion-list>
+          <!-- First Name -->
+          <ion-item>
+            <ion-label stacked color="color2">First Name</ion-label>
+            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+          </ion-item>
+
+          <!-- Last Name -->
+          <ion-item>
+            <ion-label stacked color="color2">Last Name</ion-label>
+            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+          </ion-item>
+
+          <!-- Email Address -->
+          <ion-item>
+            <ion-label stacked color="color2">Email Address</ion-label>
+            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+          </ion-item>
+
+          <!-- Phone Number -->
+          <ion-item>
+            <ion-label stacked color="color2">Phone Number</ion-label>
+            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+          </ion-item>
+
+          <!-- Address -->
+          <ion-item>
+            <ion-label stacked color="color2">Address</ion-label>
+            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <ion-row justify-content-center align-items-center>
+          <button
+            ion-button
+            block
+            type="button"
+            color="color2"
+            *ngIf="updateProfile"
+          >
+            Save
+          </button>
+
+          <button
+            ion-button
+            block
+            type="button"
+            color="color2"
+            *ngIf="!updateProfile"
+            (click)="profileUpdate()"
+          >
+            Update Profile
+          </button>
+        </ion-row>
+      </form>
       <!-- You will find this component from components folder -->
       <!-- Source Path - src/components/profile/user-information  -->
     </div>

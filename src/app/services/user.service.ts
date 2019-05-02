@@ -5,7 +5,7 @@ import {
 } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators/map';
 
-import { auth } from 'firebase/app';
+import { auth, firestore } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreDocument } from '@angular/fire/firestore';
 
@@ -23,6 +23,7 @@ interface User {
 @Injectable()
 export class UserService {
   user$: Observable<User>;
+  currentUser: any;
 
   userName: any;
 
@@ -31,6 +32,7 @@ export class UserService {
       switchMap(user => {
         // Logged in
         if (user) {
+          this.currentUser = user;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
           // Logged out
@@ -67,16 +69,24 @@ export class UserService {
       );
   }
 
-  signInWithEmailAndPassword(email: string, password: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  signInWithEmailAndPassword(email, password) {
+    console.log(email, password);
+
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
-  signUpWithEmailAndPassword(email: string, password: string) {
+  signUpWithEmailAndPassword(email, password) {
+    console.log(email, password);
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   registerUserData(user) {
-    return this.afs.collection('users').add(user);
+    console.log(user);
+
+    return this.afs
+      .collection('users')
+      .doc(user.uid)
+      .set(user);
   }
 
   setUserData(userName) {
@@ -96,6 +106,20 @@ export class UserService {
     const provider = new auth.FacebookAuthProvider();
     const credential = await this.afAuth.auth.signInWithPopup(provider);
     return this.updateUserData(credential.user);
+  }
+
+  updateUserHotel(hotelId) {
+    return this.afs
+      .collection('users')
+      .doc(this.currentUser.uid)
+      .update({ hotelIds: firestore.FieldValue.arrayUnion(hotelId) });
+  }
+
+  updateUserRestaurant(restaurantId) {
+    return this.afs
+      .collection('users')
+      .doc(this.currentUser.uid)
+      .update({ restaurantIds: firestore.FieldValue.arrayUnion(restaurantId) });
   }
 
   public updateUserData(user) {

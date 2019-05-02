@@ -39,7 +39,7 @@ export class MyApp implements OnInit {
     public menuCtrl: MenuController,
     public translateService: TranslateService,
     public dataProvider: DataProvider,
-    public userSer: UserService
+    public _user: UserService
   ) {
     this.initializeApp();
 
@@ -51,10 +51,9 @@ export class MyApp implements OnInit {
   }
 
   ngOnInit() {
-    
-    this.userSer.user$.subscribe(user => {
+    this._user.user$.subscribe(user => {
       this.user = user;
-      console.log("==> ", this.user);
+      console.log('==> ', this.user);
     });
   }
 
@@ -72,7 +71,6 @@ export class MyApp implements OnInit {
    * You get `DataProvider` Service at - 'src/providers/data/data';
    */
   getSideMenuData() {
-    
     this.pages = this.dataProvider.getSideMenus();
   }
 
@@ -99,7 +97,7 @@ export class MyApp implements OnInit {
 
   // Logout
   logout() {
-    this.userSer.signOut().then(() => {
+    this._user.signOut().then(() => {
       this.nav.setRoot('LandingPage');
     });
   }
