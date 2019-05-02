@@ -61,4 +61,8 @@ export class CreateTripPage implements OnInit {
     console.log(tripDetailId);
     this.navCtrl.setRoot('TripDetailsPage',{tripDetailId});
   }
+  dismiss()
+  {
+    this.navCtrl.setRoot('HomePage')
+  }
 }

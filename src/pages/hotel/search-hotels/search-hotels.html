@@ -36,6 +36,47 @@
      
     </form>
   </ion-grid>
+  
+
+  <ion-list>
+
+    <ion-item *ngFor="let hotel of hotelsList">
+      <ion-item>
+        <button ion-button *ngIf = 'btnStatus' (tap) = getHotel(hotel.id)>Add to trip</button>
+        <!-- <button ion-button (tap)="openTrips($event, hotel.id)">Add to trip</button> -->
+      </ion-item>
+      <ion-item class="animated fadeInLeft" (tap)="hotelDetail(hotel.id)">
+
+
+        <ion-thumbnail item-start>
+          <img src = "assets/imgs/logo.png">
+        </ion-thumbnail>
+
+        <ion-row>
+
+          <!-- Name of Hotel -->
+          <h1 text-wrap class="name">{{ hotel.data.hotelName}}</h1>
+
+
+        </ion-row>
+        <!-- Hotel Review and Type  -->
+        <p class="reviews">{{hotel.data.hotelOverview}} | {{hotel.data.hotelCategory}} </p>
+
+        <ion-item style="background: transparent" no-padding>
+
+          <!-- Hotel Ratings  
+              <rating [(ngModel)]="hotel.data.star" readOnly="false" max="{{hotel.data.star}}" emptyStarIconName="ios-star-outline" halfStarIconName="star-half"
+                starIconName="ios-star" nullable="true">
+              </rating>-->
+
+          <!-- Price  -->
+          <ion-badge item-end>Rs.{{hotel.data.hotelPrice}}/Night</ion-badge>
+        </ion-item>
+      </ion-item>
+      
+    </ion-item>
+    <!--- <h2>{{hotel.hotelName}}</h2>-->
+  </ion-list>
 </ion-content>
 
 

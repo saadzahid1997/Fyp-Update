@@ -25,6 +25,7 @@ export class PalcesPage implements OnInit {
   searchPlaceLng: any;
   tripName: any;
   btnStatus: boolean;
+  placeList:any=[];
   trip = {} as Trip
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _formBuilder:FormBuilder, 
@@ -44,6 +45,9 @@ export class PalcesPage implements OnInit {
       console.log(this.btnStatus);
       
     }
+    this.placeSer.getPlaces().subscribe(place =>{
+      this.placeList = place;
+    })
   }
 
   ionViewDidLoad() {
@@ -75,6 +79,14 @@ export class PalcesPage implements OnInit {
     searchPlaceLat = this.searchPlaceLat;
     searchPlaceLng = this.searchPlaceLng;
     this.navCtrl.setRoot('FindPlacesPage',  {searchPlaceLat,searchPlaceLng })
+  }
+
+  placeDetail(placeId)
+  {
+    this.navCtrl.setRoot('PlaceDetailPage',{placeId});
+  }
+  dismiss(){
+    this.navCtrl.setRoot('HomePage');
   }
   
 }

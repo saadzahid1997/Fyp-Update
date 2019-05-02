@@ -8,10 +8,15 @@
       <ion-icon name="ios-pin-outline"></ion-icon>
     </button>
   </ion-fab>
-
+  <ion-buttons start>
+      <button ion-button color="blue" clear (tap)="dismiss()">
+        <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+  
 </ion-header>
 <!-- Content  -->
-<ion-content fullscreen elestic-header *ngFor = "let place of placetList" >
+<ion-content fullscreen elestic-header *ngFor = "let place of placeList" >
   
   <!-- Hotel Location Map Icon  -->
   
@@ -19,7 +24,7 @@
   <ion-slides *ngIf="slideData && slideData.length" slidesPerView="0" pager loop="true" effect="slide" autoplay="5000" class="image-slider"
     style="direction:ltr">
     
-    <ion-slide *ngFor = "let img of resturant.fileURL">
+    <ion-slide *ngFor = "let img of place.fileURL">
         <img [src] = "img">
       <div class="slider-contents">
         

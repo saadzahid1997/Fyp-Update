@@ -8,13 +8,24 @@
 
   <ion-navbar>
     <ion-title>Trip Details</ion-title>
+    <ion-buttons start>
+        <button ion-button color="blue" clear (tap)="dismiss()">
+          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+        </button>
+      </ion-buttons>
+    
   </ion-navbar>
-
+  <ion-fab top right edge>
+      <button ion-fab color="danger" (tap)="openLocationMap()">
+        <ion-icon name="ios-pin-outline"></ion-icon>
+      </button>
+    </ion-fab>
+  
 </ion-header>
 
 
 <ion-content padding *ngFor = "let trip of tripList">
-  
+        
         <h3>Trip Information</h3>
         <h5>{{trip.tripName}}</h5>
       <div>
@@ -46,80 +57,63 @@
           <h6 style="display:inline;">{{day.placeholder}} </h6>
           <p style="display:inline;">{{day.value}}</p> 
       </ion-item>
-          <h3>Trip Services</h3>
+
+  <!--Trip Services-->
+        <h3>Trip Services</h3>
          <p>{{trip.tripServices}}</p> 
-  <ion-item >
+        
+  <!--Trip Places-->
     <h3>Places to visit</h3>
-    <ion-row>
-    <ion-col col-6 *ngFor = "let place of placeList">  
-    <ion-card (tap)=placeDetail()>
-     <h3> {{place.placeName}}</h3>
-      
-    </ion-card>
-    </ion-col>  
-    </ion-row>
-</ion-item>
-  
-  
-  
-  <ion-item >
-    <h3>Hotels to visit</h3>
-    <ion-row>
-    <ion-col col-6 *ngFor = "let hotel of hotelList">  
-    <ion-item (tap)='hotelDetail()'>
-    <ion-slides *ngIf="slideData && slideData.length" slidesPerView="0" pager loop="true" effect="slide" autoplay="5000" class="image-slider"
-        style="direction:ltr">
-              
-    <ion-slide *ngFor = "let img of hotel.fileURL">
-        <!--<img [src] = "img">-->
-      <div class="slider-contents">
-        
-        <!-- Name of Hotel  -->
-        
-        <p class="name">{{hotel.hotelName}}</p>
-        
-        <!-- Type of Hotel -->
-        
-        <p class="reviews"> {{hotel.hotelCategory}} </p>
-        
-       
-
-      </div>
-    </ion-slide> 
-    </ion-slides>  
+    <ion-item>
+      <ion-slides>
+      <ion-slide  *ngFor = "let place of placeList" (tap)=placeDetail(place.id)>  
+        <ion-card> 
+          <h3>{{place.data.placeName}}</h3>
+        </ion-card>  
+      </ion-slide>
+      </ion-slides>  
     </ion-item>
-    </ion-col>  
-    </ion-row>
-  </ion-item>
-
   
-      <h3>Resturants to visit</h3>
-      <ion-item>
-      <ion-row>
-      <ion-col col-6 *ngFor = "let resturant of resList">  
-      <ion-card (tap)=resturantDetail()>
-       <h3>dsfffffffff {{resturant.resturantName}}</h3>
-        
-      </ion-card>
-      </ion-col>  
-      </ion-row>
+  <!--Trip Hotels-->
+  <h3>Hotels to visit</h3>
+  <ion-item>
+    <ion-slides>
+    <ion-slide  *ngFor = "let hotel of hotelList" (tap)=hotelDetail(hotel.id)>  
+      <ion-card> 
+        <h3>{{hotel.hotelName}}</h3>
+      </ion-card>  
+    </ion-slide>
+    </ion-slides>  
   </ion-item>
+    
+     
+  <!--Trip Resturants-->
+    <h3>Resturants to visit</h3>
+    <ion-item>
+      <ion-slides>
+      <ion-slide  *ngFor = "let resturant of resList" (tap)=resturantDetail(resturant.id)>  
+        <ion-card> 
+          <h3>{{resturant.resturantName}}</h3>
+        </ion-card>  
+      </ion-slide>
+      </ion-slides>  
+    </ion-item>
   <ion-item>
       <button ion-button (tap) = "addMember()">Join Trip</button>
    </ion-item>
 
+<!--Trip Members-->
   <ion-list no-lines>
     <ion-list-header>
       <h3>Members </h3>
     </ion-list-header>
     <ion-item *ngFor = "let member of memberList">
-    
-      <p>{{member.data.memberName}}</p>
+        <p>{{member.data.memberName}}</p>
       
-    
     </ion-item>
   </ion-list>
 
+<!--Trip Reviews-->
     <ion-item>
         <ion-label floating >Add your Review</ion-label>  
         <ion-input type = "text"   [(ngModel)] = "review.tripReview" ></ion-input>

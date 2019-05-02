@@ -40,6 +40,7 @@ import { PlacesService } from './services/places.service';
 import { resturantReviewService } from './services/resReview.service';
 import { tripMembersService } from './services/tripMembers.service';
 import { tripReviewService } from './services/tripReview.service';
+import { placeReviewService } from './services/placeReview.service';
 //import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 const firebaseAuth = {
@@ -112,6 +113,7 @@ export function HttpLoaderFactory(http: HttpClient) {
      hotelReviewService,
      UserService,
      tripReviewService,
+     placeReviewService,
      roomService,
      ReactiveFormsModule,
      FormsModule,

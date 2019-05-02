@@ -7,7 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>findResturants</ion-title>
+    <ion-title>Places</ion-title>
+    <ion-buttons start>
+        <button ion-button color="blue" clear (tap)="dismiss()">
+          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+        </button>
+      </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>
@@ -18,7 +24,7 @@
 
     <ion-item  *ngFor="let place of placesList" >
       <ion-item>
-        <button ion-button (tap)="getPlace(place.id)">Add to trip</button>
+        <button ion-button *ngIf = "btnStatus" (tap)="getPlace(place.id)">Add to trip</button>
       </ion-item>
       <ion-item class="animated fadeInLeft" (tap)="placeDetail(place.id)">
 

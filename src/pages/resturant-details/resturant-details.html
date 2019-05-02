@@ -9,6 +9,12 @@
       </button>
     </ion-fab>
   
+    <ion-buttons start>
+        <button ion-button color="blue" clear (tap)="dismiss()">
+          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+        </button>
+      </ion-buttons>
+    
   </ion-header>
   <!-- Content  -->
   <ion-content fullscreen elestic-header *ngFor = "let resturant of resturantList" >

@@ -1,30 +1,49 @@
 page-search-hotels {
     ion-content {
-        .card {
-            .card-header {
-                font-size: 2.6rem;
+        background-image: linear-gradient(to right bottom, color($colors, color1), color($colors, color2));
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        border-color: transparent;
+        .item {
+            ion-thumbnail {
+                img {
+                    width: 120px;
+                    height: 100px;
+                    border-radius: 5px;
+                    box-shadow: 2px 1px #888888;
+                    -webkit-box-shadow: 0px 0px 26px 1px rgba(204, 204, 204, 1);
+                    -moz-box-shadow: 0px 0px 26px 1px rgba(204, 204, 204, 1);
+                    box-shadow: 0px 0px 26px 1px rgba(204, 204, 204, 1);
+                }
+            }
+            .name {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+            .reviews {
+                font-size: 1.2rem;
+                font-weight: bold;
             }
         }
-        .title {
-            color: color($colors, color3);
-            font-weight: 500;
+        /* Ratings */
+        ul {
+            margin: 0px;
+            padding: 0px;
+            &.rating li {
+                padding: 0px !important;
+                background: none;
+                color: #ffb400;
+                ion-icon {
+                    font-size: 15px;
+                }
+            }
         }
-        .date {
-            font-size: 2.2rem;
-            font-weight: 500;
-            color: color($colors, color1);
+
+        agm-map
+        {
+            width: 100vw;
+            height: 100vh;
         }
     }
-    ion-footer {
-        .custom-btn {
-            background: linear-gradient(to right bottom, color($colors, color1), color($colors, color2));
-            padding: 2.2rem 7.2rem;
-            font-size: 16px;
-            font-weight: bold;
-        }
-    }
-    .right
-    {
-        float: right;
-    }
+
 }

@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 //import { google, GoogleMap } from '@agm/core/services/google-maps-types';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import { MapsAPILoader } from '@agm/core';
+import { HotelService } from '../../../app/services/hotels.service';
 //import { AngularFireDatabase,AngularFireList } from '@angular/fire/database';
 //import { Hotel } from '../../../models/hotels/hotels.interface';
 //import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -27,7 +28,7 @@ export class SearchHotelsPage implements OnInit {
   public static  searchPlace:string;
   locationRef:string;
   searchLocationRef:any;
-  
+  hotelsList: any =[];
   markers: any[]; 
   //hotelRef$: AngularFirestoreCollection<Hotel[]>
   @ViewChild("addHotels")
@@ -45,7 +46,8 @@ export class SearchHotelsPage implements OnInit {
     public modalCtrl: ModalController,
     public _formBuilder: FormBuilder,
     public geoLocation: Geolocation,
-    public MapsApiLoader : MapsAPILoader
+    public MapsApiLoader : MapsAPILoader,
+    public hotelSer:HotelService
     
     //private database: AngularFirestore
     ) {
@@ -66,6 +68,9 @@ export class SearchHotelsPage implements OnInit {
       console.log(this.btnStatus);
       
     }
+    this.hotelSer.getHotels().subscribe(hotel=>{
+      this.hotelsList = hotel
+    })
   }
 
   openCalendar() {
@@ -128,6 +133,10 @@ export class SearchHotelsPage implements OnInit {
       console.log(this.locationRef);
         
     
+  }
+  hotelDetail(hotelId)
+  {
+    this.navCtrl.setRoot('HotelDetailsPage', {hotelId});
   }
   addHotels() {
     this.navCtrl.setRoot("AddHotelsPage");

@@ -101,4 +101,9 @@ export class FindResturantsPage implements OnInit {
   {
     this.navCtrl.setRoot('ResturantDetailsPage',{resId});
   }
+  
+  dismiss()
+  {
+    this.navCtrl.setRoot('ResturantsPage');
+  }
 }

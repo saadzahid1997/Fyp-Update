@@ -1,25 +1,15 @@
-<!-- List of Deals  -->
-<div class="contents">
-  <ion-list no-lines *ngFor="let deal of deals">
-    <ion-item class="animated fadeInLeft">
-
-      <!-- Deal Image -->
-      <ion-thumbnail item-start>
-        <img [src]="deal.image">
-      </ion-thumbnail>
-
-      <!-- Details  -->
-      <div class="details">
-        <!-- Name of Deal -->
-        <h2 text-wrap> </h2>
-
-        <!-- Deal Details  -->
-        <p text-wrap>{{deal.details}}</p>
-
-        <!-- Price  -->
-        <span class="price"></span>
-
-      </div>
-    </ion-item>
-  </ion-list>
-</div>
+<ion-content>
+<ion-item>
+  <ion-slides>
+    <ion-slide *ngFor = "let trip of publicTripList" (tap) = "tripDetails(trip.id)">
+      
+      <ion-card >
+        <div *ngIf = "trip.data.tripFileURL[0]">
+          <img [src] = "trip.data.tripFileURL[0]">
+        </div> 
+           {{trip.data.tripName}}
+      </ion-card> 
+    </ion-slide>     
+  </ion-slides>
+</ion-item>
+</ion-content>
