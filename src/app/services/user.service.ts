@@ -115,6 +115,15 @@ export class UserService {
       .update({ hotelIds: firestore.FieldValue.arrayUnion(hotelId) });
   }
 
+  updateUserProfile(user) {
+    console.log(user);
+    user.displayName = user.userFName + ' ' + user.userLName;
+    return this.afs
+      .collection('users')
+      .doc(this.currentUser.uid)
+      .update(user);
+  }
+
   updateUserRestaurant(restaurantId) {
     return this.afs
       .collection('users')

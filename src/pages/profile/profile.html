@@ -11,33 +11,22 @@
 </ion-header>
 
 <!-- Contents  -->
-<ion-content padding>
+<ion-content padding *ngIf="user">
   <!-- Profile Photo Section  -->
   <div class="profile-photo" padding-top>
     <!-- Photo Change Edit Button  -->
-    <ion-fab top>
+    <!-- <ion-fab top>
       <button ion-fab mini icon-only color="color1">
         <ion-icon name="md-create"></ion-icon>
       </button>
-    </ion-fab>
+    </ion-fab> -->
 
     <!-- Image Preview  -->
-    <img [src]="user ? (user.photoURL ? user.photoURL : '') : ''" />
-  </div>
-
-  <!-- User Profile Settings Options  -->
-  <div padding>
-    <ion-segment [(ngModel)]="options" style="direction:ltr">
-      <ion-segment-button value="User Info">
-        User Info
-      </ion-segment-button>
-      <!-- <ion-segment-button value="Card Info">
-        Card Info
-      </ion-segment-button>
-      <ion-segment-button value="Change Password">
-        Change PWD
-      </ion-segment-button> -->
-    </ion-segment>
+    <img
+      [src]="user.fileURL ? user.fileURL : ''"
+      (click)="imgageUpload.click()"
+    />
+    <input hidden type="file" #imgageUpload (change)="handler($event)" />
   </div>
 
   <!-- Settings View   -->
@@ -46,36 +35,57 @@
     <div *ngSwitchCase="'User Info'">
       <!-- User Information Component  -->
       <!-- <user-information></user-information> -->
-      <form class="animated zoomIn contents">
+      <form class="animated zoomIn contents" [formGroup]="userForm">
         <ion-list>
           <!-- First Name -->
           <ion-item>
             <ion-label stacked color="color2">First Name</ion-label>
-            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+            <ion-input
+              [disabled]="!updateProfile"
+              formControlName="userFName"
+              type="text"
+            ></ion-input>
           </ion-item>
 
           <!-- Last Name -->
           <ion-item>
             <ion-label stacked color="color2">Last Name</ion-label>
-            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+            <ion-input
+              [disabled]="!updateProfile"
+              formControlName="userLName"
+              type="text"
+            ></ion-input>
           </ion-item>
 
           <!-- Email Address -->
           <ion-item>
             <ion-label stacked color="color2">Email Address</ion-label>
-            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+            <ion-input
+              [disabled]="true"
+              [(ngModel)]="user.userMail"
+              [ngModelOptions]="{ standalone: true }"
+              type="text"
+            ></ion-input>
           </ion-item>
 
           <!-- Phone Number -->
           <ion-item>
             <ion-label stacked color="color2">Phone Number</ion-label>
-            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+            <ion-input
+              [disabled]="!updateProfile"
+              formControlName="phone"
+              type="text"
+            ></ion-input>
           </ion-item>
 
           <!-- Address -->
           <ion-item>
-            <ion-label stacked color="color2">Address</ion-label>
-            <ion-input [disabled]="!updateProfile" type="text"></ion-input>
+            <ion-label stacked color="color2">Password</ion-label>
+            <ion-input
+              [disabled]="!updateProfile"
+              formControlName="userPass"
+              type="text"
+            ></ion-input>
           </ion-item>
         </ion-list>
 
@@ -86,6 +96,8 @@
             type="button"
             color="color2"
             *ngIf="updateProfile"
+            [disabled]="isUploading"
+            (click)="updateUserProfile()"
           >
             Save
           </button>
@@ -96,7 +108,7 @@
             type="button"
             color="color2"
             *ngIf="!updateProfile"
-            (click)="profileUpdate()"
+            (click)="updateProfile = !updateProfile"
           >
             Update Profile
           </button>
