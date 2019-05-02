@@ -12,102 +12,210 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label>Room Details</ion-label>
-      <ion-checkbox>
-        Here i am..
-      </ion-checkbox>
-    </ion-item>
-
-    <div>
+  <ion-list *ngIf="roomDetails">
+    
+    <div *ngIf="roomDetails.Luxury">
     <ion-label>Luxury</ion-label>
-    <ion-col col-4>
+    <ion-row>
       
-        <ion-label>1 Bed</ion-label>
+     <ion-col col-2>
+       <ion-item>
         <ion-checkbox color="primary"></ion-checkbox>
-      
-    </ion-col>
-
-    <ion-col col-8>
-      
+       </ion-item> 
+     </ion-col>    
+     <ion-col col-4>
+       <ion-item>    
+        <ion-label>1 Bed</ion-label> 
+       </ion-item>
+     </ion-col>
+     <ion-col col-6>
+       <ion-item>
         <ion-label>Price/Night</ion-label>
-        <ion-input type="text">/Night</ion-input>
+       </ion-item>
+      </ion-col>
       
-    </ion-col>
-
+    </ion-row>
     <ion-row>
 
-      <ion-col col-4>
-      
-          <ion-label>2 Bed</ion-label>
-          <ion-checkbox color="primary"></ion-checkbox>
-      
-      </ion-col>
-
-      <ion-col col-8>
-        
-          <ion-label>Price/Night</ion-label>
-          <ion-input type="text">/Night</ion-input>
-        
-      </ion-col>
-
+        <ion-col col-2>
+            <ion-item>
+             <ion-checkbox color="primary"></ion-checkbox>
+            </ion-item> 
+          </ion-col>    
+          <ion-col col-4>
+            <ion-item>    
+             <ion-label>2 Bed</ion-label> 
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+             <ion-label>Price/Night</ion-label>
+            </ion-item>
+           </ion-col>
+          
     </ion-row>
 
     <ion-row>
 
-      <ion-col col-4>
-        
-          <ion-label>3 Bed</ion-label>
-          <ion-checkbox color="primary"></ion-checkbox>
-        
-      </ion-col>
-
-      <ion-col col-8>
-        
-          <ion-label>Price/Night</ion-label>
-          <ion-input type="text">/Night</ion-input>
-        
-      </ion-col>
-
+        <ion-col col-2>
+            <ion-item>
+             <ion-checkbox color="primary"></ion-checkbox>
+            </ion-item> 
+          </ion-col>    
+          <ion-col col-4>
+            <ion-item>    
+             <ion-label>3 Bed</ion-label> 
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+             <ion-label>Price/Night</ion-label>
+            </ion-item>
+           </ion-col>
+          
     </ion-row>
 
     <ion-row>
 
-      <ion-col col-4>
-        
-          <ion-label>4 Bed</ion-label>
-          <ion-checkbox color="primary">
-          </ion-checkbox>
-        
-      </ion-col>
-
-      <ion-col col-8>
-        
-          <ion-label>Price/Night</ion-label>
-          <ion-input type="text">/Night</ion-input>
-        
-      </ion-col>
-
+        <ion-col col-2>
+            <ion-item>
+             <ion-checkbox color="primary"></ion-checkbox>
+            </ion-item> 
+          </ion-col>    
+          <ion-col col-4>
+            <ion-item>    
+             <ion-label>4 Bed</ion-label> 
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+             <ion-label>Price/Night</ion-label>
+            </ion-item>
+           </ion-col>
+          
     </ion-row>
 
     <ion-row>
 
-      <ion-col col-4>
-        
-          <ion-label>5 Bed</ion-label>
-          <ion-checkbox color="primary"></ion-checkbox>
-        
-      </ion-col>
-
-      <ion-col col-8>
-        
-          <ion-label>Price/Night</ion-label>
-          <ion-input type="text">/Night</ion-input>
-        
-      </ion-col>
-      
+        <ion-col col-2>
+            <ion-item>
+             <ion-checkbox color="primary"></ion-checkbox>
+            </ion-item> 
+          </ion-col>    
+          <ion-col col-4>
+            <ion-item>    
+             <ion-label>5 Bed</ion-label> 
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+             <ion-label>Price/Night</ion-label>
+            </ion-item>
+           </ion-col>
+          
     </ion-row>
     </div>
+
+    <div *ngIf="roomDetails.normal">
+        <ion-label>Normal</ion-label>
+        <ion-row>
+          
+         <ion-col col-2>
+           <ion-item>
+            <ion-checkbox color="primary"></ion-checkbox>
+           </ion-item> 
+         </ion-col>    
+         <ion-col col-4>
+           <ion-item>    
+            <ion-label>1 Bed</ion-label> 
+           </ion-item>
+         </ion-col>
+         <ion-col col-6>
+           <ion-item>
+            <ion-label>Price/Night</ion-label>
+           </ion-item>
+          </ion-col>
+          
+        </ion-row>
+        <ion-row>
+    
+            <ion-col col-2>
+                <ion-item>
+                 <ion-checkbox color="primary"></ion-checkbox>
+                </ion-item> 
+              </ion-col>    
+              <ion-col col-4>
+                <ion-item>    
+                 <ion-label>2 Bed</ion-label> 
+                </ion-item>
+              </ion-col>
+              <ion-col col-6>
+                <ion-item>
+                 <ion-label>Price/Night</ion-label>
+                </ion-item>
+               </ion-col>
+              
+        </ion-row>
+    
+        <ion-row>
+    
+            <ion-col col-2>
+                <ion-item>
+                 <ion-checkbox color="primary"></ion-checkbox>
+                </ion-item> 
+              </ion-col>    
+              <ion-col col-4>
+                <ion-item>    
+                 <ion-label>3 Bed</ion-label> 
+                </ion-item>
+              </ion-col>
+              <ion-col col-6>
+                <ion-item>
+                 <ion-label>Price/Night</ion-label>
+                </ion-item>
+               </ion-col>
+              
+        </ion-row>
+    
+        <ion-row>
+    
+            <ion-col col-2>
+                <ion-item>
+                 <ion-checkbox color="primary"></ion-checkbox>
+                </ion-item> 
+              </ion-col>    
+              <ion-col col-4>
+                <ion-item>    
+                 <ion-label>4 Bed</ion-label> 
+                </ion-item>
+              </ion-col>
+              <ion-col col-6>
+                <ion-item>
+                 <ion-label>Price/Night</ion-label>
+                </ion-item>
+               </ion-col>
+              
+        </ion-row>
+    
+        <ion-row>
+    
+            <ion-col col-2>
+                <ion-item>
+                 <ion-checkbox color="primary"></ion-checkbox>
+                </ion-item> 
+              </ion-col>    
+              <ion-col col-4>
+                <ion-item>    
+                 <ion-label>5 Bed</ion-label> 
+                </ion-item>
+              </ion-col>
+              <ion-col col-6>
+                <ion-item>
+                 <ion-label>Price/Night</ion-label>
+                </ion-item>
+               </ion-col>
+              
+        </ion-row>
+        </div>
   </ion-list>
 </ion-content>

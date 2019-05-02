@@ -25,44 +25,46 @@ export class DataProvider {
       {
         title: 'Home', icon: 'home', component: 'HomePage'
       },
-      {
-        title: 'Search', icon: 'search',
-        subPages: [{
-          title: 'Flight',
-          icon: 'fa fa-fighter-jet',
-          component: 'SearchFlightPage',
-        }, {
-          title: 'Hotels',
-          icon: 'fa fa-bed',
-          component: 'SearchHotelsPage',
-        }, {
-          title: 'Car',
-          icon: 'fa fa-car',
-          component: 'SearchCarPage',
-        }, {
-          title: 'Bus',
-          icon: 'fa fa-bus',
-          component: 'SearchBusPage',
-        }, {
-          title: 'Train',
-          icon: 'fa fa-train',
-          component: 'SearchTrainPage',
-        }, {
-          title: 'Vacation',
-          icon: 'fa fa-globe',
-          component: 'SearchVacationPage',
-        }, {
-          title: 'Cruise',
-          icon: 'fa fa-ship',
-          component: 'SearchCruisePage',
-        }, {
-          title: 'Activities',
-          icon: 'fa fa-snowflake-o',
-          component: 'SearchActivitiesPage',
-        }]
-      },
-      { title: 'Deals', icon: 'md-megaphone', component: 'DealsPage' },
+      // {
+      //   title: 'Search', icon: 'search',
+      //   subPages: [{
+      //     title: 'Flight',
+      //     icon: 'fa fa-fighter-jet',
+      //     component: 'SearchFlightPage',
+      //   }, {
+      //     title: 'Hotels',
+      //     icon: 'fa fa-bed',
+      //     component: 'SearchHotelsPage',
+      //   }, {
+      //     title: 'Car',
+      //     icon: 'fa fa-car',
+      //     component: 'SearchCarPage',
+      //   }, {
+      //     title: 'Bus',
+      //     icon: 'fa fa-bus',
+      //     component: 'SearchBusPage',
+      //   }, {
+      //     title: 'Train',
+      //     icon: 'fa fa-train',
+      //     component: 'SearchTrainPage',
+      //   }, {
+      //     title: 'Vacation',
+      //     icon: 'fa fa-globe',
+      //     component: 'SearchVacationPage',
+      //   }, {
+      //     title: 'Cruise',
+      //     icon: 'fa fa-ship',
+      //     component: 'SearchCruisePage',
+      //   }, {
+      //     title: 'Activities',
+      //     icon: 'fa fa-snowflake-o',
+      //     component: 'SearchActivitiesPage',
+      //   }]
+      // },
+      // { title: 'Deals', icon: 'md-megaphone', component: 'DealsPage' },
       { title: 'Your Profile', icon: 'md-person', component: 'ProfilePage' },
+      { title: 'Your Hotels', icon: 'md-person', component: 'UserHotelsPage' },
+      { title: 'Your Resturants', icon: 'md-person', component: 'UserResturantsPage' },
       { title: 'About Us', icon: 'bookmark', component: 'AboutUsPage' },
       { title: 'Contact Us', icon: 'call', component: 'ContactUsPage' },
       { title: 'Language', icon: 'ios-switch', component: 'LanguagePage' },

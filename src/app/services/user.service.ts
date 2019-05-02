@@ -67,6 +67,18 @@ export class UserService {
       );
   }
 
+  signInWithEmailAndPassword(email: string, password: string) {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  signUpWithEmailAndPassword(email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  }
+
+  registerUserData(user) {
+    return this.afs.collection('users').add(user);
+  }
+
   setUserData(userName) {
     this.userName = userName;
   }
