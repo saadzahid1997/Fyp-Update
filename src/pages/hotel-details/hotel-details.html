@@ -18,17 +18,17 @@
   <!-- Hotel Location Map Icon  -->
 
   <!-- Image Slider of Hotel  -->
-  <ion-slides
-    *ngIf="slideData && slideData.length"
-    slidesPerView="0"
-    pager
-    loop="true"
-    effect="slide"
-    autoplay="5000"
-    class="image-slider"
-    style="direction:ltr"
-  >
-    <ion-slide *ngFor="let img of hotel.fileURL">
+  <!-- *ngIf="slideData && slideData.length" -->
+  <ion-slides>
+    <ion-slide
+      *ngFor="
+        let img of hotel.fileUrl
+          ? hotel.fileUrl[0]
+            ? hotel.fileUrl
+            : 'assets/imgs/logo.png'
+          : 'assets/imgs/logo.png'
+      "
+    >
       <img [src]="img" />
       <div class="slider-contents">
         <!-- Name of Hotel  -->

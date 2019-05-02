@@ -137,7 +137,11 @@
                   </button>
                 </ion-fab>
                 <!-- Image Preview  -->
-                <img [src]="" />
+                <img
+                  class="logo"
+                  [hidden]="!user.fileURL"
+                  [src]="user.fileURL"
+                />
               </div>
               <input
                 hidden
@@ -156,6 +160,7 @@
           class="custom-btn"
           (tap)="doRegistration()"
           (click)="addUser(user)"
+          [disabled]="isUploading"
         >
           Sign Up
         </button>

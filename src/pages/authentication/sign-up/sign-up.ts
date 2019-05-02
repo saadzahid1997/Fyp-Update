@@ -29,6 +29,7 @@ export class SignUpPage {
   @ViewChild('userpass') pass;
   google: any;
   registrationForm: any;
+  isUploading: boolean = false;
 
   userModel = {} as User;
 
@@ -53,14 +54,14 @@ export class SignUpPage {
 
   ngOnInit() {
     this.formValidation();
-    this.userModel.displayName = 'Node Jss';
-    this.userModel.userFName = 'Node';
-    this.userModel.userLName = 'Jss';
-    this.userModel.fileURL =
-      'https://firebasestorage.googleapis.com/v0/b/travel-gb.appspot.com/o/users%2F1556828150418?alt=media&token=95f10012-0c09-4752-b7dd-03ae9132b18f';
-    this.userModel.phone = '0333 1905060';
-    this.userModel.userPass = 'jjjjjj';
-    this.userModel.userMail = 'nodejs21@gmail.com';
+    // this.userModel.displayName = 'Node Jss';
+    // this.userModel.userFName = 'Node';
+    // this.userModel.userLName = 'Jss';
+    // this.userModel.fileURL =
+    //   'https://firebasestorage.googleapis.com/v0/b/travel-gb.appspot.com/o/users%2F1556828150418?alt=media&token=95f10012-0c09-4752-b7dd-03ae9132b18f';
+    // this.userModel.phone = '0333 1905060';
+    // this.userModel.userPass = 'jjjjjj';
+    // this.userModel.userMail = 'nodejs21@gmail.com';
   }
 
   alert(message: string) {
@@ -141,6 +142,7 @@ export class SignUpPage {
   //   }
 
   handler(e) {
+    this.isUploading = true;
     const file = e.target.files[0];
 
     const filePath = `users/${Date.now()}`;
@@ -155,6 +157,7 @@ export class SignUpPage {
           fileRef.getDownloadURL().subscribe(url => {
             this.filesURL.push(url);
             console.log(this.filesURL[0]);
+            this.isUploading = false;
             this.userModel.fileURL = this.filesURL[0];
           });
         })
