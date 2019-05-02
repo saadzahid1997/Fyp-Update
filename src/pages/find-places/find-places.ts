@@ -27,6 +27,7 @@ export class FindPlacesPage implements OnInit{
   placesLng: any;
   retPlacesList: any = [];
   x: number;
+  btnStatus:any;
   trip = {} as Trip
   constructor(public navCtrl: NavController, 
                public navParams: NavParams,
@@ -43,7 +44,7 @@ export class FindPlacesPage implements OnInit{
     console.log('ionViewDidLoad FindResturantsPage');
   }
   ngOnInit()
-  {   
+  {   this.btnStatus = this.navParams.data.btnStatus;
       this.placesLat = this.navParams.data.searchPlaceLat;
       this.placesLng = this.navParams.data.searchPlaceLng;
       this.placeSer.getPlaces().subscribe(place=>{
@@ -96,7 +97,10 @@ export class FindPlacesPage implements OnInit{
   }
   placeDetail(placeId)
   {
-    this.navCtrl.setRoot('ResturantDetailsPage',{placeId});
+    this.navCtrl.setRoot('PlaceDetailPage',{placeId});
   }
-
+  dismiss()
+  {
+    this.navCtrl.setRoot('PalcesPage')
+  }
 }

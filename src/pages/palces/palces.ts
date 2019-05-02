@@ -76,5 +76,8 @@ export class PalcesPage implements OnInit {
     searchPlaceLng = this.searchPlaceLng;
     this.navCtrl.setRoot('FindPlacesPage',  {searchPlaceLat,searchPlaceLng })
   }
+  dismiss(){
+    this.navCtrl.setRoot('HomePage');
+  }
   
 }

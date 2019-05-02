@@ -72,8 +72,8 @@ export class ResturantDetailsPage implements OnInit {
   }
   openLocationMap()
   {
-    
-    this.modalCtrl.create('LocationMapPage', { Latitude: this.resturantList[0].resturantLocationLat, Longitude: this.resturantList[0].resturantLocationLng, Address:this.resturantList[0].resturantLocation}).present();
+    console.log(this.resturantList[0].data.resturantLocationLat,this.resturantList[0].data.resturantLocationLng )
+    this.modalCtrl.create('LocationMapPage', { Latitude: this.resturantList[0].data.resturantLocationLat, Longitude: this.resturantList[0].data.resturantLocationLng, Address:this.resturantList[0].resturantLocation}).present();
   }
 
   addReview()
@@ -91,5 +91,10 @@ export class ResturantDetailsPage implements OnInit {
       })
          
   })
-}
+  }
+
+  dismiss()
+  {
+    this.navCtrl.setRoot('FindResturantsPage');
+  }
 }

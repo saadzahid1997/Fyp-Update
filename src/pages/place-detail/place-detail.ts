@@ -43,7 +43,7 @@ export class PlaceDetailPage implements OnInit {
       this.placeList[0] = places;
       console.log(this.placeList);
     });
-
+    
 
     this.reviewSer.getReviewDetails().subscribe(items =>{
       this.reviewList = items;
@@ -73,7 +73,7 @@ export class PlaceDetailPage implements OnInit {
   openLocationMap()
   {
     
-    this.modalCtrl.create('LocationMapPage', { Latitude: this.placeList[0].placeLocationLat, Longitude: this.placeList[0].placeLocationLng, Address:this.placeList[0].placeLocation}).present();
+    this.modalCtrl.create('LocationMapPage', { Latitude: this.placeList[0].data.placeLocationLat, Longitude: this.placeList[0].data.placeLocationLng, Address:this.placeList[0].placeLocation}).present();
   }
 
   addReview()
@@ -91,5 +91,9 @@ export class PlaceDetailPage implements OnInit {
       })
          
   })
+}
+dismiss()
+{
+  this.navCtrl.setRoot('FindPlacesPage');
 }
 }

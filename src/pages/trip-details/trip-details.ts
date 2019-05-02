@@ -65,7 +65,7 @@ export class TripDetailsPage implements OnInit {
   }
   ngOnInit()
   { 
-      (this.navParams.data.tripDetailId);
+      console.log(this.navParams.data.tripDetailId);
       this.tripSer.tripDetails(this.navParams.data.tripDetailId).subscribe(item =>{
         console.log(item);
         this.tripList[0] = item.data;
@@ -78,7 +78,7 @@ export class TripDetailsPage implements OnInit {
         {
           this.hotelId[i] = this.tripList[0].tripHotels[i];
           this.hotelSer.showHotelDetails(this.hotelId[i]).subscribe(hotel =>{
-            this.hotelList = hotel.data;
+            this.hotelList[i] = hotel;
           })
         }
 
@@ -87,8 +87,9 @@ export class TripDetailsPage implements OnInit {
         for(let i = 0 ; i < this.resLength; i++)
         {
           this.resId[i] = this.tripList[0].tripResturants[i];
+          console.log(this.resId[i]);
           this.resSer.showResDetails(this.resId[i]).subscribe(resturant =>{
-            this.resList = resturant.data;
+            this.resList[i] = resturant;
             console.log(this.resList);
           })
         } 
@@ -98,7 +99,7 @@ export class TripDetailsPage implements OnInit {
         {
           this.placeId[i] = this.tripList[0].tripPlaces[i];
           this.placeSer.showPlacesDetails(this.placeId[i]).subscribe(place =>{
-            this.placeList = place. data;
+            this.placeList[i] = place;
           })
         }
 
@@ -248,5 +249,8 @@ addReview()
   ionViewDidLoad() {
     console.log('ionViewDidLoad TripDetailsPage');
   }
-
+  dismiss()
+  {
+    this.navCtrl.setRoot('CreateTripPage');
+  }
 }

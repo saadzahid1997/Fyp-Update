@@ -74,4 +74,9 @@ export class ResturantsPage implements OnInit {
     searchResLng = this.searchResLng;
     this.navCtrl.setRoot('FindResturantsPage',{searchResLat,searchResLng,btnStatus})
   }
+
+  dismiss()
+  {
+    this.navCtrl.setRoot('HomePage')
+  }
 }

@@ -9,6 +9,7 @@
 
 import { Component } from '@angular/core';
 import { DataProvider } from '../../providers/data/data';
+import { TripService } from '../../app/services/trips.service';
 
 @Component({
   selector: 'deals',
@@ -17,13 +18,16 @@ import { DataProvider } from '../../providers/data/data';
 export class DealsComponent {
 
   // List of Deals
-  deals: any = [];
+  publicTripList: any = [];
 
-  constructor(public dataProvider: DataProvider) { }
+  constructor(public dataProvider: DataProvider, public tripSer:TripService) { }
 
   /** Do any initialization */
   ngOnInit() {
-    
+    this.tripSer.showPublicTrips().subscribe(items => {
+      this.publicTripList = items;
+    });
+ 
   }
 
   /**

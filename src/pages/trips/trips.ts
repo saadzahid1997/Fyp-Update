@@ -511,5 +511,8 @@ resturantAdded()
       tripNights:this.trip.tripNights
     });
   }
-
+  dismiss()
+  {
+    this.navCtrl.setRoot('CreateTripPage');
+  }
 }

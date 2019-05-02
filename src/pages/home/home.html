@@ -15,21 +15,34 @@
 
 
   <ion-row>
-    <ion-col padding-left>
+    <ion-col col-8 padding-left>
       <h2>Recommended Destinations</h2>
     </ion-col>
-    <ion-col text-right padding-top><button ion-button clear color="color3">more</button></ion-col>
+    
   </ion-row>
 
 
   <recommend-destination></recommend-destination>
   <ion-row>
-    <ion-col padding-left>
+    <ion-col col-8 padding-left>
       <h2>Trips of the Day</h2>
     </ion-col>
-    <ion-col text-right padding-top><button ion-button clear color="color3">more</button></ion-col>
+  
   </ion-row>
-
+    <ion-item>
+      <ion-slides>
+        <ion-slide *ngFor = "let trip of publicTripList" (tap) = "tripDetails(trip.id)">
+          
+          <ion-card >
+            <div *ngIf = "trip.data.tripFileURL[0]">
+              <img [src] = "trip.data.tripFileURL[0]">
+            </div> 
+               {{trip.data.tripName}}
+          </ion-card> 
+        </ion-slide>     
+      </ion-slides>
+    </ion-item>
+    
 
   
 </ion-content>
