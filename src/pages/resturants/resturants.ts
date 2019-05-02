@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
+import { ResturantService } from '../../app/services/resturant.service';
 
 declare var google: any;
 /**
@@ -21,10 +22,11 @@ export class ResturantsPage implements OnInit {
   searchResLat: any;
   searchResLng: any;
   tripName: any;
+  resturantList:any=[];
   btnStatus:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public _formBuilder:FormBuilder, 
-    public mapsApiLoader:MapsAPILoader) {
+    public mapsApiLoader:MapsAPILoader, public resSer:ResturantService) {
     this.searchResturantForm = this._formBuilder.group({
       txtSearch: ['', Validators.required]
       
@@ -41,7 +43,10 @@ export class ResturantsPage implements OnInit {
       console.log(this.btnStatus);
       
     }
-
+    this.resSer.getResturant().subscribe(resturant =>{
+      this.resturantList = resturant;
+      console.log(this.resturantList)
+    })
   }
 
   ionViewDidLoad() {
@@ -75,6 +80,10 @@ export class ResturantsPage implements OnInit {
     this.navCtrl.setRoot('FindResturantsPage',{searchResLat,searchResLng,btnStatus})
   }
 
+  resDetail(resId)
+  {
+    this.navCtrl.setRoot('ResturantDetailsPage',{resId});
+  } 
   dismiss()
   {
     this.navCtrl.setRoot('HomePage')

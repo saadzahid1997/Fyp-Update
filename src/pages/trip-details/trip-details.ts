@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { TripService } from '../../app/services/trips.service';
 import { HotelService } from '../../app/services/hotels.service';
 import { ResturantService } from '../../app/services/resturant.service';
@@ -53,11 +53,15 @@ export class TripDetailsPage implements OnInit {
   reviewList:any = [];
   tripReviewList: any = [];
   x: number;
+  hotelLocationList:any=[];
+  placeLocationList:any=[];
+  resturantLocationList:any=[];
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public tripSer : TripService , public hotelSer:HotelService,
      public resSer:ResturantService, public placeSer:PlacesService ,
       public db:AngularFirestore, public userSer:UserService,
-       public memberSer:tripMembersService, public reviewSer:tripReviewService) {
+       public memberSer:tripMembersService, public reviewSer:tripReviewService,
+       public modalCtrl:ModalController) {
   
       this.tripMemeberRef = this.db.collection('trip-Members');
       this.reviewRef$ = this.db.collection('trip-Review')
@@ -78,8 +82,11 @@ export class TripDetailsPage implements OnInit {
         {
           this.hotelId[i] = this.tripList[0].tripHotels[i];
           this.hotelSer.showHotelDetails(this.hotelId[i]).subscribe(hotel =>{
-            this.hotelList[i] = hotel;
+            this.hotelList[i] = hotel.data;
+            this.hotelLocationList = this.hotelList[i].hotelLocation;
+            
           })
+          console.log(this.hotelLocationList);
         }
 
         this.resLength = this.tripList[0].tripResturants.length;
@@ -89,9 +96,12 @@ export class TripDetailsPage implements OnInit {
           this.resId[i] = this.tripList[0].tripResturants[i];
           console.log(this.resId[i]);
           this.resSer.showResDetails(this.resId[i]).subscribe(resturant =>{
-            this.resList[i] = resturant;
+            this.resList[i] = resturant.data;
             console.log(this.resList);
+            this.resturantLocationList = this.resList[i].resturantLocation;
+            
           })
+          console.log(this.resturantLocationList);
         } 
 
         this.placeLength = this.tripList[0].tripPlaces.length;
@@ -102,74 +112,7 @@ export class TripDetailsPage implements OnInit {
             this.placeList[i] = place;
           })
         }
-
-
-
-      //   this.hotelLength = this.tripList[0].hotels.length;
-      //   console.log(this.hotelLength);
-      //  for(let i = 0 ; i < this.hotelLength; i++)
-      //   {
-      //     console.log(this.tripList[0].hotels[i]);
-
-      //     this.hotelId[i] = this.tripList[0].hotels[i];
-      //   }   
-      //   console.log(this.hotelId);
-      //   this.hotelIdLength = this.tripList[0].hotelId.length
-      //   for(let x = 0; x < this.hotelIdLength;x++)
-      //   { 
-      //     this.hotelSer.showHotelDetails(this.hotelId[x]).subscribe(hotel =>{
-      //       console.log(hotel);
-      //       this.hotelList[x] = hotel.data;
-      //     })
-      //   }
-      //   console.log(this.hotelList);  
-        
-      //    this.resLength = this.tripList[0].resturants.length;
-      //   console.log(this.resLength);
-      //  for(let i = 0 ; i < this.resLength; i++)
-      //   {
-      //     console.log(this.tripList[0].resturants[i]);
-
-      //     this.resId[i] = this.tripList[0].resturants[i];
-      //   }   
-      //   console.log(this.hotelId);
-      //   this.resIdLength = this.tripList[0].resId.length;
-      //   for(let x = 0; x < this.resIdLength;x++)
-      //   { 
-      //     this.resSer.showResDetails(this.resId[x]).subscribe(resturant =>{
-      //       //console.log(hotel);
-      //       this.resList[x] = resturant.data;
-      //     })
-      //   }
-
-      //   // this.planIdLength = this.tripList[0].tripDayDescription.length;
-      //   // for(let x = 0; x < this.planIdLength;x++)
-      //   // { 
-      //   //   this.tripSer.showResDetails(this.resId[x]).subscribe(resturant =>{
-      //   //     //console.log(hotel);
-      //   //     this.resList[x] = resturant.data;
-      //   //   })
-      //   // }
-
-      //   this.placeLength = this.tripList[0].places.length;
-      //   console.log(this.placeLength);
-      //  for(let i = 0 ; i < this.placeLength; i++)
-      //   {
-      //     console.log(this.tripList[0].places[i]);
-
-      //     this.placeId[i] = this.tripList[0].places[i];
-      //   }   
-      //   console.log(this.hotelId);
-      //   for(let x = 0; x < this.placeId.length;x++)
-      //   { 
-      //     this.placeSer.showPlacesDetails(this.placeId[x]).subscribe(place =>{
-      //       //console.log(hotel);
-      //       this.placeList[x] = place.data;
-      //     })
-      //   }
-
-      // })
-
+      
         })
 
         this.userSer.user$.subscribe(user =>{
@@ -233,19 +176,25 @@ addReview()
 }
 
   hotelDetail(hotelId){
-    hotelId = this.hotelId;
+    
     console.log(hotelId);
     this.navCtrl.setRoot('HotelDetailsPage', {hotelId});
     }
 
   resturantDetail(resId){
-      resId = this.resId;
+      
       this.navCtrl.setRoot('ResturantDetailsPage', {resId});
       }
       
-  placeDetail(placeId){
-        this.navCtrl.setRoot('PlaceDetailsPage', {placeId});
+  placeDetail(placeId)
+        {
+        this.navCtrl.setRoot('PlaceDetailPage', {placeId});
         }  
+
+  openLocationMap()
+    {
+      this.modalCtrl.create('TripMapPage', { }).present();
+    }      
   ionViewDidLoad() {
     console.log('ionViewDidLoad TripDetailsPage');
   }
