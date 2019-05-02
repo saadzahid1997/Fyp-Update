@@ -95,6 +95,6 @@ export class ResturantDetailsPage implements OnInit {
 
   dismiss()
   {
-    this.navCtrl.setRoot('FindResturantsPage');
+    this.navCtrl.setRoot('ResturantsPage');
   }
 }

@@ -182,4 +182,8 @@ export class HotelDetailsPage implements OnInit {
       });
     });
   }
+  dismiss()
+  {
+    this.navCtrl.setRoot('SearchHotelsPage');
+  }
 }

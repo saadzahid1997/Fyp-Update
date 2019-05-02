@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import { ResturantService } from '../../app/services/resturant.service';
-
+import {Trip} from '../../models/trips/trips.interface';
 declare var google: any;
 /**
  * Generated class for the ResturantsPage page.
@@ -24,9 +24,9 @@ export class ResturantsPage implements OnInit {
   tripName: any;
   resturantList:any=[];
   btnStatus:any;
-
+  trip = {} as Trip;
   constructor(public navCtrl: NavController, public navParams: NavParams, public _formBuilder:FormBuilder, 
-    public mapsApiLoader:MapsAPILoader, public resSer:ResturantService) {
+    public mapsApiLoader:MapsAPILoader, public resSer:ResturantService, public viewCtrl:ViewController) {
     this.searchResturantForm = this._formBuilder.group({
       txtSearch: ['', Validators.required]
       
@@ -35,6 +35,7 @@ export class ResturantsPage implements OnInit {
 }
 
   ngOnInit() {
+    this.btnStatus = this.navParams.data.btnStatus;
     this.tripName = this.navParams.data.tripName;
     console.log(this.tripName);
     if(this.tripName !== null && this.tripName !== undefined && this.tripName !== "" )
@@ -71,6 +72,21 @@ export class ResturantsPage implements OnInit {
   {
     this.navCtrl.setRoot('AadResturantsPage');
   }
+
+  getResturant(val,getResturant)
+  {
+    console.log(val);
+    this.resSer.showResDetails(val).subscribe(item =>{
+      this.trip.tripResturants = item
+      getResturant = this.trip.tripResturants
+      console.log(getResturant);
+      this.resSer.setResDetails(getResturant);
+      //this.navCtrl.setRoot('TripsPage',{getResturant})
+      this.viewCtrl.dismiss();  
+    })
+    
+  }
+
   searchResturants(searchResLat,searchResLng, btnStatus)
   {
     console.log(this.btnStatus);

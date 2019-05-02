@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ViewController } from 'ionic-angular';
 import { ResturantService } from '../../app/services/resturant.service';
 
 import { UserService } from '../../app/services/user.service';
@@ -8,7 +8,7 @@ import { PlacesService } from '../../app/services/places.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {PlaceReview} from '../../models/placeReview/placeReview.interface';
 import { placeReviewService } from '../../app/services/placeReview.service';
-
+import {Trip} from '../../models/trips/trips.interface'
 /**
  * Generated class for the ResturantDetailsPage page.
  *
@@ -31,13 +31,16 @@ export class PlaceDetailPage implements OnInit {
   userRef:any=[];
   placeRef$:any=[];
   reviews = {} as PlaceReview
+  btnStatus:any;
+  trip = {} as Trip;
   constructor(public navCtrl: NavController, public navParams: NavParams, public placeSer:PlacesService,
-  public  modalCtrl:ModalController, public reviewSer:placeReviewService, public userSer:UserService, public afs:AngularFirestore) {
+  public  modalCtrl:ModalController, public reviewSer:placeReviewService, public userSer:UserService, public afs:AngularFirestore, public viewCtrl:ViewController) {
     this.placeRef$ = this.afs.collection('place-Review');
   }
 
   ngOnInit()
   {
+    this.btnStatus = this.navParams.data.btnStatus;
     this.placeId = this.navParams.data.placeId;
     this.placeSer.showPlacesDetails(this.placeId).subscribe(places => {
       this.placeList[0] = places;
@@ -70,6 +73,20 @@ export class PlaceDetailPage implements OnInit {
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResturantDetailsPage');
   }
+  getPlace(val,getPlace)
+  {
+    console.log(val);
+    this.placeSer.showPlacesDetails(val).subscribe(item =>{
+      this.trip.tripPlaces = item
+      getPlace = this.trip.tripPlaces
+      console.log(getPlace);
+      this.placeSer.setPlaceDetails(getPlace);
+      //this.navCtrl.setRoot('TripsPage',{getResturant})
+      this.viewCtrl.dismiss();  
+    })
+    
+  }
+
   openLocationMap()
   {
     
@@ -94,6 +111,6 @@ export class PlaceDetailPage implements OnInit {
 }
 dismiss()
 {
-  this.navCtrl.setRoot('FindPlacesPage');
+  this.navCtrl.setRoot('PalcesPage');
 }
 }

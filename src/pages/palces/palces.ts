@@ -24,7 +24,7 @@ export class PalcesPage implements OnInit {
   searchPlaceLat: any;
   searchPlaceLng: any;
   tripName: any;
-  btnStatus: boolean;
+  btnStatus: any;
   placeList:any=[];
   trip = {} as Trip
 
@@ -37,6 +37,7 @@ export class PalcesPage implements OnInit {
 
   ngOnInit()
   {
+    this.btnStatus = this.navParams.data.btnStatus;
     this.tripName = this.navParams.data.tripName;
     console.log(this.tripName);
     if(this.tripName !== null && this.tripName !== undefined && this.tripName !== "" )
@@ -73,7 +74,20 @@ export class PalcesPage implements OnInit {
     this.navCtrl.setRoot('AddPlacesPage');
   }
 
-  
+  getPlace(val,getPlace)
+  {
+    console.log(val);
+    this.placeSer.showPlacesDetails(val).subscribe(item =>{
+      this.trip.tripPlaces = item
+      getPlace = this.trip.tripPlaces
+      console.log(getPlace);
+      this.placeSer.setPlaceDetails(getPlace);
+      //this.navCtrl.setRoot('TripsPage',{getResturant})
+      this.viewCtrl.dismiss();  
+    })
+    
+  }
+
 
   searchPlaces(  searchPlaceLat,searchPlaceLng) {
     searchPlaceLat = this.searchPlaceLat;
