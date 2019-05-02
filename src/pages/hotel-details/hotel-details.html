@@ -2,12 +2,13 @@
 <ion-header no-border title="Hotel Details">
   <ion-fab top right edge>
     <button ion-fab color="danger">
-      <!-- <button ion-fab color="danger" (tap)="openLocationMap()"> -->
+      <button ion-fab color="danger" (tap)="openLocationMap()">
       <ion-icon name="ios-pin-outline"></ion-icon>
+    </button>
     </button>
   </ion-fab>
   <ion-buttons start>
-      <button ion-button color="blue" clear (tap)="dismiss()">
+      <button ion-button color="blue" clear (click)="dismiss()">
         <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
       </button>
     </ion-buttons>
@@ -104,14 +105,14 @@
     </ion-list>
   </section>
   <ion-item>
-    <button ion-button>Book Now</button>
+    <button ion-button (click) = "bookNow(hotel.roomId)">Book Now</button>
   </ion-item>
-  <!--<ion-item>               
+  <ion-item>               
       <ion-input type = "text" placeholder = "Add your review"></ion-input>
-  </ion-item>-->
+  </ion-item>
 </ion-content>
 
 <!-- Footer  -->
 <ion-footer>
-  <!-- <button (tap) = "bookRooms()">Book Now</button> -->
+  <button (tap) = "bookRooms()">Book Now</button>
 </ion-footer>

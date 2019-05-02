@@ -16,19 +16,19 @@ import {
   ModalController,
   AlertController
 } from 'ionic-angular';
-import { Hotel } from '../../../models/hotels/hotels.interface';
-import { Review } from '../../../models/reviews/reviews.interface';
 //import { HotelService } from '../../../app/services/hotels.service';
 import {
   AngularFirestoreCollection,
   AngularFirestore
 } from '@angular/fire/firestore';
-import { HotelService } from '../../../app/services/hotels.service';
 import { storage } from 'firebase';
 import { Observable } from 'rxjs';
-import { hotelReviewService } from '../../../app/services/hotelReview.service';
-import { UserService } from '../../../app/services/user.service';
-import { roomService } from '../../../app/services/rooms.service';
+import { Hotel } from '../../models/hotels/hotels.interface';
+import { Review } from '../../models/reviews/reviews.interface';
+import { HotelService } from '../../app/services/hotels.service';
+import { hotelReviewService } from '../../app/services/hotelReview.service';
+import { UserService } from '../../app/services/user.service';
+import { roomService } from '../../app/services/rooms.service';
 
 @IonicPage()
 @Component({
@@ -142,11 +142,12 @@ export class HotelDetailsPage implements OnInit {
   bookNow(roomsRef) {
     this.reviewSer.getHotelRoomDetails(roomsRef).subscribe(details => {
       console.log(details);
-      this.modalCtrl
-        .create('RoomdetailsPage', { roomDetails: details })
-        .onDidDismiss(response => {
-          console.log(response);
-        });
+      var roomdetailmodal = this.modalCtrl
+        .create('RoomdetailsPage', { roomDetails: details });
+      roomdetailmodal.present();
+      roomdetailmodal.onDidDismiss(response => {
+        console.log(response);
+      });
     });
   }
 

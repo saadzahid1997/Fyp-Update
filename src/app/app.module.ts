@@ -34,7 +34,7 @@ import { ConnectivityProvider } from '../providers/connectivity/connectivity';
 import { GoogleMapsProvider } from '../providers/google-maps/google-maps';
 import { LocationsProvider } from '../providers/locations/locations';
 import { UserService } from './services/user.service';
-import {HotelDetailsPage} from '../pages/hotel/hotel-details/hotel-details';
+import {HotelDetailsPage} from '../pages/hotel-details/hotel-details';
 import { roomService } from './services/rooms.service';
 import { PlacesService } from './services/places.service';
 import { resturantReviewService } from './services/resReview.service';

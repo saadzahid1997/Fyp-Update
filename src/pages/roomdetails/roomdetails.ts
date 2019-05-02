@@ -21,13 +21,13 @@ export class RoomdetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public _viewCtrl: ViewController
-  ) {}
+  ) { }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RoomdetailsPage');
-    this.roomDetails = this.navParams.data.roomDetails;
+    this.roomDetails = this.navParams.data.roomDetails ? this.navParams.data.roomDetails[0] : '';
     console.log('roomDetails');
-    console.log(this.roomDetails);
+    console.log(  );
   }
 
   back(response) {

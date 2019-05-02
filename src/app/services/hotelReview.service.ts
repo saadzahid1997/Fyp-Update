@@ -47,7 +47,7 @@ export class hotelReviewService {
       .pipe(
         map(res => {
           return res.map(data => {
-            return { id: data.payload.doc.id, data: data.payload.doc.data() };
+            return { id: data.payload.doc.id, ...data.payload.doc.data() };
           });
         })
       );

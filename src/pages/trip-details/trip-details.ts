@@ -4,8 +4,6 @@ import { TripService } from '../../app/services/trips.service';
 import { HotelService } from '../../app/services/hotels.service';
 import { ResturantService } from '../../app/services/resturant.service';
 import {PlacesService} from '../../app/services/places.service';
-import { HotelDetailsPage } from '../hotel/hotel-details/hotel-details';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Members } from '../../models/tripMemers/tripMember.interface';
 import { UserService } from '../../app/services/user.service';
