@@ -9,22 +9,17 @@ var nodemailer = require('nodemailer');
 // });
 
 exports.confirmBooking = functions.firestore
-  .document('bookings')
+  .document('bookings/{bookingId}')
   .onCreate(async (snapshot, contect) => {
     console.log('Document data');
     console.log(snapshot.data());
 
-    // Generate test SMTP service account from ethereal.email
-    let testAccount = await nodemailer.createTestAccount();
-
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      secure: false, // true for 465, false for other ports
+      host: 'gmail',
       auth: {
-        user: testAccount.user, // generated ethereal user
-        pass: testAccount.pass // generated ethereal password
+        user: 'nodejs21@gmail.com', // generated ethereal user
+        pass: '12sjedon' // generated ethereal password
       }
     });
     // Only needed if you don't have a real mail account for testing
@@ -32,7 +27,7 @@ exports.confirmBooking = functions.firestore
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: 'nodejs21@gmail.com', // sender address
-      to: 'saadzahid537@gmail.com', // list of receivers
+      to: 'nodejs21@gmail.com', // list of receivers
       subject: 'Hello ✔', // Subject line
       text: 'Hello world?', // plain text body
       html: '<b>Hello world?</b>' // html body
