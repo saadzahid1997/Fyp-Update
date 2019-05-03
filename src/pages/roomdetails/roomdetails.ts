@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { roomService } from '../../app/services/rooms.service';
 
 /**
  * Generated class for the RoomdetailsPage page.
@@ -22,7 +22,7 @@ export default class RoomdetailsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public _viewCtrl: ViewController,
-    private emailComposer: EmailComposer
+    private _room: roomService
   ) {}
 
   ionViewDidLoad() {
@@ -31,26 +31,19 @@ export default class RoomdetailsPage {
       ? this.navParams.data.roomDetails[0]
       : '';
     console.log('roomDetails');
-    console.log();
   }
 
   sendEmail() {
     console.log('i am here..');
-    let email = {
-      to: 'nodejs21@gmail.com',
-      // cc: 'erika@mustermann.de',
-      // bcc: ['john@doe.com', 'jane@doe.com'],
-      // attachments: [],
-      subject: 'Room reservation',
-      body: 'Following are your room details.'
-      // isHtml: true
+    const payload = {
+      from: 'nodejs21@gmail.com',
+      to: 'saadzahid537@gmail.com',
+      subject: 'Room Reservaion',
+      text: 'You room is reserved'
     };
-    this.emailComposer.isAvailable().then((available: boolean) => {
-      if (available) {
-        // Now we know we can send
-        // Send a text message using default options
-        this.emailComposer.open(email);
-      }
+    this._room.confirmBooking(payload).then(res => {
+      console.log('Booked!!');
+      console.log(res);
     });
   }
 

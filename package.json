@@ -31,7 +31,6 @@
     "@ionic-native/camera": "^5.5.0",
     "@ionic-native/core": "4.5.3",
     "@ionic-native/crop": "^5.2.0",
-    "@ionic-native/email-composer": "^5.5.1",
     "@ionic-native/file": "^5.2.0",
     "@ionic-native/file-transfer": "^5.2.0",
     "@ionic-native/geolocation": "^5.2.0",
@@ -51,7 +50,6 @@
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-crop": "^0.4.0",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-email-composer": "0.9.2",
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-geolocation": "^4.0.1",
@@ -100,8 +98,7 @@
       "cordova-plugin-hotspot": {},
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-network-information": {},
-      "cordova-plugin-email-composer": {}
+      "cordova-plugin-network-information": {}
     },
     "platforms": [
       "android"
