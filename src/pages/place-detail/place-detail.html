@@ -21,11 +21,10 @@
   <!-- Hotel Location Map Icon  -->
   
   <!-- Image Slider of Hotel  -->
-  <ion-slides *ngIf="slideData && slideData.length" slidesPerView="0" pager loop="true" effect="slide" autoplay="5000" class="image-slider"
-    style="direction:ltr">
+  <ion-slides>
     
-    <ion-slide *ngFor = "let img of place.fileURL">
-        <img [src] = "img">
+    <ion-slide>
+      <img [src] = "place.data.placeFileURL">
       <div class="slider-contents">
         
         <!-- Name of Hotel  -->
@@ -64,14 +63,7 @@
         <ion-icon name="ios-pin-outline" item-start color="color2"></ion-icon>
         <p>{{place.data.placeLocation}}</p>
       </ion-item>
-      <ion-item>
-        <ion-icon name="ios-globe-outline" item-start color="color2"></ion-icon>
-        <p>{{place.data.placeMail}}</p>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="ios-call-outline" item-start color="color2"></ion-icon>
-        <p>{{place.data.placeContact}}</p>
-      </ion-item>
+      
     </ion-list>
 
     <!-- Reviews  -->

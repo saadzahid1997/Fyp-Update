@@ -22,11 +22,11 @@
     <!-- Hotel Location Map Icon  -->
     
     <!-- Image Slider of Hotel  -->
-    <ion-slides *ngIf="slideData && slideData.length" slidesPerView="0" pager loop="true" effect="slide" autoplay="5000" class="image-slider"
-      style="direction:ltr">
+    <ion-slides >
       
-      <ion-slide *ngFor = "let img of resturant.fileURL">
-          <img [src] = "img">
+      <ion-slide >   
+      
+          <img [src] = "resturant.data.resturantFileURL">
         <div class="slider-contents">
           
           <!-- Name of Hotel  -->

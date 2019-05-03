@@ -15,7 +15,7 @@ import { switchMap } from 'rxjs/operators';
 interface User {
   uid: string;
   email: string;
-  photoURL?: string;
+  fileURL?: string;
   displayName?: string;
   myCustomData?: string;
 }
@@ -26,6 +26,7 @@ export class UserService {
   currentUser: any;
 
   userName: any;
+  userHotelList: any = [];
 
   constructor(public afs: AngularFirestore, private afAuth: AngularFireAuth) {
     this.user$ = this.afAuth.authState.pipe(
@@ -129,6 +130,13 @@ export class UserService {
       .collection('users')
       .doc(this.currentUser.uid)
       .update({ restaurantIds: firestore.FieldValue.arrayUnion(restaurantId) });
+  }
+
+  updateUserTrips(tripId) {
+    return this.afs
+      .collection('users')
+      .doc(this.currentUser.uid)
+      .update({ restaurantIds: firestore.FieldValue.arrayUnion(tripId) });
   }
 
   public updateUserData(user) {

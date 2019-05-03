@@ -54,6 +54,7 @@ export class TripDetailsPage implements OnInit {
   hotelLocationList:any=[];
   placeLocationList:any=[];
   resturantLocationList:any=[];
+  photo: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public tripSer : TripService , public hotelSer:HotelService,
      public resSer:ResturantService, public placeSer:PlacesService ,
@@ -146,19 +147,22 @@ export class TripDetailsPage implements OnInit {
     this.userSer.user$.subscribe(user =>{
       this.userId = user.uid;
       this.userName = user.displayName
-   
+      this.photo = user.fileURL  
       this.tripMemeberRef.add({
 
         memberName: this.tripMember.userName = this.userName,
         memberId: this.tripMember.uId = this.userId,
-        tripId: this.tripMember.triplId = this.navParams.data.tripDetailId
-  
+        tripId: this.tripMember.triplId = this.navParams.data.tripDetailId,
+        memberPhoto:this.photo
       })
 
     })
     console.log('Done')   
   }
-
+  memberProfile(memberId)
+  {
+    this.navCtrl.setRoot('ProfilePage',{memberId});
+  }
 addReview()
 {
   console.log("Clicked Done")

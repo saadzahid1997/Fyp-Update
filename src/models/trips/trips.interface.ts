@@ -27,5 +27,6 @@ export interface Trip
   tripDayDescription:any;
   tripDays:any;
   tripNights:any;
+  tripPrice:any;
   
 }

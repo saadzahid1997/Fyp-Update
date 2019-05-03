@@ -1,5 +1,5 @@
 <!--
-  Generated template for the UserHotelsPage page.
+  Generated template for the RetrieveHotelPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,12 +7,50 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>userHotels</ion-title>
+    <ion-title>Your Hotels</ion-title>
+    
+    <ion-buttons start>
+        <button ion-button color="blue" clear (tap)="dismiss()">
+          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+        </button>
+      </ion-buttons>
+    
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  
 
+  <ion-list>
+
+    <ion-item *ngFor="let hotel of hotelDetails">
+      <ion-item>
+        
+        <!-- <button ion-button (tap)="openTrips($event, hotel.id)">Add to trip</button> -->
+      </ion-item>
+      <ion-item class="animated fadeInLeft" (tap)="hotelDetail(hotel.id)">
+
+
+        <ion-thumbnail item-start>
+          <img [src] = "hotel.fileUrl">
+        </ion-thumbnail>
+
+        <ion-row>
+
+          <!-- Name of Hotel -->
+          <h1 text-wrap class="name">{{hotel.hotelName}}</h1>
+
+
+        </ion-row>
+        <!-- Hotel Review and Type  -->
+        <p class="reviews">{{hotel.hotelOverview}} | {{hotel.hotelCategory}} </p>
+
+        
+      </ion-item>
+      
+    </ion-item>
+    <!--- <h2>{{hotel.hotelName}}</h2>-->
+  </ion-list>
 </ion-content>
