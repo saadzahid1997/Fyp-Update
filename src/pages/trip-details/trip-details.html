@@ -15,11 +15,6 @@
       </ion-buttons>
     
   </ion-navbar>
-  <ion-fab top right edge>
-      <button ion-fab color="danger" (tap)="openLocationMap()">
-        <ion-icon name="ios-pin-outline"></ion-icon>
-      </button>
-    </ion-fab>
   
 </ion-header>
 
@@ -67,9 +62,13 @@
     <ion-item>
       <ion-slides>
       <ion-slide  *ngFor = "let place of placeList" (tap)=placeDetail(place.id)>  
-        <ion-card> 
-          <h3>{{place.data.placeName}}</h3>
-        </ion-card>  
+          <ion-card >
+              <div *ngIf = "place.data.placeFileURL">
+                <img [src] = "place.data.placeFileURL">
+              </div> 
+              {{place.data.placeName}}
+            </ion-card> 
+            
       </ion-slide>
       </ion-slides>  
     </ion-item>
@@ -78,10 +77,14 @@
   <h3>Hotels to visit</h3>
   <ion-item>
     <ion-slides>
-    <ion-slide  *ngFor = "let hotel of hotelList" (tap)=hotelDetail(hotel.id)>  
-      <ion-card> 
-        <h3>{{hotel.hotelName}}</h3>
-      </ion-card>  
+    <ion-slide  *ngFor = "let hotel of hotelList" (tap) = hotelDetail(hotel.id)>  
+        <ion-card >
+            <div *ngIf = "hotel.fileUrl">
+               <img [src] = "hotel.fileUrl">
+            </div>
+           {{hotel.hotelName}} 
+           </ion-card> 
+         
     </ion-slide>
     </ion-slides>  
   </ion-item>
@@ -92,9 +95,12 @@
     <ion-item>
       <ion-slides>
       <ion-slide  *ngFor = "let resturant of resList" (tap)=resturantDetail(resturant.id)>  
-        <ion-card> 
-          <h3>{{resturant.resturantName}}</h3>
-        </ion-card>  
+          <ion-card >
+              <div *ngIf = "resturant.resturantFileURL">
+                <img [src] = "resturant.resturantFileURL">
+              </div> 
+              {{resturant.resturantName}}
+            </ion-card>
       </ion-slide>
       </ion-slides>  
     </ion-item>

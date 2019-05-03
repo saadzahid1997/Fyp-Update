@@ -7,7 +7,7 @@
   <ion-header>
 
   <ion-navbar>
-    <ion-title>Recommended Hotels</ion-title>
+    <ion-title> Hotels</ion-title>
     <button ion-button (tap) = mapView()>Map view</button>
     <ion-buttons start>
         <button ion-button color="blue" clear (tap)="dismiss()">
@@ -21,15 +21,7 @@
 
 
 <ion-content padding>
-  <!--  <agm-map [latitude] = "38" [longitude ]  = "-119">
-      <agm-marker *ngFor = "let hotel of hotels | async"   [latitude] = "hotel.pos.geopoint.latitude" [longitude ]  = "hotel.pos.geopoint.longitude">
-        <agm-info-window>
-          {{hotel.queryMetadata}}
-        </agm-info-window>
-      </agm-marker>
-    </agm-map>-->
-  <!--<button ion-button (tap) = retrieveData()>Retrieve Data</button>-->
-
+  
 
   <ion-list>
 
@@ -42,7 +34,7 @@
 
 
         <ion-thumbnail item-start>
-          <img [src] = "hotel.data.fileURL">
+          <img [src] = "hotel.data.fileUrl">
         </ion-thumbnail>
 
         <ion-row>

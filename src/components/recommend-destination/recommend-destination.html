@@ -9,10 +9,11 @@
         <ion-card >
            <div *ngIf = "hotel.data.fileUrl">
             <img [src] = "hotel.data.fileUrl">
-           </div>
-           
+          
+          </div>
+          {{hotel.data.hotelName}} 
           </ion-card> 
-          {{hotel.data.hotelName}}            
+          
       </ion-slide >
     </ion-slides>
   </ion-item>
@@ -24,8 +25,9 @@
             <div *ngIf = "resturant.data.resturantFileURL">
               <img [src] = "resturant.data.resturantFileURL">
             </div> 
+            {{resturant.data.resturantName}}
           </ion-card> 
-          {{resturant.data.resturantName}}
+          
       </ion-slide>
     </ion-slides>
   </ion-item>
@@ -37,8 +39,9 @@
             <div *ngIf = "place.data.placeFileURL">
               <img [src] = "place.data.placeFileURL">
             </div> 
+            {{place.data.placeName}}
           </ion-card> 
-          {{place.data.placeName}}
+          
       </ion-slide>
     </ion-slides>
  </ion-item>

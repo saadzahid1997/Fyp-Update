@@ -19,10 +19,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
-export class ProfilePage implements OnInit {
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
-  }
+export class ProfilePage {
+  
   user;
   // Segment Options
   options: any = 'User Info';

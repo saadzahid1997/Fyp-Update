@@ -26,10 +26,14 @@
       
       <ion-col col-6 *ngFor = "let trip of privateTripList" (tap) = "tripDetails(trip.id)">
         
-        <ion-card class="animated fadeInLeft text-primary">
-        {{trip.data.tripName}}
-        </ion-card>
-        
+          <ion-card class="animated fadeInLeft text-primary">
+              <div *ngIf = "trip.data.tripFileURL[0]">
+         <img [src] = "trip.data.tripFileURL[0]">
+        </div> 
+                
+             {{trip.data.tripName}}
+             </ion-card>
+         
 
       </ion-col>
       
