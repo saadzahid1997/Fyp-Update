@@ -26,6 +26,7 @@ export class UserService {
   currentUser: any;
 
   userName: any;
+  userHotelList: any = [];
 
   constructor(public afs: AngularFirestore, private afAuth: AngularFireAuth) {
     this.user$ = this.afAuth.authState.pipe(

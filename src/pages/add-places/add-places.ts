@@ -89,4 +89,8 @@ export class AddPlacesPage {
       placeFileURL: this.place.fileURL
     });
   }
+  dismiss()
+  {
+    this.navCtrl.setRoot('PalcesPage')
+  }
 }

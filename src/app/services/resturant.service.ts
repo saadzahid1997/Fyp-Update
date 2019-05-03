@@ -16,6 +16,17 @@ export class ResturantService {
 
     }
     
+    getUserResturants(resId)
+    {
+        return this.afs.collection('resturants').doc(resId).snapshotChanges().pipe(map(data => {
+            return {    
+                id: data.payload.id, ...data.payload.data()
+            }
+        }))
+
+    }
+
+
     getResturant() {
         return this.afs.collection('resturants').snapshotChanges().pipe(map(res => {
             return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })

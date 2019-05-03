@@ -9,49 +9,53 @@
   <ion-navbar>
     <ion-title>Create Trip</ion-title>
     <ion-buttons start>
-        <button ion-button color="blue" clear (tap)="dismiss()">
-          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
-        </button>
-      </ion-buttons>
-    
-  </ion-navbar>
-  
-</ion-header>
-    
+      <button ion-button color="blue" clear (tap)="dismiss()">
+        <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
 
-<ion-content padding >
-  <h3>Trip Details</h3> 
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h3>Trip Details</h3>
   <ion-item>
-  <ion-input type = "text" placeholder="Trip Title" name = "trip-title" [(ngModel)]="trip.tripName"></ion-input>
-  </ion-item>  
-  <ion-item>
-  <!-- <ion-input type = "textarea" placeholder="Trip Description"   name = "trip-description" [(ngModel)]="trip.tripDescription"></ion-input> -->
-  <textarea cols = "36" rows = "7" placeholder="Trip Description"   name = "trip-description" [(ngModel)]="trip.tripDescription"></textarea>  
+    <ion-input type="text" placeholder="Trip Title" name="trip-title" [(ngModel)]="trip.tripName"></ion-input>
   </ion-item>
   <ion-item>
-  <ion-input type = "text" placeholder="Host Name" name = "trip-host" [(ngModel)]="trip.tripHost"></ion-input>
+    <!-- <ion-input type = "textarea" placeholder="Trip Description"   name = "trip-description" [(ngModel)]="trip.tripDescription"></ion-input> -->
+    <textarea cols="36" rows="7" placeholder="Trip Description" name="trip-description"
+      [(ngModel)]="trip.tripDescription"></textarea>
   </ion-item>
   <ion-item>
-  <ion-input type = "text" placeholder="Trip Cateogory" (tap) = "tripCateogory()"  name = "trip-cateogory" [(ngModel)]="trip.tripCateogory"></ion-input>
+    <ion-input type="text" placeholder="Host Name" name="trip-host" [(ngModel)]="trip.tripHost"></ion-input>
   </ion-item>
-      
+  <ion-item>
+    <ion-input type="text" placeholder="Trip Cateogory" (tap)="tripCateogory()" name="trip-cateogory"
+      [(ngModel)]="trip.tripCateogory"></ion-input>
+  </ion-item>
+
   <h3>Trip Location</h3>
   <ion-item>
-  <ion-row>
-  <ion-col col-6>
-  <ion-item>
-    <ion-input type = "text" placeholder="From" id = "txtDepLocation" name = "trip-location" (tap) = "tripDepLocation()"></ion-input>
-  </ion-item>   
-  </ion-col>
-  <ion-col col-6>
-  <ion-item>
-      <ion-input type = "text" placeholder="To" id = "txtRetLocation" name = "trip-location" (tap) = "tripRetLocation()"></ion-input>
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-input type="text" placeholder="From" id="txtDepLocation" name="trip-location" (tap)="tripDepLocation()">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6>
+        <ion-item>
+          <ion-input type="text" placeholder="To" id="txtRetLocation" name="trip-location" (tap)="tripRetLocation()">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
   </ion-item>
-  </ion-col>  
-  </ion-row> 
- </ion-item>
   <h3>Trip Duration</h3>
-  
+
   <ion-row class="animated zoomIn" justify-content-center align-items-center>
 
     <!-- Check-in Date  -->
@@ -82,87 +86,105 @@
     </ion-col>
   </ion-row>
   <ion-row>
-      <ion-col col-6>  
+    <ion-col col-6>
       <ion-item>
-          <ion-input type = "text" placeholder="Days"  (tap) = "tripDays()"  name = "trip-days" [(ngModel)]="trip.tripDays"></ion-input>
-      </ion-item>  
-      </ion-col>
-      <ion-col col-6>
-      <ion-item>
-          <ion-input type = "text" placeholder="Nights"  (tap) = "tripNights()"  name = "trip-nights" [(ngModel)]="trip.tripNights"></ion-input>
+        <ion-input type="text" placeholder="Days" (tap)="tripDays()" name="trip-days" [(ngModel)]="trip.tripDays">
+        </ion-input>
       </ion-item>
-      </ion-col>
-      </ion-row>
-    
+    </ion-col>
+    <ion-col col-6>
+      <ion-item>
+        <ion-input type="text" placeholder="Nights" (tap)="tripNights()" name="trip-nights"
+          [(ngModel)]="trip.tripNights"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 
-<h3>Trip Plan</h3>
 
-<ion-item *ngFor="let input of inputs">   
-   <textarea cols = "35" rows = "4" [(ngModel)]="input.value"></textarea>
- </ion-item>
- 
- <button ion-button  (click)="addDay();">Add day</button>
- 
-<h3>Trip Services</h3>
-<ion-item>
-<ion-input type = "text" placeholder="Trip Services" (tap) = "tripServices()"  name = "trip-cateogory" [(ngModel)]="trip.tripServices"></ion-input>
-</ion-item>
-<ion-row>
-<ion-col col-10>  
-<h3 class = "place-margin">Places to visit</h3>
-</ion-col>
-<ion-col col-2>
-<button ion-button class="btn-round" (tap) = "addPlaces()">+</button>
-</ion-col>
-</ion-row>
-<button (tap)="placeAdded()">Add Places</button>
-<ion-card *ngFor="let place of placeList">
-  <p>{{place.data.placeName}}</p> 
-</ion-card>      
+  <h3>Trip Plan</h3>
 
-<ion-row>
-  <ion-col col-10>  
-     <h3 class = "place-margin">Hotels to stay</h3>
-  </ion-col>
-  <ion-col col-2>
-     <button ion-button class="btn-round" (tap) = "addHotels()">+</button>
-  </ion-col>
+  <ion-item *ngFor="let input of inputs">
+    <textarea cols="35" rows="4" [(ngModel)]="input.value"></textarea>
+  </ion-item>
+
+  <button ion-button (click)="addDay();">Add day</button>
+
+  <h3>Trip Services</h3>
+  <ion-item>
+    <ion-input type="text" placeholder="Trip Services" (tap)="tripServices()" name="trip-cateogory"
+      [(ngModel)]="trip.tripServices"></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col col-10>
+      <h3 class="place-margin">Places to visit</h3>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button class="btn-round" (tap)="addPlaces()">+</button>
+    </ion-col>
+  </ion-row>
+  <button (tap)="placeAdded()">Add Places</button>
+  <ion-slides>
+    <ion-slide *ngFor="let place of placeList">
+      <ion-card>
+
+        <div *ngIf="place.data.placeFileURL">
+          <img [src]="place.data.placeFileURL">
+        </div>
+
+        <p>{{place.data.placeName}}</p>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <ion-row>
+    <ion-col col-10>
+      <h3 class="place-margin">Hotels to stay</h3>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button class="btn-round" (tap)="addHotels()">+</button>
+    </ion-col>
   </ion-row>
   <button (tap)="hotelAdded()">Add Hotels</button>
-  
-  <ion-card class="animated fadeInLeft text-primary" *ngFor="let hotel of hotelList">
-      <div *ngIf = "hotel.data.fileURL">
-      <img [src] = "hotel.data.fileURL">
-      <p>{{hotel.data.hotelName}}</p> 
-      </div>  
-  </ion-card>      
-
-<ion-row>
-  <ion-col col-10>  
-     <h3 class = "place-margin">Resturants to eat</h3>
-  </ion-col>
-  <ion-col col-2>
-     <button ion-button class="btn-round" (tap) = "addResturants()">+</button>
-  </ion-col>
-</ion-row>
-<button (tap)="resturantAdded()">Add Resturant</button>
- <ion-card *ngFor="let resturant of resturantList">
-   <p>{{resturant.data.resturantName}}</p> 
-</ion-card>      
-          
+  <ion-slides>
+    <ion-slide *ngFor="let hotel of hotelList">
+      <ion-card class="animated fadeInLeft text-primary">
+        <div *ngIf="hotel.data.fileUrl">
+          <img [src]="hotel.data.fileUrl">
+          <p>{{hotel.data.hotelName}}</p>
+        </div>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+  <ion-row>
+    <ion-col col-10>
+      <h3 class="place-margin">Resturants to eat</h3>
+    </ion-col>
+    <ion-col col-2>
+      <button ion-button class="btn-round" (tap)="addResturants()">+</button>
+    </ion-col>
+  </ion-row>
+  <button (tap)="resturantAdded()">Add Resturant</button>
+  <ion-slides>
+    <ion-slide *ngFor="let resturant of resturantList">
+      <ion-card>
+        <div *ngIf="resturant.data.resturantFileURL">
+          <img [src]="resturant.data.resturantFileURL">
+          <p>{{resturant.data.resturantName}}</p>
+        </div>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
 </ion-content>
 <ion-footer text-center>
   <ion-row>
     <ion-col col-6 text-left>
-      <button ion-button block class="custom-btn" (tap) = "addTrips()">Add Trip</button>
+      <button ion-button block class="custom-btn" (tap)="addTrips()">Add Trip</button>
     </ion-col>
-    <ion-col col-6>    
+    <ion-col col-6>
       <ion-item>
-          <input type="file" (change)="handler($event)">Choose Photo/>     
+        <input type="file" (change)="handler($event)">Choose Photo/>
       </ion-item>
-  </ion-col>
-    
+    </ion-col>
+
   </ion-row>
 </ion-footer>
-

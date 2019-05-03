@@ -7,11 +7,12 @@
     <ion-slides>
       <ion-slide *ngFor = "let hotel of hotelList" (tap) = "getHotel(hotel.id)"> 
         <ion-card >
-          <!-- <div *ngIf = "hotel.data.fileURL[0]">
-            <img [src] = "hotel.data.fileURL[0]">
-          </div>  -->
-             {{hotel.data.hotelName}}
-        </ion-card> 
+           <div *ngIf = "hotel.data.fileUrl">
+            <img [src] = "hotel.data.fileUrl">
+           </div>
+           
+          </ion-card> 
+          {{hotel.data.hotelName}}            
       </ion-slide >
     </ion-slides>
   </ion-item>
@@ -20,11 +21,11 @@
     <ion-slides>
         <ion-slide *ngFor = "let resturant of resList" (tap) = "getResturant(resturant.id)" >
           <ion-card >
-            <!-- <div *ngIf = "resturant.data.fileURL[0]">
-              <img [src] = "resturant.data.fileURL[0]">
-            </div>  -->
-               {{resturant.data.resturantName}}
+            <div *ngIf = "resturant.data.resturantFileURL">
+              <img [src] = "resturant.data.resturantFileURL">
+            </div> 
           </ion-card> 
+          {{resturant.data.resturantName}}
       </ion-slide>
     </ion-slides>
   </ion-item>
@@ -33,11 +34,11 @@
     <ion-slides  >
         <ion-slide *ngFor = "let place of placeList" (tap) = "getPlace(place.id)">
           <ion-card >
-            <!-- <div *ngIf = "place.data.fileURL[0]">
-              <img [src] = "place.data.fileURL[0]">
-            </div>  -->
-               {{place.data.placeName}}
+            <div *ngIf = "place.data.placeFileURL">
+              <img [src] = "place.data.placeFileURL">
+            </div> 
           </ion-card> 
+          {{place.data.placeName}}
       </ion-slide>
     </ion-slides>
  </ion-item>
