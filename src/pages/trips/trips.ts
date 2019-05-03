@@ -508,7 +508,15 @@ resturantAdded()
       tripPlaces:this.trip.tripPlaces = this.tripPlaceId,
       tripServices:this.trip.tripServices,
       tripDays:this.trip.tripDays,
-      tripNights:this.trip.tripNights
+      tripNights:this.trip.tripNights,
+      tripPrice:this.trip.tripPrice
+    }).then(res => {
+      console.log('Hotel additoin response');
+      console.log(res);
+      console.log(res.id);
+      this.userSer.updateUserHotel(res.id).then(res => {
+        console.log(res);
+      });
     });
   }
   dismiss()

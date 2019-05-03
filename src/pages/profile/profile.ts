@@ -7,7 +7,7 @@
  * File path - '../../src/pages/profile/profile'
  */
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../app/services/user.service';
 
@@ -16,7 +16,7 @@ import { UserService } from '../../app/services/user.service';
   selector: 'page-profile',
   templateUrl: 'profile.html'
 })
-export class ProfilePage {
+export class ProfilePage implements OnInit {
   user;
   // Segment Options
   options: any = 'User Info';
@@ -25,9 +25,15 @@ export class ProfilePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private _user: UserService
-  ) {
+  ) 
+  {
     this._user.user$.subscribe(user => {
       this.user = user;
     });
+  }
+
+  ngOnInit()
+  {
+    
   }
 }

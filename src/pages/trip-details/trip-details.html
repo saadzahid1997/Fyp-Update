@@ -107,8 +107,19 @@
     <ion-list-header>
       <h3>Members </h3>
     </ion-list-header>
-    <ion-item *ngFor = "let member of memberList">
-        <p>{{member.data.memberName}}</p>
+    <ion-item *ngFor = "let member of memberList" (tap) = "memberProfile(member.memberId)">
+        <ion-thumbnail item-start>
+            <img
+              [src] = "member.data.memberPhoto"             
+            >   
+          </ion-thumbnail>
+  
+          <ion-row>
+            <!-- Name of Hotel -->
+            <h1 text-wrap class="name">{{ member.data.memberName }}</h1>
+          </ion-row>
+            
+      
       
     </ion-item>
   </ion-list>
