@@ -142,8 +142,10 @@ export class HotelDetailsPage implements OnInit {
   bookNow(roomsRef) {
     this.reviewSer.getHotelRoomDetails(roomsRef).subscribe(details => {
       console.log(details);
-      var roomdetailmodal = this.modalCtrl
-        .create('RoomdetailsPage', { roomDetails: details });
+      var roomdetailmodal = this.modalCtrl.create('RoomdetailsPage', {
+        roomDetails: details,
+        hotelDetails: this.hotelsList[0]
+      });
       roomdetailmodal.present();
       roomdetailmodal.onDidDismiss(response => {
         console.log(response);
@@ -182,8 +184,7 @@ export class HotelDetailsPage implements OnInit {
       });
     });
   }
-  dismiss()
-  {
+  dismiss() {
     this.navCtrl.setRoot('SearchHotelsPage');
   }
 }
