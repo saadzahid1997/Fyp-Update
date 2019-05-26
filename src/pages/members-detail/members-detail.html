@@ -1,0 +1,36 @@
+<!-- 
+  - @author    ThemesBuckets <themebucketbd@gmail.com>
+  - @copyright Copyright (c) 2018
+  - @license   Fulcrumy
+-->
+<!-- Profile Page  -->
+
+<!-- Header  -->
+<ion-header no-border>
+    <ion-buttons start>
+        <button ion-button color="blue" clear (tap)="dismiss()">
+          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+        </button>
+      </ion-buttons>
+    
+      </ion-header>
+  
+  <!-- Contents  -->
+  <ion-content padding *ngFor = "let member of membersList" >
+      <ion-item>
+          <img [src] = "member.data.fileURL" >            
+          
+      </ion-item>
+      <ion-item>     
+        <h3>Name  </h3>  {{member.data.displayName}}
+      </ion-item>
+      <ion-item>   
+        <h3>Email  </h3>  {{member.data.userMail}}
+      </ion-item> 
+      <ion-item>   
+        <h3> Phone </h3>      {{member.data.phone}}  
+
+    </ion-item>
+
+  </ion-content>
+  

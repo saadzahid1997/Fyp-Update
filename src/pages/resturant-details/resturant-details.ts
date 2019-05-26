@@ -31,6 +31,7 @@ export class ResturantDetailsPage implements OnInit {
   userRef:any=[];
   reviewRef$:any=[];
   reviews = {} as ResturantReview
+  userPhoto: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public resSer:ResturantService,
   public  modalCtrl:ModalController, public reviewSer:resturantReviewService, public userSer:UserService, public afs:AngularFirestore) {
     this.reviewRef$ = this.afs.collection('resturant-Review');
@@ -81,13 +82,14 @@ export class ResturantDetailsPage implements OnInit {
        
     this.userRef = this.userSer.user$.subscribe(user=>
       {
-        this.userRef = user.displayName
-    
+        this.userRef = user.displayName,
+        this.userPhoto = user.fileURL
       console.log(this.userRef);
       this.reviewRef$.add({
         userName:this.reviews.userName = this.userRef,
         resturantId: this.reviews.resturantId = this.resturantId,
-        resturantReview : this.reviews.resturantReview
+        resturantReview : this.reviews.resturantReview,
+        userPhoto : this.userPhoto
       })
          
   })

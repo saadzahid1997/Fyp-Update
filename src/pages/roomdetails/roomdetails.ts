@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
 import { roomService } from '../../app/services/rooms.service';
-import { HTTP } from '@ionic-native/http/ngx';
+
 import { UserService } from '../../app/services/user.service';
 import { HttpClient } from '@angular/common/http';
 

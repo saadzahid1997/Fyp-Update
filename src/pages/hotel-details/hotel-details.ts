@@ -60,6 +60,7 @@ export class HotelDetailsPage implements OnInit {
   hotelRoomRef: any;
   finalHotelList: any = [];
   finalRoomList: any = [];
+  photo: any;
   //review: any;
 
   // Array List of Hotels
@@ -176,11 +177,13 @@ export class HotelDetailsPage implements OnInit {
     console.log('Clicked Done');
     this.userRef = this.userSer.user$.subscribe(user => {
       this.userRef = user.displayName;
+      this.photo = user.fileURL;
       console.log(this.userRef);
       this.reviewRef$.add({
         userName: this.reviews.userName = this.userRef,
         hotelId: this.reviews.hotelId = this.hotelId,
-        hotelReview: this.reviews.hotelReview
+        hotelReview: this.reviews.hotelReview,
+        userPhoto : this.photo
       });
     });
   }

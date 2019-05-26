@@ -67,6 +67,17 @@ export class UserService {
       );
   }
 
+  getTripMembers(memberId)
+  {
+    console.log("User service instantiated");
+    console.log("Member Id");
+    return this.afs.collection('users').doc(memberId).snapshotChanges().pipe(map(data => {
+      return {    
+          id: data.payload.id, data: data.payload.data()
+      }
+  })) 
+  }
+
   signInWithEmailAndPassword(email, password) {
     console.log(email, password);
 

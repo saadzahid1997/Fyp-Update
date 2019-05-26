@@ -113,7 +113,7 @@
     <ion-list-header>
       <h3>Members </h3>
     </ion-list-header>
-    <ion-item *ngFor = "let member of memberList" (tap) = "memberProfile(member.memberId)">
+    <ion-item *ngFor = "let member of memberList" (tap) = "memberProfile(member.data.memberId)">
         <ion-thumbnail item-start>
             <img
               [src] = "member.data.memberPhoto"             
@@ -145,6 +145,12 @@
         </ion-list-header>
         <ion-item *ngFor = "let reviews of reviewList">
         <ion-item>
+            <ion-thumbnail item-start>
+                <img
+                  [src] = "reviews.data.userPhoto"             
+                >   
+              </ion-thumbnail>
+      
           <p>{{reviews.data.userName}}</p>
           <p>{{reviews.data.tripReview}}</p>
           <p right class="dateFont">{{reviewDate | date}}</p>

@@ -33,6 +33,7 @@ export class PlaceDetailPage implements OnInit {
   reviews = {} as PlaceReview
   btnStatus:any;
   trip = {} as Trip;
+  userPhoto: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public placeSer:PlacesService,
   public  modalCtrl:ModalController, public reviewSer:placeReviewService, public userSer:UserService, public afs:AngularFirestore, public viewCtrl:ViewController) {
     this.placeRef$ = this.afs.collection('place-Review');
@@ -98,13 +99,15 @@ export class PlaceDetailPage implements OnInit {
        
     this.userRef = this.userSer.user$.subscribe(user=>
       {
-        this.userRef = user.displayName
+        this.userRef = user.displayName,
+        this.userPhoto = user.fileURL
     
       console.log(this.userRef);
       this.placeRef$.add({
         userName:this.reviews.userName = this.userRef,
         placeId: this.reviews.placeId = this.placeId,
-        placeReview : this.reviews.placeReview
+        placeReview : this.reviews.placeReview,
+        userPhoto : this.userPhoto
       })
          
   })

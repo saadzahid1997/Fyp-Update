@@ -95,7 +95,13 @@
           </ion-list-header>
           <ion-item *ngFor = "let reviews of reviewList">
           <ion-item>
-            <p>{{reviews.data.userName}}</p>
+              <ion-thumbnail item-start>
+                  <img
+                    [src] = "reviews.data.userPhoto"             
+                  >   
+                </ion-thumbnail>
+        
+            <h3>{{reviews.data.userName}}</h3>
             <p>{{reviews.data.resturantReview}}</p>
             <p right class="dateFont">{{reviewDate | date}}</p>
           </ion-item>
