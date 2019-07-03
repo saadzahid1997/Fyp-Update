@@ -45,6 +45,7 @@ export default class AddHotelsPage implements OnInit {
   roomRef: any;
   api_loader;
   room = {} as Rooms;
+  userId: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -90,6 +91,10 @@ export default class AddHotelsPage implements OnInit {
         console.log(this.hotel.hotelLocation);
       });
     });
+    this._user.user$.subscribe(user =>{
+      this.userId = user.uid;
+    })
+
   }
 
   // public options = {
@@ -247,7 +252,8 @@ export default class AddHotelsPage implements OnInit {
         hotelLocationLng: this.hotel.hotelLocationLng,
         hotelLocation: this.hotel.hotelLocation,
         hotelAmenities: this.hotel.hotelAmenities,
-        roomId: this.hotel.roomId = this.roomSer.getRoomData()
+        roomId: this.hotel.roomId = this.roomSer.getRoomData(),
+        userId : this.userId
       })
       .then(res => {
         console.log('Hotel additoin response');

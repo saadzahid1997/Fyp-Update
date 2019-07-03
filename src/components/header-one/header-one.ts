@@ -8,7 +8,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { NavController, ViewController, ModalController   } from 'ionic-angular';
 import { PopoverController } from 'ionic-angular';
 
 @Component({
@@ -21,7 +21,9 @@ export class HeaderOneComponent {
 
   constructor(public navCtrl: NavController,
     public viewCtrl: ViewController,
-    public popoverCtrl: PopoverController) { }
+    public popoverCtrl: PopoverController,
+    public modalCtrl : ModalController
+    ) { }
 
   /**
    * Open Language Settings Page
@@ -51,6 +53,12 @@ export class HeaderOneComponent {
       this.navCtrl.setRoot("CreateTripPage");
       console.log("Clicked");
     }
+  
+  searchPeopleModal()
+    {
+      let peopleModal = this.modalCtrl.create('SearchPeoplePage');
+      peopleModal.present();
+    }  
   dismiss() 
     {
       this.viewCtrl.dismiss();

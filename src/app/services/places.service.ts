@@ -11,6 +11,7 @@ export class PlacesService {
     place: Observable<any>;
     placeDetailId : any;
     placeDetail: any;
+    placeCollection: AngularFirestoreCollection<unknown>;
     constructor(public afs: AngularFirestore) {
         console.log("Places service instantiated...");
 
@@ -38,4 +39,16 @@ export class PlacesService {
     {
         return this.placeDetail;
     }
+
+    userPlaces(userId)
+    {
+        this.placeCollection = this.afs.collection('places', ref =>
+        ref.where('userId', '==', userId)
+         );
+         return this.placeCollection.snapshotChanges().pipe(map(res => {
+          return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
+      }))
+
+    }
+
 }

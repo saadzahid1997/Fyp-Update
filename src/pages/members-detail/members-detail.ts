@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../app/services/user.service';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { HotelService } from '../../app/services/hotels.service';
+import { PlacesService } from '../../app/services/places.service';
+import { ResturantService } from '../../app/services/resturant.service';
 
 /**
  * Generated class for the MembersDetailPage page.
@@ -18,7 +21,10 @@ import { ViewController } from 'ionic-angular/navigation/view-controller';
 export class MembersDetailPage implements OnInit {
   memberId: any;
   membersList : any = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSer:UserService, public viewCtrl:ViewController) {
+  userHotel;
+  userResturant: { id: string; data: any; }[];
+  userPlace: { id: string; data: unknown; }[];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSer:UserService, public viewCtrl:ViewController, public hotelSer:HotelService, public placeSer:PlacesService, public resturantSer:ResturantService) {
   }
 ngOnInit()
 { 
@@ -27,9 +33,39 @@ ngOnInit()
     this.membersList[0] = user;
     console.log(this.membersList);
   })
+  
+  this.hotelSer.userHotels(this.memberId).subscribe(hotel =>{
+    this.userHotel = hotel;
+    console.log(this.userHotel);
+  })
+
+  this.resturantSer.userResturants(this.memberId).subscribe(resturant =>{
+    this.userResturant = resturant;
+    console.log(this.userHotel);
+  })
+
+  this.placeSer.userPlaces(this.memberId).subscribe(place =>{
+    this.userPlace = place;
+    console.log(this.userHotel);
+  })
+
+
 }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MembersDetailPage');
+  }
+  getHotel(hotelId)
+  {
+    this.navCtrl.setRoot('HotelDetailsPage', {hotelId});
+  }
+  getResturant(resId)
+  {
+    this.navCtrl.setRoot('ResturantDetailsPage',{resId});
+  }
+  getPlace(placeId)
+  {
+    console.log(placeId);
+    this.navCtrl.setRoot('PlaceDetailPage',{placeId});
   }
 dismiss(){
   this.viewCtrl.dismiss()

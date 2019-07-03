@@ -19,17 +19,31 @@ export class TripMapPage {
   geocoder: any;
   address: any;
   google:any;
-  Latitude: any;
-  Longitude: any;
+  HotelLatitude: any;
+  HotelLongitude: any;
+  ResturantLatitude: any;
+  ResturantLongitude: any;
+  PlaceLatitude: any;
+  PlaceLongitude: any;
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public platform: Platform) {
     // Get Hotel Address
-    this.Latitude = this.navParams.get('Latitude');
-    this.Longitude = this.navParams.get('Longitude');
+    this.HotelLatitude = this.navParams.get('HotelLatitude');
+    this.HotelLongitude = this.navParams.get('HotelLongitude');
+    this.ResturantLatitude = this.navParams.get('ResturantLatitude');
+    this.ResturantLongitude = this.navParams.get('ResturantLongitude');
+    this.PlaceLatitude = this.navParams.get('PlaceLatitude');
+    this.PlaceLongitude = this.navParams.get('PlaceLongitude');
+    
     this.address = this.navParams.get('Address');
-    console.log(this.Latitude);
-    console.log(this.Longitude);
+    console.log(this.HotelLatitude);
+    console.log(this.HotelLongitude);
+    console.log(this.ResturantLatitude);
+    console.log(this.ResturantLongitude);
+    console.log(this.PlaceLatitude);
+    console.log(this.PlaceLongitude);
   }
 
   /**
@@ -64,7 +78,7 @@ export class TripMapPage {
         //const longitude = results[0].geometry.location.lng();
 
         // Set Latitude and Longitude
-        let latlng = new google.maps.LatLng(this.Latitude, this.Longitude );
+        let latlng = new google.maps.LatLng(this.HotelLatitude, this.HotelLongitude );
 
         // Map Options
         const mapOptions = {

@@ -33,7 +33,7 @@
       <ion-slides>
         <ion-slide *ngFor = "let trip of publicTripList" (tap) = "tripDetails(trip.id)">
           
-          <ion-card >
+          <ion-card>
             <div *ngIf = "trip.data.tripFileURL[0]">
               <img [src] = "trip.data.tripFileURL[0]">
             </div> 

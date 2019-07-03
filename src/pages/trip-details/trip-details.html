@@ -7,12 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Trip Details</ion-title>
     <ion-buttons start>
-        <button ion-button color="blue" clear (tap)="dismiss()">
-          <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+      <button ion-button color="blue" clear (tap)="dismiss()">
+        <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+      </button>
+    </ion-buttons>
+  
+    <ion-title style="text-align: center;">Trip Details</ion-title>
+    <ion-fab top right edge>
+      <button ion-fab color="danger">
+        <button ion-fab color="danger" (tap)="openLocationMap()">
+          <ion-icon name="ios-pin-outline"></ion-icon>
         </button>
-      </ion-buttons>
+      </button>
+    </ion-fab>
     
   </ion-navbar>
   
@@ -21,8 +29,7 @@
 
 <ion-content padding *ngFor = "let trip of tripList">
         
-        <h3>Trip Information</h3>
-        <h5>{{trip.tripName}}</h5>
+        <h1>{{trip.tripName}}</h1>
       <div>
         <h6 style="display:inline;">Description : </h6>
         <p style="display:inline;">  {{trip.tripDescription}}</p>

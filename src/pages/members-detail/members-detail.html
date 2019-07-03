@@ -16,21 +16,70 @@
       </ion-header>
   
   <!-- Contents  -->
-  <ion-content padding *ngFor = "let member of membersList" >
+  <ion-content padding>
+    <div *ngFor = "let member of membersList" >
       <ion-item>
-          <img [src] = "member.data.fileURL" >            
-          
+          <img [src] = "member.data.fileURL" >                      
       </ion-item>
       <ion-item>     
-        <h3>Name  </h3>  {{member.data.displayName}}
+        <h2>Name</h2>{{member.data.displayName}}
       </ion-item>
       <ion-item>   
-        <h3>Email  </h3>  {{member.data.userMail}}
+        <h2>Email</h2>{{member.data.userMail}}
       </ion-item> 
       <ion-item>   
-        <h3> Phone </h3>      {{member.data.phone}}  
-
+        <h2> Phone</h2>{{member.data.phone}}        
+      </ion-item>
+    </div>
+    <ion-item *ngFor = "let member of membersList"> 
+        <h2>{{member.data.displayName}}'s Hotels</h2>
+    <div >  
+        <ion-slides >
+            <ion-slide *ngFor = "let hotel of userHotel" (tap) = "getHotel(hotel.id)"> 
+              <ion-card >
+                  <img [src] = "hotel.data.fileUrl">
+                
+                 {{hotel.data.hotelName}} 
+                </ion-card> 
+                
+            </ion-slide>
+          </ion-slides>     
+      
+     </div> 
     </ion-item>
-
+      <ion-item *ngFor = "let member of membersList">
+          <h2>{{member.data.displayName}}'s Places</h2>
+          <div >  
+              <ion-slides >
+                  <ion-slide *ngFor = "let place of userPlace" (tap) = "getPlace(place.id)"> 
+                    <ion-card >
+                        <img [src] = "place.data.placeFileURL">
+                      
+                       {{place.data.placeName}} 
+                      </ion-card> 
+                      
+                  </ion-slide >
+                </ion-slides>     
+            
+           </div> 
+          
+      </ion-item>
+      <ion-item *ngFor = "let member of membersList">
+          <h2>{{member.data.displayName}}'s Resturants</h2>
+          <div >  
+              <ion-slides >
+                  <ion-slide *ngFor = "let resturant of userResturant" (tap) = "getResturant(resturant.id)"> 
+                    <ion-card >
+                        <img [src] = "resturant.data.resturantFileURL">
+                      
+                       {{resturant.data.resturantName}} 
+                      </ion-card> 
+                      
+                  </ion-slide >
+                </ion-slides>     
+            
+           </div> 
+          
+      </ion-item>
   </ion-content>
   

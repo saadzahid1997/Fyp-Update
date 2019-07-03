@@ -5,27 +5,32 @@
   - that contains menu button, page title, notification and language change options 
 -->
 <ion-navbar no-border>
-
+  
   <!-- Menu-->
+  
   <button color="blue" ion-button menuToggle>
     <ion-icon name="menu" color="white"></ion-icon>
   </button>
+  
+  
+      <!-- Page Title  -->
+      <ion-title color="white">{{title}}</ion-title>
+      
+      <ion-icon style="float: right" name="search" color="white" (tap) = "searchPeopleModal()" ></ion-icon>
 
-  <!-- Page Title  -->
-  <ion-title color="white">{{title}}</ion-title>
-
+      <!-- <ion-searchbar animated placeholder = "Search People" color = "danger" (tap) = "searchPeopleModal()" ></ion-searchbar> -->
+  
   <!-- Buttons  -->
   
-  <ion-buttons right>
+  <!-- <ion-buttons right>
+    <ion-searchbar right color = "danger" ></ion-searchbar>
     
     
-    <!-- Notification Button  -->
     
-    <!-- Language Settings Option  -->
-    <button ion-button icon-only color="white" (tap)="goToLanguageSettingPage()">
+    Language Settings Option  -->
+    <!-- <button ion-button icon-only color="white" (tap)="goToLanguageSettingPage()">
       <ion-icon name="md-options"></ion-icon>
     </button>
     
-  </ion-buttons>
-
+  </ion-buttons> -->
 </ion-navbar>

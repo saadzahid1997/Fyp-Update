@@ -33,6 +33,7 @@ export class AadResturantsPage {
   resturant = {} as Resturant;
   google: any;
   isUploading: boolean = false;
+  userId: string;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -47,6 +48,10 @@ export class AadResturantsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AadResturantsPage');
+    this._user.user$.subscribe(user =>{
+      this.userId = user.uid;
+    })
+
   }
   resturantMeals() {
     let alertResturantMeals = this.alert.create();
@@ -188,7 +193,8 @@ export class AadResturantsPage {
         resturantMail: this.resturant.resturantMail,
         resturantContact: this.resturant.resturantContact,
         resturantDescription: this.resturant.resturantDescription,
-        resturantFileURL: this.resturant.fileURL
+        resturantFileURL: this.resturant.fileURL,
+        userId:this.userId
       })
       .then(res => {
         console.log('Restaurant addition response');

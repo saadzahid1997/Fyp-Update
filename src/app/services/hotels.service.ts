@@ -59,5 +59,15 @@ export class HotelService {
         return this.HotelDetail;
     }
 
+    userHotels(userId)
+    {
+        this.hotelCollection = this.afs.collection('hotel', ref =>
+        ref.where('userId', '==', userId)
+         );
+         return this.hotelCollection.snapshotChanges().pipe(map(res => {
+          return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
+      }))
+
+    }
 
 }

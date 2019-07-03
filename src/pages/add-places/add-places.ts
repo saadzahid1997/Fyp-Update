@@ -6,6 +6,7 @@ import { MapsAPILoader } from '@agm/core';
 import { Place } from '../../models/places/places.interface';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { UserService } from '../../app/services/user.service';
 //import { google } from '@agm/core/services/google-maps-types';
 declare var google: any;
 
@@ -26,12 +27,17 @@ export class AddPlacesPage {
   placeRef$ : AngularFirestoreCollection<any>;
   place = {} as Place;
   google:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alert : AlertController, public db:AngularFirestore, public MapsApiLoader: MapsAPILoader, public storage:AngularFireStorage) {
+  userId: string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alert : AlertController, public db:AngularFirestore, public MapsApiLoader: MapsAPILoader, public storage:AngularFireStorage, public userSer:UserService) {
     this.placeRef$ = this.db.collection('places');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AadResturantsPage');
+    this.userSer.user$.subscribe(user =>{
+      this.userId = user.uid;
+    })
+
   } 
   
   placeLocation()
@@ -86,7 +92,8 @@ export class AddPlacesPage {
       placeLocationLat: this.place.placeLocationLat,
       placeLocationLng: this.place.placeLocationLng,
       placeDescription : this.place.placeDescription,
-      placeFileURL: this.place.fileURL
+      placeFileURL: this.place.fileURL,
+      userId:this.userId
     });
   }
   dismiss()

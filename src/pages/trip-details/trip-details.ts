@@ -200,8 +200,17 @@ addReview()
 
   openLocationMap()
     {
-      this.modalCtrl.create('TripMapPage', { }).present();
-    }      
+      this.modalCtrl.create('TripMapPage', 
+        { 
+          HotelLatitude: this.hotelList[0].hotelLocationLat,
+          HotelLongitude: this.hotelList[0].hotelLocationLng,
+          HotelAddress: this.hotelList[0].hotelLocation,
+          ResturantLatitude: this.resList[0].resturantLocationLat,
+          ResturantLongitude: this.resList[0].resturantLocationLng,
+          PlaceLatitude: this.placeList[0].placeLocationLat,
+          PlaceLongitude: this.placeList[0].placeLocationLng
+        }).present();
+        }      
   ionViewDidLoad() {
     console.log('ionViewDidLoad TripDetailsPage');
   }

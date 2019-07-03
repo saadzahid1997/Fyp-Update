@@ -48,4 +48,16 @@ export class ResturantService {
     {
         return this.resturantDetail;
     }
+
+    userResturants(userId)
+    {
+        this.resturantCollection = this.afs.collection('resturants', ref =>
+        ref.where('userId', '==', userId)
+         );
+         return this.resturantCollection.snapshotChanges().pipe(map(res => {
+          return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
+      }))
+
+    }
+
 }

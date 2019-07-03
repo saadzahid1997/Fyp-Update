@@ -1,0 +1,33 @@
+<!--
+  Generated template for the SearchPeoplePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Search People</ion-title>
+    <p style="color: darkblue; float: right" (tap) = "dismiss()">Cancel</p>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-searchbar animated placeholder = "Search People" color = "danger" (tap) = "searchPeopleModal()" ></ion-searchbar>
+    <ion-item *ngFor = "let user of userList" (tap) = "userProfile(user.data.uid)">
+    
+        <li>
+         <ion-row> 
+            <ion-thumbnail>
+            <img style="border-radius: 50%" [src] = "user.data.fileURL">   
+            </ion-thumbnail>
+            <h3 style="border-top: 10%">{{user.data.displayName}}</h3>
+          </ion-row>
+        </li>
+     
+        
+    
+    </ion-item>
+</ion-content>
