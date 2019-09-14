@@ -17,8 +17,8 @@ recommend-destination {
     ion-slides,
     .swiper-container {
         width: 100%;
-        height: auto;
-        margin: 20px auto;
+        //height: 50%;
+        //margin: 20px auto;
     }
     .swiper-slide {
         background-size: cover !important;
@@ -28,7 +28,5 @@ recommend-destination {
     .swiper-pagination-bullet {
         background-color: white;
     }
-    ion-card{
-        height: auto;
-    }
+    
 }

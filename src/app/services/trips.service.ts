@@ -65,5 +65,10 @@ export class TripService {
                 return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
             }))
           }
+     
+    tripLikes(tripId:string)
+    {
+        
+    }      
             
 }

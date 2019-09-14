@@ -20,29 +20,51 @@
     </ion-col>
     
   </ion-row>
-
+  <div>
 
   <recommend-destination></recommend-destination>
+  </div>
   <ion-row>
     <ion-col col-8 padding-left>
-      <h2>Trips of the Day</h2>
+      <h1 style="font-weight: bold;">Trips of the Day</h1>
     </ion-col>
   
   </ion-row>
+  <div>
     <ion-item>
       <ion-slides>
-        <ion-slide *ngFor = "let trip of publicTripList" (tap) = "tripDetails(trip.id)">
-          
-          <ion-card>
+        <ion-slide *ngFor = "let trip of publicTripList" >
+          <div  (tap) = "tripDetails(trip.id)">
+          <ion-card style="height: 500px;">
             <div *ngIf = "trip.data.tripFileURL[0]">
               <img [src] = "trip.data.tripFileURL[0]">
             </div> 
-               {{trip.data.tripName}}
+               
           </ion-card> 
-        </ion-slide>     
+            <div style="font-weight: bold;">
+                {{trip.data.tripName}}
+            </div>
+           </div>
+           <div> 
+            <ion-item>
+                <ion-row>
+                <div>
+                    <i class="fa fa-thumbs-up" aria-hidden="true" (tap) = "tripLike(trip.id)"></i>
+                    Like
+                </div>
+                <!-- <div><i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                  DisLike
+                </div> -->
+                </ion-row>  
+              </ion-item>      
+            </div>        
+        </ion-slide>
+
       </ion-slides>
+      
     </ion-item>
     
-
+  </div>
+  
   
 </ion-content>

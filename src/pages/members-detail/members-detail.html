@@ -20,19 +20,18 @@
     <div *ngFor = "let member of membersList" >
       <ion-item>
           <img [src] = "member.data.fileURL" >                      
-      </ion-item>
-      <ion-item>     
-        <h2>Name</h2>{{member.data.displayName}}
+      
+        <h1 style="text-align: center;">{{member.data.displayName}}</h1>
       </ion-item>
       <ion-item>   
-        <h2>Email</h2>{{member.data.userMail}}
+        {{member.data.userMail}}
       </ion-item> 
       <ion-item>   
-        <h2> Phone</h2>{{member.data.phone}}        
+        {{member.data.phone}}        
       </ion-item>
     </div>
     <ion-item *ngFor = "let member of membersList"> 
-        <h2>{{member.data.displayName}}'s Hotels</h2>
+        <h2 style="font-weight: bold;">{{member.data.displayName}}'s Hotels</h2>
     <div >  
         <ion-slides >
             <ion-slide *ngFor = "let hotel of userHotel" (tap) = "getHotel(hotel.id)"> 
@@ -48,7 +47,7 @@
      </div> 
     </ion-item>
       <ion-item *ngFor = "let member of membersList">
-          <h2>{{member.data.displayName}}'s Places</h2>
+          <h2 style="font-weight: bold;">{{member.data.displayName}}'s Places</h2>
           <div >  
               <ion-slides >
                   <ion-slide *ngFor = "let place of userPlace" (tap) = "getPlace(place.id)"> 
@@ -65,7 +64,7 @@
           
       </ion-item>
       <ion-item *ngFor = "let member of membersList">
-          <h2>{{member.data.displayName}}'s Resturants</h2>
+          <h2 style="font-weight: bold;">{{member.data.displayName}}'s Resturants</h2>
           <div >  
               <ion-slides >
                   <ion-slide *ngFor = "let resturant of userResturant" (tap) = "getResturant(resturant.id)"> 

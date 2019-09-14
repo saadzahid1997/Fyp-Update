@@ -11,7 +11,7 @@ export class PlacesService {
     place: Observable<any>;
     placeDetailId : any;
     placeDetail: any;
-    placeCollection: AngularFirestoreCollection<unknown>;
+    placeCollection: AngularFirestoreCollection<any>;
     constructor(public afs: AngularFirestore) {
         console.log("Places service instantiated...");
 

@@ -23,7 +23,7 @@ export class MembersDetailPage implements OnInit {
   membersList : any = [];
   userHotel;
   userResturant: { id: string; data: any; }[];
-  userPlace: { id: string; data: unknown; }[];
+  userPlace: { id: string; data: any; }[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public userSer:UserService, public viewCtrl:ViewController, public hotelSer:HotelService, public placeSer:PlacesService, public resturantSer:ResturantService) {
   }
 ngOnInit()

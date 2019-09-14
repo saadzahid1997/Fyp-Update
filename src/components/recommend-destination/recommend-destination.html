@@ -1,47 +1,53 @@
 <!-- Recommend Destination Slider  -->
 
  <ion-item >
-    <h3>Hotels</h3>
+    <h1 style="font-weight: bold;">Hotels</h1>
     <!-- <ion-slides  padding-left padding-right #slider spaceBetween="10" slidesPerView="1.2" loop="true" effect="slide" autoplay="5000"
     style="direction:ltr"   >-->
-    <ion-slides>
-      <ion-slide *ngFor = "let hotel of hotelList" (tap) = "getHotel(hotel.id)"> 
-        <ion-card >
-           <div *ngIf = "hotel.data.fileUrl">
-            <img [src] = "hotel.data.fileUrl">
+    <ion-slides >
+      <ion-slide  *ngFor = "let hotel of hotelList" (tap) = "getHotel(hotel.id)"> 
+        <ion-card style="height: 500px;">
+           <div  *ngIf = "hotel.data.fileUrl">
+            <img   [src] = "hotel.data.fileUrl">
           
           </div>
-          {{hotel.data.hotelName}} 
+           
           </ion-card> 
-          
+          <div style="font-weight: bold;">
+              {{hotel.data.hotelName}}
+          </div>
       </ion-slide >
     </ion-slides>
   </ion-item>
   <ion-item >
-    <h3>Resturants</h3>
+    <h1 style="font-weight: bold;">Resturants</h1>
     <ion-slides>
         <ion-slide *ngFor = "let resturant of resList" (tap) = "getResturant(resturant.id)" >
-          <ion-card >
+          <ion-card style="height: 500px;">
             <div *ngIf = "resturant.data.resturantFileURL">
               <img [src] = "resturant.data.resturantFileURL">
             </div> 
-            {{resturant.data.resturantName}}
-          </ion-card> 
-          
+            
+          </ion-card>
+          <div style="font-weight: bold;">
+              {{resturant.data.resturantName}}
+          </div>
       </ion-slide>
     </ion-slides>
   </ion-item>
   <ion-item >
-    <h3>Places</h3>
+    <h1 style="font-weight: bold;"> Places</h1>
     <ion-slides  >
         <ion-slide *ngFor = "let place of placeList" (tap) = "getPlace(place.id)">
-          <ion-card >
+          <ion-card style="height: 500px;">
             <div *ngIf = "place.data.placeFileURL">
               <img [src] = "place.data.placeFileURL">
             </div> 
-            {{place.data.placeName}}
-          </ion-card> 
-          
+            
+          </ion-card>
+          <div style="font-weight: bold;"> 
+               {{place.data.placeName}}
+          </div>
       </ion-slide>
     </ion-slides>
  </ion-item>

@@ -43,6 +43,7 @@
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
     "@types/googlemaps": "^3.30.18",
+    "algoliasearch": "^3.33.0",
     "angular-translate": "^2.18.1",
     "angular2-swing": "^0.14.0",
     "angularfire2": "^5.1.2",

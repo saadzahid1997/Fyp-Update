@@ -96,9 +96,7 @@
           <ion-item *ngFor = "let reviews of reviewList">
           <ion-item>
               <ion-thumbnail item-start>
-                  <img
-                    [src] = "reviews.data.userPhoto"             
-                  >   
+                  <img style="border-radius: 50%;" [src] = "reviews.data.userPhoto">   
                 </ion-thumbnail>
         
             <h3>{{reviews.data.userName}}</h3>
