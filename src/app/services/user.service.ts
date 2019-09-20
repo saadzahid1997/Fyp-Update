@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators/map';
 
 import { auth, firestore } from 'firebase/app';
@@ -21,7 +21,7 @@ interface User {
 export class UserService {
   user$: Observable<User>;
   currentUser: any;
-
+  userCollection:AngularFirestoreCollection<any>;
   userName: any;
   userHotelList: any = [];
 
@@ -167,5 +167,15 @@ export class UserService {
 
   async signOut() {
     return await this.afAuth.auth.signOut();
+  }
+
+  getChatUser(userId)
+  {
+    this.userCollection = this.afs.collection('users', ref =>
+        ref.where('uid', '==',userId)
+        );
+         return this.userCollection.snapshotChanges().pipe(map(res => {
+          return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
+      }))
   }
 }

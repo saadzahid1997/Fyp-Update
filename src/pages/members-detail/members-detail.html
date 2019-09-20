@@ -29,7 +29,9 @@
       <ion-item>   
         {{member.data.phone}}        
       </ion-item>
+      <button ion-button block color = "blue" (tap) = "">Message</button>
     </div>
+
     <ion-item *ngFor = "let member of membersList"> 
         <h2 style="font-weight: bold;">{{member.data.displayName}}'s Hotels</h2>
     <div >  

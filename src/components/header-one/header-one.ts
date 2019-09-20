@@ -59,6 +59,11 @@ export class HeaderOneComponent {
       let peopleModal = this.modalCtrl.create('SearchPeoplePage');
       peopleModal.present();
     }  
+
+  messenger()
+  {
+    this.modalCtrl.create('MessagePage').present(); 
+  }  
   dismiss() 
     {
       this.viewCtrl.dismiss();

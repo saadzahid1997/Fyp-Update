@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { UserService } from '../../app/services/user.service';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
 import { HotelService } from '../../app/services/hotels.service';
@@ -24,7 +24,7 @@ export class MembersDetailPage implements OnInit {
   userHotel;
   userResturant: { id: string; data: any; }[];
   userPlace: { id: string; data: any; }[];
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userSer:UserService, public viewCtrl:ViewController, public hotelSer:HotelService, public placeSer:PlacesService, public resturantSer:ResturantService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userSer:UserService, public viewCtrl:ViewController, public hotelSer:HotelService, public placeSer:PlacesService, public resturantSer:ResturantService, public modalCtrl:ModalController) {
   }
 ngOnInit()
 { 
@@ -67,7 +67,12 @@ ngOnInit()
     console.log(placeId);
     this.navCtrl.setRoot('PlaceDetailPage',{placeId});
   }
-dismiss(){
-  this.viewCtrl.dismiss()
-}
+  message(userId)
+  {
+    this.modalCtrl.create('MessagePage',{userId}).present(); 
+  }
+  dismiss()
+  {
+    this.viewCtrl.dismiss()
+  }
 }
