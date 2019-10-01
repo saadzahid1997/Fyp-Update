@@ -1,3 +1,25 @@
 page-chat-box {
-
+ #grey
+ {
+    margin: 10px; 
+    background-color: lightgrey;
+    padding: 10px;
+    border-radius: 5px;
+    width:fit-content;
+    //position: absolute;
+ }
+ #blue
+ {
+    border-radius: 5px;
+    width:fit-content;
+    background-color :lightblue;
+    margin: 10px;
+    padding: 10px;
+    //float: right;
+    margin-left:60%;
+    //position: absolute;
+    //float: right;  
+    //left: 50%;
+ }
+ 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Message  } from '../../models/message/message.interface';
 import { UserService }  from '../../app/services/user.service';
@@ -18,6 +18,7 @@ import { convertUrlToSegments } from 'ionic-angular/umd/navigation/url-serialize
   templateUrl: 'message.html',
 })
 export class MessagePage implements OnInit{
+  userCollection:any =[];
   receiverId:any;
   messageRef$:AngularFirestoreCollection<any>
   messageInterface = {} as Message;
@@ -32,7 +33,7 @@ export class MessagePage implements OnInit{
   i:any;
   x: number;
   constructor(public navCtrl: NavController, public navParams: NavParams, public database : AngularFirestore, 
-              public userSer:UserService, public messageSer:MessageService)
+              public userSer:UserService, public messageSer:MessageService, public modalCtrl:ModalController)
     {
        this.messageRef$ = this.database.collection('message');
 
@@ -60,18 +61,23 @@ export class MessagePage implements OnInit{
       this.x = 0;
       for(let i = 0; i < this.peopleCollection.length; i++)
         {
-          this.userSer.getChatUser(this.peopleCollection[i].data.senderId).subscribe(items =>{
-            console.log(items)
+          this.userSer.getChatUser(this.peopleCollection[i].data.senderId).subscribe(user =>{
+            //console.log(user[i].data.uid)
+            console.log(this.peopleCollection[i].data.senderId);  
+            console.log(user)
+              this.chatCollection[i] = user;
             
-            this.chatCollection[i] = items;
-            
+          
             console.log(this.chatCollection);
-            this.peopleCollection[i] = this.chatCollection[i][0].data;
-            console.log(this.peopleCollection);
-            //this.x = this.x + 1;
+            this.userCollection[this.x] = this.chatCollection[i][0];
+            console.log(this.userCollection);
+            this.x = this.x + 1;
+            
+            // while(this.peopleCollection[i].uid != this.peopleCollection[i].uid); 
           });
           
         }
+        this.chatCollection = this.userCollection;
         //this.peopleCollection = this.chatCollection;  
         console.log(this.chatCollection);
         //this.chatCollection = this.peopleCollection;
@@ -121,15 +127,26 @@ export class MessagePage implements OnInit{
     // })
   // });
   // }
-  sendMessage()
+  // sendMessage()
+  // {
+  //   console.log(this.messageInterface.message);
+  //   this.messageRef$.add({
+  //     senderId: this.messageInterface.senderID = this.userId ,
+  //     receiverId : this.messageInterface.receiverID = this.receiverId,
+  //     messageBody : this.messageInterface.message,
+  //   });
+  // }
+  
+  chatBox(snederId)
   {
-    console.log(this.messageInterface.message);
-    this.messageRef$.add({
-      senderId: this.messageInterface.senderID = this.userId ,
-      receiverId : this.messageInterface.receiverID = this.receiverId,
-      messageBody : this.messageInterface.message,
-    });
+    this.modalCtrl.create('ChatBoxPage',{snederId}).present();
   }
+
+  searchUser()
+  {
+    this.modalCtrl.create('SearchPeoplePage').present();
+  }
+
   dismiss() 
   {
     this.navCtrl.setRoot('HomePage');

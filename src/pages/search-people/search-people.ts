@@ -31,10 +31,10 @@ export class SearchPeoplePage implements OnInit {
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPeoplePage');
   }
-  userProfile(memberId)
+  userChat(snederId)
   {
-    console.log(memberId);
-    this.modalCtrl.create('MembersDetailPage',{memberId}).present();
+    console.log(snederId);
+    this.modalCtrl.create('ChatBoxPage',{snederId}).present();
   }
   dismiss()
   {

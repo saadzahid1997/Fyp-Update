@@ -19,22 +19,24 @@
 
 
 <ion-content padding>
-    
-      <ion-item *ngFor = "let people of peopleCollection">
-      <li>
+    <ion-item>
+        <ion-searchbar (tap) = "searchUser()"></ion-searchbar>
+    </ion-item>
+      <ion-item *ngFor = "let people of chatCollection" (tap) = "chatBox(people.data.uid)">
+      
         <ion-row > 
           <ion-col col-3>
            <ion-thumbnail>
-           <img style="border-radius: 50%" [src] = "people.fileURL">   
+           <img style="border-radius: 50%" [src] = "people.data.fileURL">   
            </ion-thumbnail>
            </ion-col>
            <ion-col col-9>
-           <h2 style="border-top: 10%; font-weight: bold">{{people.displayName}}</h2>
+           <h2 style="border-top: 10%; font-weight: bold">{{people.data.displayName}}</h2>
             <!-- <p *ngFor = "let message of messageCollection">{{message.data.msessageBody}}</p>  -->
             </ion-col>
           </ion-row>
           
-       </li>
+      
        </ion-item>
     
 

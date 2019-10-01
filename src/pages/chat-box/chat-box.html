@@ -5,15 +5,62 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
+  <ion-item *ngFor = "let u of uData"> 
   <ion-navbar>
-    <ion-title>chatBox</ion-title>
+    
+    <!-- <ion-title>{{user$.uName}}</ion-title> -->
+   
+   
+          <button ion-button start color="blue" clear (tap)="dismiss()">
+            <ion-icon name="arrow-back" style="zoom:2.0;"></ion-icon>
+          </button>
+   
+     
+     
+   <!-- <ion-col col-1>
+    <ion-thumbnail>
+      <img style="border-radius: 50%" [src] = "u.data.fileURL">   
+    </ion-thumbnail>
+    </ion-col> -->
+   
+    <ion-title>{{u.data.displayName}}</ion-title>
+   
+    
+   
+   
+  
   </ion-navbar>
-
+</ion-item>
 </ion-header>
-
-
 <ion-content padding>
+     <div *ngFor = "let u of uData">
+     <!-- <div   *ngFor = "let chat of chatCollection">  -->
+      <!-- <ion-item *ngIf = "sent; then blue else grey">   -->
+     <div *ngFor  = "let chat of chatCollection">   
+       <div *ngIf = "u.data.uid != chat.data.senderId" >
+         
+        <p id = "blue"> {{chat.data.messageBody}}</p> 
+       </div>
+       <div *ngIf = "u.data.uid == chat.data.senderId" > 
+        <p id = "grey"> {{chat.data.messageBody}}</p> 
+      </div>
+        <!-- </ion-item> -->
+      
+     </div> 
+     </div>
+    <!-- <div *ngFor  = "let reply of replyCollection">   
+      <p id = "blue"> {{reply.data.messageBody}}</p> 
+    </div> -->
+
+   
+    <!-- </div> -->
+    
+      <!-- <div style = "color:grey" *ngFor = "let reply of replyCollection">
+        <h5> {{reply.data.messageBody}}</h5>
+      </div>  
+    -->
+   
+
 
 </ion-content>
 <ion-footer>
