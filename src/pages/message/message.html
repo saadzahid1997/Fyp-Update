@@ -24,7 +24,7 @@
     </ion-item>
       <ion-item *ngFor = "let people of chatCollection" (tap) = "chatBox(people.data.uid)">
       
-        <ion-row > 
+        <ion-row> 
           <ion-col col-3>
            <ion-thumbnail>
            <img style="border-radius: 50%" [src] = "people.data.fileURL">   

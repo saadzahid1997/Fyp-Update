@@ -15,7 +15,11 @@
 
 
 <ion-content padding>
+  <ion-item>
+    <ion-searchbar   (ionInput) = "searchUser($event)"></ion-searchbar>
     
+  </ion-item>
+
     <ion-item *ngFor = "let user of userList" (tap) = "userChat(user.data.uid)">
     
         <li>

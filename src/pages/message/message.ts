@@ -61,27 +61,34 @@ export class MessagePage implements OnInit{
       this.x = 0;
       for(let i = 0; i < this.peopleCollection.length; i++)
         {
+          
           this.userSer.getChatUser(this.peopleCollection[i].data.senderId).subscribe(user =>{
             //console.log(user[i].data.uid)
+             
             console.log(this.peopleCollection[i].data.senderId);  
             console.log(user)
               this.chatCollection[i] = user;
             
           
-            console.log(this.chatCollection);
-            this.userCollection[this.x] = this.chatCollection[i][0];
-            console.log(this.userCollection);
-            this.x = this.x + 1;
+            console.log(this.chatCollection[i]);
+                 this.userCollection[this.x] = this.chatCollection[i][0];
+                this.x++;
+                console.log(this.userCollection[this.x]);
+            
+            
+            
             
             // while(this.peopleCollection[i].uid != this.peopleCollection[i].uid); 
           });
           
         }
-        this.chatCollection = this.userCollection;
-        //this.peopleCollection = this.chatCollection;  
-        console.log(this.chatCollection);
-        //this.chatCollection = this.peopleCollection;
-        console.log(this.peopleCollection);
+              this.chatCollection = this.userCollection;
+              //this.peopleCollection = this.chatCollection;  
+              console.log(this.chatCollection);
+              //this.chatCollection = this.peopleCollection;
+              console.log(this.peopleCollection);
+        
+       
     });
 
     });

@@ -36,13 +36,25 @@
      <div *ngFor = "let u of uData">
      <!-- <div   *ngFor = "let chat of chatCollection">  -->
       <!-- <ion-item *ngIf = "sent; then blue else grey">   -->
-     <div *ngFor  = "let chat of chatCollection">   
-       <div *ngIf = "u.data.uid != chat.data.senderId" >
-         
-        <p id = "blue"> {{chat.data.messageBody}}</p> 
+     <div *ngFor  = "let chat of chatCollection ">   
+       
+        <div *ngIf = "u.data.uid != chat.data.senderId" >
+        
+        <div id = "blue"> 
+          <span style = "font-size: 12px; float: right; color: darkslategray;">{{chat.data.time | date: "hh:mm"}}</span>  
+            <p style = "font-size: 18px">{{chat.data.messageBody  }}
+            
+            </p>  
+        </div>
        </div>
+       
+       
        <div *ngIf = "u.data.uid == chat.data.senderId" > 
-        <p id = "grey"> {{chat.data.messageBody}}</p> 
+        <div id = "grey"> 
+          <span style = "font-size: 12px; float: right; color: darkslategray; ">{{chat.data.time | date: "hh:mm"}}</span>  
+          <p style = "font-size: 18px">{{chat.data.messageBody}}</p>
+          
+        </div>
       </div>
         <!-- </ion-item> -->
       
@@ -64,10 +76,14 @@
 
 </ion-content>
 <ion-footer>
-    <ion-item>  
+  
+    <ion-row>
+      <ion-col col-10>
         <ion-input type = "text" placeholder = "Type your message" [(ngModel)] = "messageInterface.message"></ion-input>
-      </ion-item>
-      <ion-item>
-        <button ion-button block (tap) = "sendMessage()" >Send</button>
-      </ion-item>  
+      </ion-col>
+      <ion-col col-2>
+        <ion-item  (tap) = "sendMessage()"><i class="fa fa-paper-plane-o" aria-hidden="true"></i>Send</ion-item>
+      </ion-col>  
+    </ion-row>
+      
 </ion-footer>

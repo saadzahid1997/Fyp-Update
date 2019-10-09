@@ -34,6 +34,8 @@ export class ChatBoxPage implements OnInit{
   sent: boolean;
   reply: boolean;
   uData:any;
+  hours:Int32Array;
+  minutes:Int16Array;
   sentCollection:any;
   //replyCollection:any;
   constructor(public navCtrl: NavController,public navParams: NavParams, public userSer:UserService,public messageSer:MessageService, public database:AngularFirestore ){
@@ -57,7 +59,7 @@ export class ChatBoxPage implements OnInit{
       this.uId = user.uid;
       this.uName = user.displayName;
       
-    this.messageSer.getMessage().subscribe(item =>{
+    this.messageSer.getMessage().subscribe(item => {
       
       console.log(item);
       //this.chatCollection = [];
@@ -112,7 +114,7 @@ export class ChatBoxPage implements OnInit{
     //   this.replyCollection = item;
     //   console.log(this.replyCollection);
     // });  
-    });
+    });   
   }
   ionViewDidLoad() {
     
@@ -120,16 +122,33 @@ export class ChatBoxPage implements OnInit{
 
   sendMessage()
   {
-    
+    let d = new Date(); 
     this.messageRef$.add({
       senderId: this.messageInterface.senderID = this.uId ,
       receiverId : this.messageInterface.receiverID = this.receiverId,
       messageBody : this.messageInterface.message,
-      time: firebase.database.ServerValue.TIMESTAMP
+      // time: firebase.firestore.FieldValue.serverTimestamp()
+      time : Date.now()
     });
     
   }
+  convertTime(time)
+    {
+      // console.log(time);
+      // // let d = new Date(time);
+      // // return(d.getHours() < 10 ? '0' : '') + d.getHours() + ':' + (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+      // this.hours = time.seconds/3600/60/60/12;
+      // this.minutes = time.nanoseconds/1000000000 * 60;
+      // console.log(minutes);
 
+      // return (hours) + ':' + (minutes) ;
+      
+      // //let d = new Date()
+      // d = time.toDate()
+      // let d = new Date();  
+      // d = time.toDate();
+      //return d;
+    }
   dismiss()
   {
     this.navCtrl.setRoot('MessagePage');

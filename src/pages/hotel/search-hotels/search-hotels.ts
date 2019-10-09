@@ -33,6 +33,7 @@ export class SearchHotelsPage implements OnInit {
   locationRef: string;
   searchLocationRef: any;
   hotelsList: any = [];
+  filterHotelsList: any = [];
   markers: any[];
   //hotelRef$: AngularFirestoreCollection<Hotel[]>
   @ViewChild('addHotels')
@@ -74,6 +75,7 @@ export class SearchHotelsPage implements OnInit {
     }
     this.hotelSer.getHotels().subscribe(hotel => {
       this.hotelsList = hotel;
+      this.filterHotelsList = hotel;
       console.log(this.hotelsList);
     });
   }
@@ -163,4 +165,35 @@ export class SearchHotelsPage implements OnInit {
       btnStatus
     });
   }
+
+  intializeItem():void
+  {
+    console.log("in the method")
+    this.hotelsList = this.filterHotelsList;
+    console.log(this.hotelsList);
+  
+  }
+  searchHotel(evt)
+  {
+    console.log("in the method")
+    this.intializeItem();
+    const searchHotel = evt.srcElement.value;  
+    console.log(searchHotel);
+    if(!searchHotel)
+    {
+      return;
+    }
+
+    this.hotelsList = this.hotelsList.filter(currentHotel =>{
+      if(currentHotel.data.hotelName && searchHotel)
+      {
+        if (currentHotel.data.hotelName.toLowerCase().indexOf(searchHotel.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+       }
+    });
+  }
+
 }
+

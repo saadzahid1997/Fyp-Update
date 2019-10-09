@@ -36,6 +36,7 @@ export class RetrieveHotelPage implements OnInit {
   hotels: Observable<any>;
   radius = new BehaviorSubject(0.5);
   hotelsList: any = [];
+  filterHotelsList:any = [];
   retHotelList: any = [];
   hotel = {} as Hotel;
   i: any;
@@ -80,6 +81,7 @@ export class RetrieveHotelPage implements OnInit {
     this.hotelSer.getHotels().subscribe(items => {
       console.log(items);
       this.hotelsList = items;
+      this.filterHotelsList = items;
       console.log(this.hotelsList);
       console.log(items.length);
       console.log('Hotel');
@@ -149,6 +151,37 @@ export class RetrieveHotelPage implements OnInit {
   hotelDetail(hotelId) {
     this.navCtrl.setRoot('HotelDetailsPage', { hotelId });
   }
+
+  intializeItem():void
+  {
+    console.log("in the method")
+    this.hotelsList = this.filterHotelsList;
+    console.log(this.hotelsList);
+  
+  }
+  searchHotel(evt)
+  {
+    console.log("in the method")
+    this.intializeItem();
+    const searchHotel = evt.srcElement.value;  
+    console.log(searchHotel);
+    if(!searchHotel)
+    {
+      return;
+    }
+
+    this.hotelsList = this.hotelsList.filter(currentHotel =>{
+      if(currentHotel.data.hotelName && searchHotel)
+      {
+        if (currentHotel.data.hotelName.toLowerCase().indexOf(searchHotel.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+       }
+    });
+  }
+
+
   dismiss() {
     this.navCtrl.setRoot('SearchHotelsPage');
   }

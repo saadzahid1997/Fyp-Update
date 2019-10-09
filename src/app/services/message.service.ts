@@ -18,7 +18,7 @@ export class MessageService {
 
     getPeople(receiverId)
     {
-        this.messageCollection = this.afs.collection('message', ref =>
+        this.messageCollection = this.afs.collection('message', ref => 
         ref.where('receiverId', '==',receiverId)
         );
          return this.messageCollection.snapshotChanges().pipe(map(res => {
@@ -37,7 +37,7 @@ export class MessageService {
     //      return this.messageCollection.collection('message').snapshotChanges().pipe(map(res => {
     //       return res.map(data => { return { id: data.payload.doc.id, data: data.payload.doc.data() } })
     //   }))
-    return this.afs.collection('message')
+    return this.afs.collection('message', ref => ref.orderBy('time',"asc"))
       .snapshotChanges()
       .pipe(
         map(res => {
